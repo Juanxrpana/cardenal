@@ -17,9 +17,8 @@
 	}elseif($sentencia->rowCount() == 1){
 		 $_SESSION['nombre'] = $datos->username;
 		 // Define la página a la que debe redirigirse después del inicio de sesión
-		 echo "Conexion exitosa2";
+		 echo "Cargando persona desde login";
 		 $_SESSION['persona'] = 'principal';
-		 
 		 header('Location: ../index.php');
 
 	 }

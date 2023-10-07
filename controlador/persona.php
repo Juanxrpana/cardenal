@@ -1,5 +1,5 @@
 <?php
-
+echo "cargando controlador de persona";
 if (!is_file("modelo/".$pagina.".php")){
     //alli pregunte que si no es archivo se niega //con !
     //si no existe envio mensaje y me salgo

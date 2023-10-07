@@ -4,6 +4,7 @@
 		header('Location: index.php');
 	}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,7 +16,7 @@
 </head>
 
 <body>
-
+<p>\vista\login</p></p>
     <div class="container" id="container">
         <div class="form-container-registro">
             <form action="">
