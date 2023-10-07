@@ -1,7 +1,7 @@
 <?php 
 	require_once 'conexion.php';
 	$conexion = new Conexion(); // Crea una instancia de la clase Conexion
-	$pdo = $conexion->conecta(); // Obtén la conexión PDO
+	$pdo = $conexion->conecta(); //
 
 	session_start();
 	
@@ -13,9 +13,15 @@
 	$datos = $sentencia->fetch(PDO::FETCH_OBJ);
 
 	if ($datos === FALSE) {
-		header('Location: login.php');
+		header('Location: ../vista/login.php');
 	}elseif($sentencia->rowCount() == 1){
-		$_SESSION['nombre'] = $datos->username;
-		header('Location: ../index.php');
-	}
+		 $_SESSION['nombre'] = $datos->username;
+		 // Define la página a la que debe redirigirse después del inicio de sesión
+		 echo "Conexion exitosa2";
+		 $_SESSION['persona'] = 'principal';
+		 
+		 header('Location: ../index.php');
+
+	 }
+	
 ?>
