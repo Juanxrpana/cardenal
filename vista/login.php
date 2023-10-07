@@ -25,7 +25,7 @@
 
                 <input type="text" name="apellido" id="apellido" placeholder="Apellido">
 
-                <input type="text" name="username" id="username" placeholder="Nombre de usuario">
+                <input type="text" name="createusername" id="createusername" placeholder="Nombre de usuario">
 
                 <input type="text" name="contrasena" id="contrasena" placeholder="Contrasena">
 
@@ -37,10 +37,8 @@
             <form method="POST" action="../modelo/login.php">
                 <h1>Iniciar Sesion</h1>
                 <input type="text" name="username" id="username" placeholder="Usuario">
-                <input type="text" name="password" id="password" placeholder="password">
-                <div class="boton"><input type="submit" value="Iniciar Sesion2"></div>
-                <input type="submit" value="Iniciar Sesion">
-                
+                <input type="password" name="password" id="password" placeholder="password">
+                <input type="submit" value="Iniciar sesión">
             </form>
         </div>
         <div class="toggle-container">
