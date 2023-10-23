@@ -18,7 +18,7 @@
 		 $_SESSION['nombre'] = $datos->username;
 		 // Define la página a la que debe redirigirse después del inicio de sesión
 		 echo "Cargando persona desde login";
-		 $_SESSION['persona'] = 'principal';
+		 $_SESSION['?pagina=materia_prima'] = 'principal';
 		 header('Location: ../index.php');
 
 	 }

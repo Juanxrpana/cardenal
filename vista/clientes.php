@@ -4,19 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../CSS/inicio.css">
-    <link rel="stylesheet" href="../CSS/bootstrap.css">
-    <link rel="stylesheet" href="../CSS/formularios_registro_clientes.css">
+    <link rel="stylesheet" href="./CSS/inicio.css">
+    <link rel="stylesheet" href="./CSS/bootstrap.css">
+    <link rel="stylesheet" href="./CSS/formularios_registro_clientes.css">
     <script src="https://kit.fontawesome.com/ecd5745f4f.js" crossorigin="anonymous"></script>
     <title>CLIENTES</title>
 </head>
 
 <body>
+
     <div class="sidebar">
         <div class="logo">
-            <div class="cardenal"><img src="../extras/LOGO.png" alt=""></div>
+            <div class="cardenal"><img src="./extras/LOGO.png" alt=""></div>
         </div>
-        <div class="cardenal"><img src="../extras/LOGO.png" alt=""></div>
+        
         <ul class="menu">
             <li class="">
                 <a href="?pagina=inicio">
@@ -181,6 +182,7 @@
 
 
         </div>
+        
     </div>
     <script src="/js/jquery-3.6.0.min.js"></script>
     <script src="/js/formulario_registro_clientes.js"></script>

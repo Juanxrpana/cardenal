@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../CSS/inicio.css">
-    <link rel="stylesheet" href="../CSS/bootstrap.css">
+    <link rel="stylesheet" href="./CSS/inicio.css">
+    <link rel="stylesheet" href="./CSS/bootstrap.css">
     <script src="https://kit.fontawesome.com/ecd5745f4f.js" crossorigin="anonymous"></script>
     <title>INICIO</title>
 </head>
@@ -13,9 +13,9 @@
 <body>
     <div class="sidebar">
         <div class="logo">
-            <div class="cardenal"><img src="../extras/LOGO.png" alt=""></div>
+            <div class="cardenal"><img src="./extras/LOGO.png" alt=""></div>
         </div>
-        <div class="cardenal"><img src="../extras/LOGO.png" alt=""></div>
+        <div class="cardenal"><img src="./extras/LOGO.png" alt=""></div>
         <ul class="menu">
             <li class="active">
                 <a href="?pagina=inicio">
@@ -83,7 +83,7 @@
                                 4
                             </span>
                             <span class="tarjetas--detalles">
-                                <i><a href="?pagina=tablas">VER ULTIMO REGISTRO</a><img src="../extras/eye-solid.svg" alt="../extras/eye-solid.svg">  </i>
+                                <i><a href="?pagina=tablas">VER ULTIMO REGISTRO</a><img src="./extras/eye-solid.svg" alt="./extras/eye-solid.svg">  </i>
                             </span>
                         </div>
                     </div>
@@ -98,7 +98,7 @@
                                 4
                             </span>
                             <span class="tarjetas--detalles">
-                                <i><a href="?pagina=tablas">VER ULTIMO REGISTRO</a><img src="../extras/eye-solid.svg" alt="../extras/eye-solid.svg">  </i>
+                                <i><a href="?pagina=tablas">VER ULTIMO REGISTRO</a><img src="./extras/eye-solid.svg" alt="./extras/eye-solid.svg">  </i>
                             </span>
                         </div>
                     </div>
@@ -113,7 +113,7 @@
                                 4
                             </span>
                             <span class="tarjetas--detalles">
-                              <i><a href="?pagina=tablas">VER ULTIMO REGISTRO</a><img src="../extras/eye-solid.svg" alt="../extras/eye-solid.svg">  </i>
+                              <i><a href="?pagina=tablas">VER ULTIMO REGISTRO</a><img src="./extras/eye-solid.svg" alt="./extras/eye-solid.svg">  </i>
                             </span>
                         </div>
                     </div>

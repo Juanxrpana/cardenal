@@ -40,7 +40,8 @@
                                 
                                
                                 
-                            </tr>';
+                            </tr>
+                            <a href="logout.php">Cerrar Sesión</a>';
 
     }
     echo $tablapersonas.$datosTablapersonas.'</tbody></table>';

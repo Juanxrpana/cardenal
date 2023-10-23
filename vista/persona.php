@@ -51,10 +51,13 @@
                 <div></div>
                 <div></div>
             </label>
+            <a href="logout.php">Cerrar Sesión</a>
         </header>
         <div class="decorado"></div>
         <main>
+        <a href="logout.php">Cerrar Sesión</a>
             <div class="clientes">
+            <a href="logout.php">Cerrar Sesión</a>
                 <!-- Aquí empieza el formulario consta de dos partes left - right para ordenar segun la necesidad -->
 
                 <ul class="nav nav-tabs" id="pestañas" role="tablist">
