@@ -91,6 +91,8 @@
                 <div class="tab-content" id="myTabsContent">
                     <div class="tab-pane fade show active" id="proveedor" role="tabpanel" aria-labelledby="proveedor-tab">
                         <h1>proveedor</h1>
+                        <div id="tablaproveedor" style="color: white;"></div>
+
                     </div>
                     <div class="tab-pane fade" id="cantidad" role="tabpanel" aria-labelledby="cantidad-tab">
                         <!-- Contenido del formulario para la cantidad de materia prima -->

@@ -9,7 +9,7 @@ require_once('Conexion.php');
 //que decirle a esta clase que puede usar los mismos metodos
 //que estan en la clase de dodne hereda (La padre) como sir fueran de el
 
-class Registroproveedor extends Conexion
+class Registromateria_prima extends Conexion
 {
 	//el primer paso dentro de la clase
 	//sera declarar los atributos (variables) que describen la clase

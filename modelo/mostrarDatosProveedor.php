@@ -3,39 +3,38 @@
     
     if (!is_file("../modelo/proveedor.php")){
 
-        echo "Falta definir la clase personas";
+        echo "Falta definir la clase proveedor";
         exit;
     }
 
-    require_once ("../modelo/persona.php");
-    $obj= new RegistroPersonas();
-    $datos=$obj->mostrarPersonas();
+    require_once ("../modelo/proveedor.php");
+    $obj= new Registroproveedor();
+    $datos=$obj->mostrarproveedor();
 
-    $tablapersonas='<table class="table table-striped table-hover" id="tpersonas">
+    $tablaproveedor='<table class="table table-striped table-hover" id="tproveedor">
                      <thead>
                              <tr>
-                                <th scope="col">N° Cliente</th>
-                                <th scope="col">Cédula</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Telefono</th>
-                                <th scope="col">Organización</th>
+                                <th scope="col">rif</th>
+                                <th scope="col">nombre</th>
+                                <th scope="col">ciudad</th>
+                                <th scope="col">telefono</th>
                                 <th scope="col">Modificar/Eliminar</th>
                             </tr>
                      </thead>
                      <tbody>';
-    $datosTablapersonas="";
+    $datosTablaproveedor="";
     foreach ($datos as $key => $value){
-        $a = $value['id_persona'];
-        $datosTablapersonas=$datosTablapersonas.'  
+        $a = $value['id_proveedor'];
+        $datosTablaproveedor=$datosTablaproveedor.'  
                             <tr style="cursor:pointer">
                                 <td>****</td>
-                                <td>'.$value['id_persona'].'</td>
+                                <td>'.$value['rif'].'</td>
                                 <td>'.$value['nombre'].' '.$value['apellido'].'</td>
+                                <td>'.$value['ciudad'].'</td>
                                 <td>'.$value['telefono'].'</td>
-                                <td>'.$value['organizacion'].'</td>
                                 <td>                              
-                                <a id="modify" class="btn btn-success btn-sm" data-toggle="modal" data-target="#ModalPersona" data-id="'.$value['id_persona'].'"onclick="modificarDatos('.$value['id_persona'].')"><i class="fa-solid fa-user-pen"></i></a>
-                                <a class="btn btn-danger id="eliminar" btn-sm" data-id="'.$value['id_persona'].'" onclick="eliminarPersona('.$value['id_persona'].')"><i class="fa-solid fa-user-xmark"></i></a>
+                                <a id="modify" class="btn btn-success btn-sm" data-toggle="modal" data-target="#Modalproveedor" data-id="'.$value['id_proveedor'].'"onclick="modificarDatos('.$value['id_proveedor'].')"><i class="fa-solid fa-user-pen"></i></a>
+                                <a class="btn btn-danger id="eliminar" btn-sm" data-id="'.$value['id_proveedor'].'" onclick="eliminarproveedor('.$value['id_proveedor'].')"><i class="fa-solid fa-user-xmark"></i></a>
                                 </td>
                                 
                                
@@ -43,6 +42,6 @@
                             </tr>';
 
     }
-    echo $tablapersonas.$datosTablapersonas.'</tbody></table>';
+    echo $tablaproveedor.$datosTablaproveedor.'</tbody></table>';
 ?>
 
