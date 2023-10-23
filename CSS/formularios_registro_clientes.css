@@ -1,12 +1,5 @@
     /*formulario*/
     
-    main {
-        display: flex;
-        justify-content: center;
-        align-items: flex-start;
-    }
-    /* Cambiar el color del texto en las pestañas */
-    
     .nav-tabs .nav-item .nav-link {
         color: rgb(36, 36, 36);
         width: 100%;
@@ -19,9 +12,6 @@
         font-weight: bold;
     }
     /* Cambiar el color del contenido de las pestañas */
-    /* .tab-content {
-        color: whitesmoke;
-    } */
     
     .clientes {
         width: 100%;
@@ -45,6 +35,14 @@
         position: relative;
     }
     
+    .formulario__grupo-select {
+        padding-top: 15px;
+        padding-bottom: 15px;
+        display: grid;
+        grid-template-columns: auto;
+        gap: 25px;
+    }
+    
     .formulario__input {
         width: 100%;
         background: #ffff;
@@ -57,16 +55,19 @@
     }
     
     .formulario__input:focus {
-        border: 3px solid red;
+        border: 3px solid gray;
         outline: none;
-        box-shadow: 3px 0px 30px rgb(163, 163, 163);
     }
     
-    .formulario__ipnut-error {
+    .formulario__input-error {
         color: red;
         font-size: 12px;
         margin-bottom: 0;
         display: none;
+    }
+    
+    .formulario__input-error-activo {
+        display: block;
     }
     
     .formulario__validacion-estado {
@@ -77,7 +78,7 @@
         opacity: 0;
     }
     
-    .formulario__boton,
+    .formulario__grupo-btn-enviar,
     .formulario__mensaje {
         grid-column: span 2;
     }
@@ -91,8 +92,8 @@
         display: none;
     }
     
-    .formulario__mensaje-activo {
-        display: block;
+    .formulario__mensaje-exito {
+        display: none;
     }
     
     .botonera {
