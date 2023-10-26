@@ -32,9 +32,9 @@
                 </a>
             </li>
             <li class="active">
-                <a href="?pagina=clientes">
+                <a href="?pagina=proveedor">
                     <i class="fa-solid fa-user"></i>
-                    <span>Clientes</span>
+                    <span>Proveedores</span>
                 </a>
             </li>
             <li>
@@ -70,18 +70,20 @@
         </div>
 
     <div class="tablas">
+    <span>Proveedores</span>
         <div class="proveedor" id="proveedor">
-            <span>Proveedores</span>
+            
             <div class="tablaDatosproveedor" id="tablaDatosproveedor"></div>
         </div>
         <div class="materia_prima" id="materia_prima">
-            <span>Proveedores</span>
+            <span>Materia Prima</span>
             <div class="tablaDatosmateria_prima" id="tablaDatosmateria_prima"></div>
         </div>
     </div>
 
     <script src="./js/jquery-3.6.0.min.js"></script>
     <script src="./js/tabla.js"></script>
+    <script src="./js/proveedor.js"></script>
     <script src="./js/sweetalert2.js"></script>
 </body>
 

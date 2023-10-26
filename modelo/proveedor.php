@@ -191,29 +191,21 @@ class Registroproveedor extends Conexion
 		  
 		}
 
-		public function eliminarproveedor() {
-			$co1 = $this->conecta();
-		
-			if (!$co1) {
-				// En caso de error de conexión, devuelve una respuesta JSON de error
-				return array("status" => "error", "message" => "No se pudo conectar a la base de datos");
-			}
-		
-			$co1->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		
-			if ($this->existe($this->id_proveedor)) {
+		function eliminar() {
+			$co = $this->conecta();
+			if($this->existe($this->id_proveedor)){
 				try {
-					$co1->query("DELETE FROM proveedor WHERE id_proveedor = '$this->id_proveedor'");
-		
-					// En caso de éxito, devuelve una respuesta JSON de éxito
-					return array("status" => "success", "message" => "Entrada Eliminada");
-				} catch (Exception $e) {
-					// En caso de error en la consulta, devuelve una respuesta JSON de error
-					return array("status" => "error", "message" => $e->getMessage());
+						$co->query("delete from _id_proveedor
+							where
+							id_proveedor = '$this->id_proveedor'
+							");
+							return "_id_proveedor Eliminado";
+				} catch(Exception $e) {
+					return $e->getMessage();
 				}
-			} else {
-				// Si no existe la cédula, devuelve una respuesta JSON de error
-				return array("status" => "error", "message" => "Cedula no registrada");
+			}
+			else{
+				return "id_proveedor no registrada";
 			}
 		}
 		

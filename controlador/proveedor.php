@@ -49,12 +49,13 @@ if (!is_file("modelo/".$pagina.".php")){
 			echo  $o->agregarproveedor();
 		  }
 
-		  elseif($accion=='modificarproveedor'){
+		  elseif($accion=='modificar'){
 			echo  $o->modificarproveedor();
 			
 		  }
-		  elseif($accion=='eliminarproveedor'){
-			echo  $o->eliminarproveedor();
+		  elseif($accion=='eliminar'){
+			$o->set_id_proveedor($_POST['id_proveedor']);
+			echo  $o->eliminar($rif);
 			
 		  }
 		  exit;

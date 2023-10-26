@@ -13,11 +13,11 @@
 
     $tablaproveedor='<table class="table table-striped table-hover" id="tproveedor">
                      <thead>
-                             <tr>
-                                <th scope="col">rif</th>
-                                <th scope="col">nombre</th>
-                                <th scope="col">ciudad</th>
-                                <th scope="col">telefono</th>
+                             <tr id="tr">
+                                <th scope="col">RIF</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Ciudad</th>
+                                <th scope="col">Teléfono</th>
                                 <th scope="col">Modificar/Eliminar</th>
                             </tr>
                      </thead>
@@ -27,14 +27,14 @@
         $a = $value['id_proveedor'];
         $datosTablaproveedor=$datosTablaproveedor.'  
                             <tr style="cursor:pointer">
-                                <td>****</td>
+                                
                                 <td>'.$value['rif'].'</td>
                                 <td>'.$value['nombre'].'</td>
                                 <td>'.$value['ciudad'].'</td>
                                 <td>'.$value['telefono'].'</td>
                                 <td>                              
                                 <a id="modify" class="btn btn-success btn-sm" data-toggle="modal" data-target="#Modalproveedor" data-id="'.$value['id_proveedor'].'"onclick="modificarDatos('.$value['id_proveedor'].')"><i class="fa-solid fa-user-pen"></i></a>
-                                <a class="btn btn-danger id="eliminar" btn-sm" data-id="'.$value['id_proveedor'].'" onclick="eliminarproveedor('.$value['id_proveedor'].')"><i class="fa-solid fa-user-xmark"></i></a>
+                                <a class="btn btn-danger id="eliminar" btn-sm" data-id="'.$value['id_proveedor'].'" onclick="eliminar('.$value['id_proveedor'].')"><i class="fa-solid fa-user-xmark"></i></a>
                                 </td>
                                 
                                

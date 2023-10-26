@@ -64,7 +64,7 @@ document.getElementById('modificar').onclick = function() {
 
 }
 
-function mostrarproveedor() {
+/* function mostrarproveedor() {
     // La función realiza una petición AJAX al archivo mostrarproveedor.php
     console.log("entrando mostrando data proveedor");
 
@@ -73,7 +73,7 @@ function mostrarproveedor() {
         console.log("Mostrando data proveedor satisfactoriamente");
         $('#tablaDatosproveedor').html(r);
     });
-}
+} */
 
 document.getElementById('eliminar').onclick = function() {
 

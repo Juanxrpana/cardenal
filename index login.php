@@ -5,7 +5,7 @@ session_start();
 		header('Location: ./vista/login.php');
 	}
 	else{
-		$pagina = "principal";
+		$pagina = "inicio";
 		echo "Conexion exitosa en index";
 		if (!empty($_GET['pagina'])) {
 			echo "cambio de valor"; // Si no está vacía la variable $pagina que viene por GET

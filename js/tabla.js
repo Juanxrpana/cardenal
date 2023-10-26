@@ -27,3 +27,37 @@ function mostrarmateria_prima() {
         $('#tablaDatosmateria_prima').html(r);
     });
 }
+
+document.getElementById('eliminar').onclick = function() {
+
+    /*  a = valida_datos();
+     if (a != '') {
+         $("#contenidodemodal").html(a);
+         $("#mostrarmodal").modal("show");
+         setTimeout(function() {
+             $("#mostrarmodal").modal("hide");
+         }, 4000);
+     } */
+    try {
+        var datos = new FormData();
+        datos.append('accion', 'incluir');
+        datos.append('rif', $("#rif").val());
+        datos.append('nombre', $("#nombre").val());
+        datos.append('estado', $("#estado").val());
+        datos.append('municipio', $("#municipio").val());
+        datos.append('parroquia', $("#parroquia").val());
+        datos.append('ciudad', $("#ciudad").val());
+        datos.append('direccion', $("#direccion").val());
+        datos.append('telefono', $("#telefono").val());
+        enviaAjax(datos);
+        limpia();
+    } catch (error) {
+        console.log("error en eliminar");
+        // Expected output: ReferenceError: nonExistentFunction is not defined
+        // (Note: the exact output may be browser-dependent)
+    }
+
+
+
+
+}
