@@ -73,7 +73,8 @@
             <h3 class="main--titulo">
                 Registro Proveedor
             </h3>
-            <form action="" class="formulario" id="formulario">
+            <form method="POST" class="formulario" id="formulario">
+            <input type="text" name="accion" id="accion" style="display:none"/>
                 <!-- Grupo: rif -->
                 <div class="formulario__grupo" id="grupo__rif">
                     <label for="rif" class="formulario__label">RIF</label>
@@ -132,10 +133,6 @@
                             <option value="tachira">Tachira</option>
                         </select>
 
-
-
-
-
                     </div>
 
                     <div class="formulario__grupo-input">
@@ -156,21 +153,12 @@
                     <p class="formulario__input-error">El telefono solo puede contener numeros y el maximo 11 dígitos.</p>
                 </div>
 
-
-                <!-- Grupo: Terminos y Condiciones
-                <div class="formulario__grupo" id="grupo__terminos">
-                    <label class="formulario__label">
-                        <input class="formulario__checkbox" type="checkbox" name="terminos" id="terminos">
-                        Acepto los Terminos y Condiciones
-                    </label>
-                </div> -->
-
                 <div class="formulario__mensaje" id="formulario__mensaje">
                     <p><i class="fas fa-exclamation-triangle"></i> <b>Error:</b> Por favor rellena el formulario correctamente. </p>
                 </div>
 
                 <div class="formulario__grupo formulario__grupo-btn-enviar">
-                    <button type="submit" class="btn btn-dark" id="boton__enviar">Enviar</button>
+                <button type="button" class="btn btn-dark" id="incluir" name="incluir">INCLUIR</button>
                     <p class="formulario__mensaje-exito" id="formulario__mensaje-exito">Formulario enviado exitosamente!</p>
                 </div>
             </form>
@@ -184,8 +172,10 @@
         </div>
         
     </div>
-    <script src="/js/jquery-3.6.0.min.js"></script>
-    <script src="/js/formulario_registro_clientes.js"></script>
+    <script src="./js/jquery-3.6.0.min.js"></script>
+    <script src="./js/formulario_registro_clientes.js"></script>
+    <script src="./js/proveedor.js"></script>
+    <script src="./js/sweetalert2.js"></script>
 </body>
 
 </html>

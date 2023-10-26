@@ -30,9 +30,9 @@
                 </a>
             </li>
             <li>
-                <a href="?pagina=clientes">
+                <a href="?pagina=proveedor">
                     <i class="fa-solid fa-user"></i>
-                    <span>Clientes</span>
+                    <span>Proveedores</span>
                 </a>
             </li>
             <li>

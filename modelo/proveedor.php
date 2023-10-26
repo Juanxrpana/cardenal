@@ -217,6 +217,29 @@ class Registroproveedor extends Conexion
 			}
 		}
 		
-		
+		function modificarproveedor(){
+			//1 Se llama a la funcion conecta
+			$co = $this->conecta();
+			$co->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+	
+			try {
+				$co->query("UPDATE proveedores SET 
+					rif='$this->rif', 
+					nombre='$this->nombre,'
+					estado='$this->estado,
+					municipio='$this->municipio,
+					parroquia='$this->parroquia,
+					ciudad='$this->ciudad,
+					direccion='$this->direccion,
+					telefono='this->telefono'
+				WHERE rif='$this->rif' ");
+	
+				return "Registro Actualizado";
+			} 
+			catch(Exception $e) {
+	
+			return $e->getMessage();
+			}
+		}
 }
 ?>
