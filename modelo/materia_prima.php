@@ -17,7 +17,7 @@ class Registromateria_prima extends Conexion
 	//la vista como variables aca
 	//cada atributo debe ser privado, es decir, ser visible solo dentro de la
 	//misma clase, la forma de colcoarlo privado es usando la palabra private
-	private $id_proveedor;
+	private $id_materia_prima;
     private $rif;
 	private $nombre; //recuerden que en php, las variables no tienen tipo predefinido
 	private $estado;
@@ -28,9 +28,9 @@ class Registromateria_prima extends Conexion
     private $telefono;
 	//Ok ya tenemos los atributos, pero como son privados no podemos acceder a ellos desde fueran
 	//por lo que debemos colcoar metodos (funciones) que me permitan leer (get) y colocar (set)
-	function set_id_proveedor($valor)
+	function set_id_materia_prima($valor)
 	{
-		$this->id_proveedor = $valor; //fijencen como se accede a los elementos dentro de una clase
+		$this->id_materia_prima = $valor; //fijencen como se accede a los elementos dentro de una clase
 		//this que singnifica esto es decir esta clase luego -> simbolo que indica que apunte
 	}
 
@@ -76,8 +76,8 @@ class Registromateria_prima extends Conexion
 	
 	//ahora la misma cosa pero para leer, es decir get
 
-    function get_id_proveedor(){
-        return $this->id_proveedor;
+    function get_id_materia_prima(){
+        return $this->id_materia_prima;
     }
 
     function get_rif(){
@@ -120,12 +120,12 @@ class Registromateria_prima extends Conexion
 	}
 	//----//Lo siguiente que demos hacer es crear los metodos para incluir, consultar y eliminar----//----//
 	//lo primero es chequear si el id ya fue registrado//
-	public function existe($id_proveedor)
+	public function existe($id_materia_prima)
 	{
 		$co = $this->conecta();
 		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		try {
-			$resultado = $co->query("Select * from proveedor where id_proveedor	='$id_proveedor'");
+			$resultado = $co->query("Select * from materia_prima where id_materia_prima	='$id_materia_prima'");
 			$fila = $resultado->fetchAll(PDO::FETCH_BOTH);
 			if ($fila) {
 
@@ -138,15 +138,15 @@ class Registromateria_prima extends Conexion
 			return false;
 		}
 	}
-	//ahora incluiremos una proveedor//
-	function agregarproveedor()
+	//ahora incluiremos una materia_prima//
+	function agregarmateria_prima()
 	{
 		$co = $this->conecta();
 		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		//if (!$this->existe($this->id_proveedor)) {
+		//if (!$this->existe($this->id_materia_prima)) {
 			try {
-				$co->query("INSERT INTO proveedor(
-			  id_proveedor,
+				$co->query("INSERT INTO materia_prima(
+			  id_materia_prima,
 			  rif,
 			  nombre,
 			  estado,
@@ -156,7 +156,7 @@ class Registromateria_prima extends Conexion
 			  direccion,
               telefono
 			  ) VALUES (
-			  '$this->id_proveedor',
+			  '$this->id_materia_prima',
 			  '$this->rif',
 			  '$this->nombre',
 			  '$this->estado',
@@ -179,19 +179,19 @@ class Registromateria_prima extends Conexion
 		//}
 	}
 	
-	public function mostrarproveedor(){
+	public function mostrarmateria_prima(){
 
 		
 		$co1 = $this->conecta();
 		$co1->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 	
-		$sql=$co1->query("SELECT *from proveedor");
+		$sql=$co1->query("SELECT *from materia_prima");
 	
 			return $sql;
 		  
 		}
 
-		public function eliminarproveedor() {
+		public function eliminarmateria_prima() {
 			$co1 = $this->conecta();
 		
 			if (!$co1) {
@@ -201,9 +201,9 @@ class Registromateria_prima extends Conexion
 		
 			$co1->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		
-			if ($this->existe($this->id_proveedor)) {
+			if ($this->existe($this->id_materia_prima)) {
 				try {
-					$co1->query("DELETE FROM proveedor WHERE id_proveedor = '$this->id_proveedor'");
+					$co1->query("DELETE FROM materia_prima WHERE id_materia_prima = '$this->id_materia_prima'");
 		
 					// En caso de éxito, devuelve una respuesta JSON de éxito
 					return array("status" => "success", "message" => "Entrada Eliminada");
