@@ -32,7 +32,7 @@ $(document).on('click', '.borrar', function() {
     var rif = $(this).data("rif");
     if (confirm("Estas seguro de que quieres borrar este registro?:" + rif)) {
         $.ajax({
-            url: "",
+
             method: "POST",
             data: {
                 accion: "eliminar",
@@ -40,7 +40,7 @@ $(document).on('click', '.borrar', function() {
             },
 
             success: function(data) {
-                console.log("success time");
+                console.log(data);
                 alert(data);
                 mostrarproveedor();
             }
