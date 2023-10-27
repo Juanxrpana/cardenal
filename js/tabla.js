@@ -31,19 +31,20 @@ function mostrarmateria_prima() {
 $(document).on('click', '.borrar', function() {
     var rif = $(this).data("rif");
     if (confirm("Estas seguro de que quieres borrar este registro?:" + rif)) {
+        console.log("entrando a borrar parte ajax");
         $.ajax({
-
             method: "POST",
+            url: "",
             data: {
-                accion: "eliminar",
+                accion: "borrar",
                 rif: rif
             },
 
             success: function(data) {
-                console.log(data);
-                alert(data);
-                mostrarproveedor();
+                console.log("esto es data: " + data);
+                /* mostrarproveedor(); */
             }
         })
+
     }
 })

@@ -64,7 +64,7 @@ class RegistroPersonas extends Conexion
 	}
 	//ahora la misma cosa pero para leer, es decir get
 	
-	//----//Lo siguiente que demos hacer es crear los metodos para incluir, consultar y eliminar----//----//
+	//----//Lo siguiente que demos hacer es crear los metodos para incluir, consultar y borrar----//----//
 	//lo primero es chequear si el id ya fue registrado//
 	public function existe($id_persona)
 	{
@@ -135,7 +135,7 @@ class RegistroPersonas extends Conexion
 		  
 		}
 
-		public function eliminarPersona() {
+		public function borrarPersona() {
 			$co1 = $this->conecta();
 		
 			if (!$co1) {

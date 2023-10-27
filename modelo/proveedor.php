@@ -118,7 +118,7 @@ class Registroproveedor extends Conexion
     {
 		return $this->telefono = $valor;
 	}
-	//----//Lo siguiente que demos hacer es crear los metodos para incluir, consultar y eliminar----//----//
+	//----//Lo siguiente que demos hacer es crear los metodos para incluir, consultar y borrar----//----//
 	//lo primero es chequear si el id ya fue registrado//
 	public function existe($id_proveedor)
 	{
@@ -193,20 +193,15 @@ class Registroproveedor extends Conexion
 
 		function borrar() {
 			$co = $this->conecta();
-			if($this->existe($this->id_proveedor)){
-				try {
-						$co->query("delete from _id_proveedor
-							where
-							id_proveedor = '$this->id_proveedor'
-							");
-							return "_id_proveedor Eliminado";
-				} catch(Exception $e) {
-					return $e->getMessage();
-				}
-			}
-			else{
-				return "id_proveedor no registrada";
-			}
+			try {
+				$co->query("delete from rif
+					where
+					rif = '$this->rif'
+					");
+					return "rif Eliminado";
+		} catch(Exception $e) {
+			return $e->getMessage();
+		}
 		}
 		
 		function modificarproveedor(){

@@ -19,7 +19,7 @@
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Telefono</th>
                                 <th scope="col">Organización</th>
-                                <th scope="col">Modificar/Eliminar</th>
+                                <th scope="col">Modificar/borrar</th>
                             </tr>
                      </thead>
                      <tbody>';
@@ -35,7 +35,7 @@
                                 <td>'.$value['organizacion'].'</td>
                                 <td>                              
                                 <a id="modify" class="btn btn-success btn-sm" data-toggle="modal" data-target="#ModalPersona" data-id="'.$value['id_persona'].'"onclick="modificarDatos('.$value['id_persona'].')"><i class="fa-solid fa-user-pen"></i></a>
-                                <a class="btn btn-danger id="eliminar" btn-sm" data-id="'.$value['id_persona'].'" onclick="eliminarPersona('.$value['id_persona'].')"><i class="fa-solid fa-user-xmark"></i></a>
+                                <a class="btn btn-danger id="borrar" btn-sm" data-id="'.$value['id_persona'].'" onclick="borrarPersona('.$value['id_persona'].')"><i class="fa-solid fa-user-xmark"></i></a>
                                 </td>
                                 
                                

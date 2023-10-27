@@ -75,35 +75,7 @@ document.getElementById('modificar').onclick = function() {
     });
 } */
 
-document.getElementById('borrar').onclick = function() {
 
-    /*  a = valida_datos();
-     if (a != '') {
-         $("#contenidodemodal").html(a);
-         $("#mostrarmodal").modal("show");
-         setTimeout(function() {
-             $("#mostrarmodal").modal("hide");
-         }, 4000);
-     } */
-    try {
-        var datos = new FormData();
-        datos.append('accion', 'eliminar');
-        datos.append('rif', $("#rif").val());
-        datos.append('rsocial', $("#rsocial").val());
-        datos.append('telefonop', $("#telefonop").val());
-        datos.append('direccion', $("#direccion").val());
-        enviaAjax(datos);
-        limpia();
-    } catch (error) {
-        console.log("error en eliminar");
-        // Expected output: ReferenceError: nonExistentFunction is not defined
-        // (Note: the exact output may be browser-dependent)
-    }
-
-
-
-
-}
 
 
 

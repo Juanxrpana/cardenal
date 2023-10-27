@@ -3,7 +3,7 @@
 //llamda al archivo que contiene la clase
 //usuarios, en ella estara el codigo que me premitira
 //guardar, consultar y modificar dentro de mi base de datos
-require_once('modelo/proveedor.php');
+
 
 //lo primero que se debe hacer es verificar al igual que en la vista que exista el archivo
 if (!is_file("modelo/".$pagina.".php")){
@@ -12,17 +12,16 @@ if (!is_file("modelo/".$pagina.".php")){
 	echo "Falta definir la clase ".$pagina;
 	exit;
 }  
-  
-  if(is_file("vista/".$pagina.".php")){
-	  
+
+require_once("modelo/".$pagina.".php");
+
 	  //bien si estamos aca es porque existe la vista y la clase
 	  //por lo que lo primero que debemos hace es realizar una instancia de la clase
 	  //instanciar es crear una variable local, que contiene los metodos de la clase
 	  //para poderlos usar
-	  
 	  $o = new Registroproveedor(); //ahora nuestro objeto se llama $o y es una copia en memoria de la
-	  //clase usuarios
-	  
+	  //clase proveedor
+	  if(!empty($_POST)){
 	  if(isset($_POST['accion'])){
 		  
 		  //como ya sabemos si estamos aca es porque se recibio alguna informacion
@@ -31,11 +30,12 @@ if (!is_file("modelo/".$pagina.".php")){
 
 		$accion = $_POST['accion'];
 
-
-		  if($accion=='mostrarproveedor'){
-			echo  $o->mostrarproveedor($_POST['rif']);
-			exit;
+		if($accion=='borrar'){
+			$o->set_rif($_POST['rif']);
+			echo  $o->borrar();
+			
 		  }
+		  
 		  $o->set_id_proveedor($_POST['id_proveedor']);
 		  $o->set_rif($_POST['rif']);
 		  $o->set_nombre($_POST['nombre']);
@@ -53,15 +53,12 @@ if (!is_file("modelo/".$pagina.".php")){
 			echo  $o->modificarproveedor();
 			
 		  }
-		  elseif($accion=='borrar'){
-			$o->set_id_proveedor($_POST['id_proveedor']);
-			echo  $o->borrar($rif);
-			
-		  }
+		  elseif($accion=='mostrarproveedor'){
+			echo  $o->mostrarproveedor($_POST['rif']);
+		  }	
+		} 
 		  exit;
-	  }
-	  
-	  require_once("vista/".$pagina.".php"); 
+	  	  require_once("vista/".$pagina.".php"); 
   }
   else{
 	  echo "pagina en construccion";

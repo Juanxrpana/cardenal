@@ -18,7 +18,7 @@
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Ciudad</th>
                                 <th scope="col">Teléfono</th>
-                                <th scope="col">Modificar/Eliminar</th>
+                                <th scope="col">Modificar/borrar</th>
                             </tr>
                      </thead>
                      <tbody>';

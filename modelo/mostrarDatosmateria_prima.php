@@ -18,7 +18,7 @@
                                 <th scope="col">nombre</th>
                                 <th scope="col">ciudad</th>
                                 <th scope="col">telefono</th>
-                                <th scope="col">Modificar/Eliminar</th>
+                                <th scope="col">Modificar/borrar</th>
                             </tr>
                      </thead>
                      <tbody>';
@@ -34,7 +34,7 @@
                                 <td>'.$value['telefono'].'</td>
                                 <td>                              
                                 <a id="modify" class="btn btn-success btn-sm" data-toggle="modal" data-target="#Modalmateria_prima" data-id="'.$value['id_materia_prima'].'"onclick="modificarDatos('.$value['id_materia_prima'].')"><i class="fa-solid fa-user-pen"></i></a>
-                                <a class="btn btn-danger id="eliminar" btn-sm" data-id="'.$value['id_materia_prima'].'" onclick="eliminarmateria_prima('.$value['id_materia_prima'].')"><i class="fa-solid fa-user-xmark"></i></a>
+                                <a class="btn btn-danger id="borrar" btn-sm" data-id="'.$value['id_materia_prima'].'" onclick="borrarmateria_prima('.$value['id_materia_prima'].')"><i class="fa-solid fa-user-xmark"></i></a>
                                 </td>
                                 
                                

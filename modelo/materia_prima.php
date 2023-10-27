@@ -118,7 +118,7 @@ class Registromateria_prima extends Conexion
     {
 		return $this->telefono = $valor;
 	}
-	//----//Lo siguiente que demos hacer es crear los metodos para incluir, consultar y eliminar----//----//
+	//----//Lo siguiente que demos hacer es crear los metodos para incluir, consultar y borrar----//----//
 	//lo primero es chequear si el id ya fue registrado//
 	public function existe($id_materia_prima)
 	{
@@ -191,7 +191,7 @@ class Registromateria_prima extends Conexion
 		  
 		}
 
-		public function eliminarmateria_prima() {
+		public function borrarmateria_prima() {
 			$co1 = $this->conecta();
 		
 			if (!$co1) {

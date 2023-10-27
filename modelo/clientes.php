@@ -77,7 +77,7 @@ class registro_clientes extends Conexion{
 
 
 
-	//Lo siguiente que demos hacer es crear los metodos para incluir, consultar y eliminar
+	//Lo siguiente que demos hacer es crear los metodos para incluir, consultar y borrar
 
 	//Prechequeo para obtener los datos foraneos//
 	public function consultapersona_id_persona(){
@@ -156,7 +156,7 @@ class registro_clientes extends Conexion{
 
 	}
 
-	function eliminarDatos(){
+	function borrarDatos(){
 		$co = $this->conecta();
 		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		if($this->existe($this->id_clientes)){

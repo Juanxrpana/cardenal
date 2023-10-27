@@ -126,17 +126,17 @@ function mostrarPersonas() {
     });
 }
 
-function eliminarPersona(id_persona) {
+function borrarPersona(id_persona) {
     console.log("Valor de id_persona:", id_persona);
 
     if ($.isNumeric(id_persona)) {
-        // Realiza una solicitud AJAX para eliminar la persona
+        // Realiza una solicitud AJAX para borrar la persona
         $.ajax({
             url: './controlador/persona.php',
             type: 'POST',
             dataType: 'json',
             data: {
-                accion: 'eliminar',
+                accion: 'borrar',
                 id_persona: id_persona
             },
 
@@ -147,7 +147,7 @@ function eliminarPersona(id_persona) {
                     console.log("Persona eliminada con éxito");
                 } else {
                     // Si hubo un error en la eliminación, muestra un mensaje de error
-                    console.error("Error al eliminar la persona: " + response.message);
+                    console.error("Error al borrar la persona: " + response.message);
                 }
             },
             error: function(xhr, status, error) {
