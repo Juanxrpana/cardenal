@@ -191,7 +191,7 @@ class Registroproveedor extends Conexion
 		  
 		}
 
-		function eliminar() {
+		function borrar() {
 			$co = $this->conecta();
 			if($this->existe($this->id_proveedor)){
 				try {

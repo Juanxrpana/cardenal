@@ -75,7 +75,7 @@ document.getElementById('modificar').onclick = function() {
     });
 } */
 
-document.getElementById('eliminar').onclick = function() {
+document.getElementById('borrar').onclick = function() {
 
     /*  a = valida_datos();
      if (a != '') {

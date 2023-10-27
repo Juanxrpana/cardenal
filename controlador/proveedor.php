@@ -53,9 +53,9 @@ if (!is_file("modelo/".$pagina.".php")){
 			echo  $o->modificarproveedor();
 			
 		  }
-		  elseif($accion=='eliminar'){
+		  elseif($accion=='borrar'){
 			$o->set_id_proveedor($_POST['id_proveedor']);
-			echo  $o->eliminar($rif);
+			echo  $o->borrar($rif);
 			
 		  }
 		  exit;

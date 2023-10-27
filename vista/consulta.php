@@ -25,13 +25,13 @@
                     <span>Inicio</span>
                 </a>
             </li>
-            <li>
+            <li class="active">
                 <a href="?pagina=consulta">
                     <i class="fa-solid fa-clipboard"></i>
                     <span>Consultas</span>
                 </a>
             </li>
-            <li class="active">
+            <li >
                 <a href="?pagina=proveedor">
                     <i class="fa-solid fa-user"></i>
                     <span>Proveedores</span>
@@ -83,7 +83,7 @@
 
     <script src="./js/jquery-3.6.0.min.js"></script>
     <script src="./js/tabla.js"></script>
-    <script src="./js/proveedor.js"></script>
+    <!-- <script src="./js/proveedor.js"></script> -->
     <script src="./js/sweetalert2.js"></script>
 </body>
 

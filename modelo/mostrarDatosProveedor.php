@@ -33,8 +33,8 @@
                                 <td>'.$value['ciudad'].'</td>
                                 <td>'.$value['telefono'].'</td>
                                 <td>                              
-                                <a id="modify" class="btn btn-success btn-sm" data-toggle="modal" data-target="#Modalproveedor" data-id="'.$value['id_proveedor'].'"onclick="modificarDatos('.$value['id_proveedor'].')"><i class="fa-solid fa-user-pen"></i></a>
-                                <a class="btn btn-danger id="eliminar" btn-sm" data-id="'.$value['id_proveedor'].'" onclick="eliminar('.$value['id_proveedor'].')"><i class="fa-solid fa-user-xmark"></i></a>
+                                <a id="modify" class="btn btn-success btn-sm" data-toggle="modal" data-target="#Modalproveedor" data-id="'.$value['rif'].'"onclick="modificarDatos('.$value['rif'].')"><i class="fa-solid fa-user-pen"></i></a>
+                                <a class="btn btn-danger btn-sm borrar" id="borrar" btn-sm" data-rif="'.$value['rif'].'" "><i class="fa-solid fa-user-xmark"></i></a>
                                 </td>
                                 
                                
