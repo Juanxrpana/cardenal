@@ -36,8 +36,8 @@ require_once("modelo/".$pagina.".php");
 			 echo  $o->consultar();
 		  }	  
 		  elseif($accion=='eliminar'){
-			 $o->set_cedula($_POST['cedula']);
-			 echo  $o->eliminar();
+			 $o->set_idcompra1($_POST['idcompra']);
+			 echo  $o->borrarmateria_prima();
 		  }
 		  else{
 			  $o->set_proveedor($_POST['proveedor']);
@@ -47,8 +47,7 @@ require_once("modelo/".$pagina.".php");
 			  $o->set_cantidad1($_POST['cantidad1']);
 			  $o->set_cantidad2($_POST['cantidad2']);
 			  if($accion=='incluir'){
-                echo  "USTED DESEA INCLUIR <br/>".$_POST['proveedor']."<br/>".
-			$_POST['fecha']; 
+                
 				echo  $o->agregarmateria_prima();
 			  }
 			  elseif($accion=='modificar'){

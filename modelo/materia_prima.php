@@ -19,6 +19,7 @@ class Registromateria_prima extends Conexion
 	//misma clase, la forma de colcoarlo privado es usando la palabra private
 
 	private $proveedor;
+	private $idcompra1;
 	private $fecha;
 	private $usuario;
 	private $calidad1; //recuerden que en php, las variables no tienen tipo predefinido
@@ -36,6 +37,10 @@ class Registromateria_prima extends Conexion
 	function set_fecha($valor)
 	{
 		$this->fecha  = $valor;
+	}
+	function set_idcompra1($valor)
+	{
+		$this->idcompra1  = $valor;
 	}
 	function set_usuario($valor)
 	{
@@ -166,13 +171,72 @@ class Registromateria_prima extends Conexion
 		//}
 	}
 
+
+
+	function modificar()
+	{
+		$co = $this->conecta();
+		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		//if (!$this->existe($this->id_materia_prima)) {
+		try {
+			$co->query("UPDATE `compra` SET 
+			  `fecha_compra`='$this->fecha'
+			  WHERE idcompra = '$this->fecha' ");
+ 				
+				
+		if($this->cantidad1 != NULL){
+
+			$co->query("INSERT INTO quintal(
+					idcompra,
+					cantidad,
+					calidad_idcalidad
+					) VALUES (
+						'$idCompra',
+					'$this->cantidad1',
+					'$this->calidad1'
+					)");
+		}		
+			if($this->cantidad2 != NULL){
+
+				$co->query("INSERT INTO quintal(
+				idcompra,
+				cantidad,
+				calidad_idcalidad
+				) VALUES (
+					'$idCompra',
+				'$this->cantidad2',
+				'$this->calidad2'
+				)");
+
+			}
+			return "Registro incluido";
+		} catch (Exception $e) {
+			return $e->getMessage();
+		}
+		//} 
+		//else{
+		//	return "Ya existe la cedula que desea ingresar";
+		//}
+	}
+
+
 	function consultar(){
 		$co = $this->conecta();
 		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		try{
 
 			$resultado = $co->query("SELECT p_natural_identificacion, id_prov FROM `proveedor`");
+			$resultado2 = $co->query("SELECT idcompra, SUM(cantidad) AS total_cantidad
+			FROM (
+			  SELECT idcompra, cantidad
+			  FROM quintal
+			  WHERE idcompra = '10'
+			  LIMIT 2
+			) AS subconsulta
+			GROUP BY idcompra
+			HAVING COUNT(*) > 1;");
 
+			
 			if($resultado){
 
 				$respuesta = '';
@@ -206,39 +270,30 @@ class Registromateria_prima extends Conexion
 		$co1 = $this->conecta();
 		$co1->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-		$sql = $co1->query("SELECT c.fecha_compra, pn.nombre_prov, p.p_natural_identificacion, q.cantidad, c.idcompra
+		$sql = $co1->query("SELECT c.fecha_compra, pn.nombre_prov, p.p_natural_identificacion, SUM(q.cantidad) AS total_cantidad, c.idcompra
 		FROM proveedor p
-		INNER JOIN compra c ON p.id_prov= c.proveedor_id_proveedor
 		INNER JOIN p_natural pn ON p.p_natural_identificacion = pn.identificacion
-		INNER JOIN quintal q ON c.idcompra = q.idcompra" );
+		LEFT JOIN compra c ON p.id_prov = c.proveedor_id_proveedor
+		LEFT JOIN quintal q ON c.idcompra = q.idcompra
+		GROUP BY c.idcompra" );
 
 		return $sql;
 	}
 
 	public function borrarmateria_prima()
 	{
-		$co1 = $this->conecta();
-
-		if (!$co1) {
-			// En caso de error de conexión, devuelve una respuesta JSON de error
-			return array("status" => "error", "message" => "No se pudo conectar a la base de datos");
-		}
-
-		$co1->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-		if ($this->existe($this->id_materia_prima)) {
+		$co = $this->conecta();
+		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		
 			try {
-				$co1->query("DELETE FROM materia_prima WHERE id_materia_prima = '$this->id_materia_prima'");
-
-				// En caso de éxito, devuelve una respuesta JSON de éxito
-				return array("status" => "success", "message" => "Entrada Eliminada");
-			} catch (Exception $e) {
-				// En caso de error en la consulta, devuelve una respuesta JSON de error
-				return array("status" => "error", "message" => $e->getMessage());
+					$co->query("delete from compra
+						where
+						idcompra = '$this->idcompra1'
+						");
+						return "Registro Eliminado";
+			} catch(Exception $e) {
+				return $e->getMessage();
 			}
-		} else {
-			// Si no existe la cédula, devuelve una respuesta JSON de error
-			return array("status" => "error", "message" => "Cedula no registrada");
-		}
+
 	}
 }

@@ -29,11 +29,11 @@
                             <tr style="cursor:pointer">
                                 <td>'.$value['p_natural_identificacion'].'</td>
                                 <td>'.$value['nombre_prov'].'</td>
-                                <td>'.$value['cantidad'].'</td>
+                                <td>'.$value['total_cantidad'].'</td>
                                 <td>'.$value['fecha_compra'].'</td>
                                 <td>                              
-                                <a id="modify" class="btn btn-success btn-sm" data-toggle="modal" data-target="#Modalmateria_prima" data-id="'.$value[''].'"onclick="modificarDatos('.$value[''].')"><i class="fa-solid fa-user-pen"></i></a>
-                                <a class="btn btn-danger id="borrar" btn-sm" data-id="'.$value[''].'" onclick="borrarmateria_prima('.$value[''].')"><i class="fa-solid fa-user-xmark"></i></a>
+                                <a id="modify" class="btn btn-success btn-sm" data-toggle="modal" data-target="#Modalmateria_prima" data-id="'.$value['idcompra'].'"onclick="modificarDatos('.$value['idcompra'].')"><i class="fa-solid fa-user-pen"></i></a>
+                                <a class="btn btn-danger id="eliminar" btn-sm" data-id="'.$value['idcompra'].'" onclick="borrarmateria_prima('.$value['idcompra'].')"><i class="fa-solid fa-user-xmark"></i></a>
                                 </td>
                                 
                                

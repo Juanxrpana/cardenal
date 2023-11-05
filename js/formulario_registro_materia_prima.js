@@ -22,16 +22,46 @@ $(document).ready(function() {
         datos.append('cantidad1', $("#cantidad1").val());
         datos.append('cantidad2', $("#cantidad2").val());
         enviaAjax(datos, 'incluir');
-        console.log('Con JSON.stringify: ' + JSON.stringify(datos));
-        console.log(datos.get('datos'));
-        datos.forEach((value, key) => {
-            console.log(key, value);
-        });
-        //  }  
-
     });
+    //  }  
 
 });
+
+$("#modificar").on("click", function() {
+// if(validarenvio()){
+//console.log("I1")
+
+var datos = new FormData();
+datos.append('accion', 'incluir');
+datos.append('proveedor', $("#proveedor").val());
+datos.append('fecha', $("#fecha").val());
+datos.append('calidad1', $("#calidad1").val());
+datos.append('calidad2', $("#calidad2").val());
+datos.append('cantidad1', $("#cantidad1").val());
+datos.append('cantidad2', $("#cantidad2").val());
+enviaAjax(datos, 'incluir');
+
+});
+//  }  
+
+});
+
+
+
+});
+
+$("#eliminar").click(function(e) {
+    e.preventDefault();
+    alert("asldjaopsildj");
+
+});
+
+function borrarmateria_prima(valor) {
+    var datos = new FormData();
+    datos.append('accion', 'eliminar');
+    datos.append('idcompra', valor);
+    enviaAjax(datos, 'eliminar');
+}
 
 function enviaAjax(datos, accion) {
     $.ajax({
@@ -47,24 +77,30 @@ function enviaAjax(datos, accion) {
             //si resulto exitosa la transmision
             if (accion == "consultar") {
                 $("#proveedor").html(respuesta);
+            } else {
+
+                mostrarDatosmateria_prima();
+
+
+
+                $("#hola").html(respuesta);
+                Swal.fire({
+                    title: 'Proveedor ingresado exitosamente',
+                    text: respuesta,
+                    icon: 'success',
+                    timer: 4033330, // Establece el tiempo en milisegundos (5 segundos en este caso)
+
+                }).then((result) => {
+                    if (result.dismiss === Swal.DismissReason.timer) {
+                        // Esto se ejecutará después de que se cierre el mensaje automáticamente
+                        console.log('Mensaje modal cerrado');
+                    }
+                });
+
             }
-
-            $("#hola").html(respuesta);
-            /*  Swal.fire({
-                 title: 'Proveedor ingresado exitosamente',
-                 text: 'El proveedor ha sido registrado con éxito.',
-                 icon: 'success',
-                 timer: 4000, // Establece el tiempo en milisegundos (5 segundos en este caso)
-
-             }).then((result) => {
-                 if (result.dismiss === Swal.DismissReason.timer) {
-                     // Esto se ejecutará después de que se cierre el mensaje automáticamente
-                     console.log('Mensaje modal cerrado');
-                 }
-             }); */
-
         },
         error: function() {
+
             Swal.fire({
                 title: 'Error al ingresar el proveedor',
                 text: 'Hubo un problema al registrar el proveedor.',
@@ -77,6 +113,7 @@ function enviaAjax(datos, accion) {
                     console.log('Mensaje modal de error cerrado');
                 }
             });
+
 
         }
 
