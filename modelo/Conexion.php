@@ -3,7 +3,7 @@
     class Conexion{
 
     private $ip = "localhost";
-    private $bd = "cafecardenal";
+    private $bd = "cardenal";
     private $usuario = "root";
     private $contrasena = "";
 

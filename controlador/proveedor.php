@@ -14,7 +14,7 @@ if (!is_file("modelo/".$pagina.".php")){
 }  
 
 require_once("modelo/".$pagina.".php");
-
+  if(is_file("vista/".$pagina.".php")){
 	  //bien si estamos aca es porque existe la vista y la clase
 	  //por lo que lo primero que debemos hace es realizar una instancia de la clase
 	  //instanciar es crear una variable local, que contiene los metodos de la clase
@@ -58,7 +58,7 @@ require_once("modelo/".$pagina.".php");
 		  }	
 		} 
 		  exit;
-	  	  require_once("vista/".$pagina.".php"); 
+	  }	  require_once("vista/".$pagina.".php"); 
   }
   else{
 	  echo "pagina en construccion";

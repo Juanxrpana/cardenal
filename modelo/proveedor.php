@@ -185,7 +185,7 @@ class Registroproveedor extends Conexion
 		$co1 = $this->conecta();
 		$co1->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 	
-		$sql=$co1->query("SELECT *from proveedor");
+		$sql=$co1->query("SELECT * from proveedor");
 	
 			return $sql;
 		  

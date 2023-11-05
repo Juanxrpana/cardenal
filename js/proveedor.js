@@ -25,7 +25,7 @@ document.getElementById('incluir').onclick = function() {
         datos.append('direccion', $("#direccion").val());
         datos.append('telefono', $("#telefono").val());
         enviaAjax(datos);
-        limpia();
+
     } catch (error) {
         console.log("error en incluir");
         // Expected output: ReferenceError: nonExistentFunction is not defined
@@ -55,7 +55,7 @@ document.getElementById('modificar').onclick = function() {
         datos.append('direccion', $("#direccion").val());
         datos.append('telefono', $("#telefono").val());
         enviaAjax(datos);
-        limpia();
+
     } catch (error) {
         console.log("error en modificar");
         // Expected output: ReferenceError: nonExistentFunction is not defined
