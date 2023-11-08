@@ -32,7 +32,7 @@ require_once("modelo/".$pagina.".php");
 		  $accion = $_POST['accion'];
 
 		   if($accion=='consultar'){
-            echo "alñkjoiashfoiasfh";
+            
 			 echo  $o->consultar();
 		  }	  
 		  elseif($accion=='eliminar'){
@@ -40,17 +40,22 @@ require_once("modelo/".$pagina.".php");
 			 echo  $o->borrarmateria_prima();
 		  }
 		  else{
-			  $o->set_proveedor($_POST['proveedor']);
+			 
+           
               $o->set_fecha($_POST['fecha']);
 			  $o->set_calidad1($_POST['calidad1']);
 			  $o->set_calidad2($_POST['calidad2']);
 			  $o->set_cantidad1($_POST['cantidad1']);
 			  $o->set_cantidad2($_POST['cantidad2']);
+              
 			  if($accion=='incluir'){
-                
+                echo "ewrwqerwerwe";
+                $o->set_proveedor($_POST['proveedor']);
 				echo  $o->agregarmateria_prima();
 			  }
 			  elseif($accion=='modificar'){
+                echo "12121212121";
+                $o->set_idcompra1($_POST['idcompra']);
 				echo  $o->modificar();
 			  }
 		  }

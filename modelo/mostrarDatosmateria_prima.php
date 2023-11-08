@@ -27,13 +27,13 @@
         $a = $value['idcompra'];
         $datosTablamateria_prima=$datosTablamateria_prima.'  
                             <tr style="cursor:pointer">
-                                <td>'.$value['p_natural_identificacion'].'</td>
+                                <td>'.$value['datos_prov_identificacion'].'</td>
                                 <td>'.$value['nombre_prov'].'</td>
                                 <td>'.$value['total_cantidad'].'</td>
                                 <td>'.$value['fecha_compra'].'</td>
                                 <td>                              
-                                <a id="modify" class="btn btn-success btn-sm" data-toggle="modal" data-target="#Modalmateria_prima" data-id="'.$value['idcompra'].'"onclick="modificarDatos('.$value['idcompra'].')"><i class="fa-solid fa-user-pen"></i></a>
-                                <a class="btn btn-danger id="eliminar" btn-sm" data-id="'.$value['idcompra'].'" onclick="borrarmateria_prima('.$value['idcompra'].')"><i class="fa-solid fa-user-xmark"></i></a>
+                                <a id="modificar" class="btn btn-success btn" data-toggle="modal" data-target="#Modalmateria_prima" data-id="'.$value['idcompra'].'"onclick="modificarDatos('.$value['idcompra'].')"><i class="fa-solid fa-user-pen"></i></a>
+                                <a class="btn btn-danger id="eliminar" btn" data-id="'.$value['idcompra'].'" onclick="borrarmateria_prima('.$value['idcompra'].')"><i class="fa-solid fa-user-xmark"></i></a>
                                 </td>
                                 
                                

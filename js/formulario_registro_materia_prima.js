@@ -2,17 +2,13 @@ $(document).ready(function() {
     mostrarDatosmateria_prima();
     llenarLista();
 
-    var $form = $("#formulario");
-    $form.on("submit", function(event) {
-        event.preventDefault();
-        var FormData = $form.serialize();
-        console.log(FormData);
-    })
+
 
     $("#incluir").on("click", function() {
         // if(validarenvio()){
         //console.log("I1")
-
+        alert("wakdhads");
+        alert("wakdhads");
         var datos = new FormData();
         datos.append('accion', 'incluir');
         datos.append('proveedor', $("#proveedor").val());
@@ -23,44 +19,35 @@ $(document).ready(function() {
         datos.append('cantidad2', $("#cantidad2").val());
         enviaAjax(datos, 'incluir');
     });
-    //  }  
+
+
 
 });
 
-$("#modificar").on("click", function() {
-// if(validarenvio()){
-//console.log("I1")
-
-var datos = new FormData();
-datos.append('accion', 'incluir');
-datos.append('proveedor', $("#proveedor").val());
-datos.append('fecha', $("#fecha").val());
-datos.append('calidad1', $("#calidad1").val());
-datos.append('calidad2', $("#calidad2").val());
-datos.append('cantidad1', $("#cantidad1").val());
-datos.append('cantidad2', $("#cantidad2").val());
-enviaAjax(datos, 'incluir');
-
-});
 //  }  
 
-});
 
-
-
-});
-
-$("#eliminar").click(function(e) {
-    e.preventDefault();
-    alert("asldjaopsildj");
-
-});
 
 function borrarmateria_prima(valor) {
     var datos = new FormData();
     datos.append('accion', 'eliminar');
     datos.append('idcompra', valor);
     enviaAjax(datos, 'eliminar');
+}
+
+function modificarDatos(valor) {
+    var datos = new FormData();
+    alert("gola");
+    datos.append('accion', 'modificar');
+    datos.append('fecha', $("#fecha").val());
+    datos.append('calidad1', $("#calidad1").val());
+    datos.append('calidad2', $("#calidad2").val());
+    datos.append('cantidad1', $("#cantidad1").val());
+    datos.append('cantidad2', $("#cantidad2").val());
+    console.log(valor);
+    console.log("sadasd");
+    datos.append('idcompra', valor);
+    enviaAjax(datos, 'modificar');
 }
 
 function enviaAjax(datos, accion) {

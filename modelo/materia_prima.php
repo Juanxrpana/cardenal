@@ -29,7 +29,7 @@ class Registromateria_prima extends Conexion
 
 	//Ok ya tenemos los atributos, pero como son privados no podemos acceder a ellos desde fueran
 	//por lo que debemos colcoar metodos (funciones) que me permitan leer (get) y colocar (set)
-	
+
 	function set_proveedor($valor)
 	{
 		$this->proveedor  = $valor;
@@ -134,11 +134,11 @@ class Registromateria_prima extends Conexion
 			  '12312',
 			  '$this->fecha'
 			  )");
- 				
-				 $idCompra = $co->lastInsertId();
-		if($this->cantidad1 != NULL){
 
-			$co->query("INSERT INTO quintal(
+			$idCompra = $co->lastInsertId();
+			if ($this->cantidad1 != NULL) {
+
+				$co->query("INSERT INTO quintal(
 					idcompra,
 					cantidad,
 					calidad_idcalidad
@@ -147,8 +147,8 @@ class Registromateria_prima extends Conexion
 					'$this->cantidad1',
 					'$this->calidad1'
 					)");
-		}		
-			if($this->cantidad2 != NULL){
+			}
+			if ($this->cantidad2 != NULL) {
 
 				$co->query("INSERT INTO quintal(
 				idcompra,
@@ -159,7 +159,6 @@ class Registromateria_prima extends Conexion
 				'$this->cantidad2',
 				'$this->calidad2'
 				)");
-
 			}
 			return "Registro incluido";
 		} catch (Exception $e) {
@@ -179,37 +178,45 @@ class Registromateria_prima extends Conexion
 		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		//if (!$this->existe($this->id_materia_prima)) {
 		try {
-			$co->query("UPDATE `compra` SET 
-			  `fecha_compra`='$this->fecha'
-			  WHERE idcompra = '$this->fecha' ");
- 				
-				
-		if($this->cantidad1 != NULL){
+			$co->query("Update compra set
+					fecha_compra = '$this->fecha'
+					where
+					compra.idcompra = '$this->idcompra1'
+				");
 
-			$co->query("INSERT INTO quintal(
-					idcompra,
-					cantidad,
-					calidad_idcalidad
-					) VALUES (
-						'$idCompra',
-					'$this->cantidad1',
-					'$this->calidad1'
-					)");
-		}		
-			if($this->cantidad2 != NULL){
+			// Verificar si ya existe una entrada con calidad 2 para el mismo idcompra
+			$verificarSQL = "SELECT COUNT(*) AS count FROM quintal WHERE idcompra = '$this->idcompra1' AND calidad_idcalidad = '$this->calidad2'";
+			$resultado = $co->query($verificarSQL);
+			$registro = $resultado->fetch(PDO::FETCH_ASSOC);
 
-				$co->query("INSERT INTO quintal(
-				idcompra,
-				cantidad,
-				calidad_idcalidad
-				) VALUES (
-					'$idCompra',
-				'$this->cantidad2',
-				'$this->calidad2'
-				)");
-
+			if ($registro['count'] > 0) {
+				// Actualizar la cantidad existente para calidad 2
+				$co->query("UPDATE quintal
+        SET cantidad = '$this->cantidad1'
+        WHERE idcompra = '$this->idcompra1' AND calidad_idcalidad = '$this->calidad1'");
+			} else {
+				// Insertar una nueva fila para calidad 2
+				$co->query("INSERT INTO quintal (idcompra, calidad_idcalidad, cantidad)
+        VALUES ('$this->idcompra1', '$this->calidad1', '$this->cantidad1')");
 			}
-			return "Registro incluido";
+
+			if ($registro['count'] > 0) {
+				// Actualizar la cantidad existente para calidad 2
+				$co->query("UPDATE quintal
+        SET cantidad = '$this->cantidad2'
+        WHERE idcompra = '$this->idcompra1' AND calidad_idcalidad = '$this->calidad2'");
+			} else {
+				// Insertar una nueva fila para calidad 2
+				$co->query("INSERT INTO quintal (idcompra, calidad_idcalidad, cantidad)
+        VALUES ('$this->idcompra1', '$this->calidad2', '$this->cantidad2')");
+			}
+
+			$co->query("Update compra set
+					fecha_compra = '$this->fecha'
+					where
+					compra.idcompra = '$this->cantidad1'
+				");
+			return "Registro Modificado";
 		} catch (Exception $e) {
 			return $e->getMessage();
 		}
@@ -220,12 +227,13 @@ class Registromateria_prima extends Conexion
 	}
 
 
-	function consultar(){
+	function consultar()
+	{
 		$co = $this->conecta();
 		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		try{
+		try {
 
-			$resultado = $co->query("SELECT p_natural_identificacion, id_prov FROM `proveedor`");
+			$resultado = $co->query("SELECT datos_prov_identificacion, id_prov FROM `proveedor`");
 			$resultado2 = $co->query("SELECT idcompra, SUM(cantidad) AS total_cantidad
 			FROM (
 			  SELECT idcompra, cantidad
@@ -236,30 +244,26 @@ class Registromateria_prima extends Conexion
 			GROUP BY idcompra
 			HAVING COUNT(*) > 1;");
 
-			
-			if($resultado){
+
+			if ($resultado) {
 
 				$respuesta = '';
-				$respuesta ="<option value=''selected>Proveedor</option>";
-				foreach($resultado as $r){
-					$respuesta = $respuesta."<option value=";
-						$respuesta = $respuesta." '";
-							$respuesta = $respuesta.$r['id_prov'];
-						$respuesta = $respuesta."'>";
-							$respuesta = $respuesta.$r['p_natural_identificacion'];	
-					$respuesta = $respuesta."</option>";
+				$respuesta = "<option value=''selected>Proveedor</option>";
+				foreach ($resultado as $r) {
+					$respuesta = $respuesta . "<option value=";
+					$respuesta = $respuesta . " '";
+					$respuesta = $respuesta . $r['id_prov'];
+					$respuesta = $respuesta . "'>";
+					$respuesta = $respuesta . $r['datos_prov_identificacion'];
+					$respuesta = $respuesta . "</option>";
 				}
 				return $respuesta;
-
-			}
-			else{
+			} else {
 				return '';
 			}
-
-		}catch(Exception $e){
+		} catch (Exception $e) {
 			return $e->getMessage();
 		}
-
 	}
 
 
@@ -270,12 +274,12 @@ class Registromateria_prima extends Conexion
 		$co1 = $this->conecta();
 		$co1->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-		$sql = $co1->query("SELECT c.fecha_compra, pn.nombre_prov, p.p_natural_identificacion, SUM(q.cantidad) AS total_cantidad, c.idcompra
+		$sql = $co1->query("SELECT c.fecha_compra, pn.nombre_prov, p.datos_prov_identificacion, SUM(q.cantidad) AS total_cantidad, c.idcompra
 		FROM proveedor p
-		INNER JOIN p_natural pn ON p.p_natural_identificacion = pn.identificacion
+		INNER JOIN datos_prov pn ON p.datos_prov_identificacion = pn.identificacion
 		LEFT JOIN compra c ON p.id_prov = c.proveedor_id_proveedor
 		LEFT JOIN quintal q ON c.idcompra = q.idcompra
-		GROUP BY c.idcompra" );
+		GROUP BY c.idcompra");
 
 		return $sql;
 	}
@@ -284,16 +288,15 @@ class Registromateria_prima extends Conexion
 	{
 		$co = $this->conecta();
 		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		
-			try {
-					$co->query("delete from compra
+
+		try {
+			$co->query("delete from compra
 						where
 						idcompra = '$this->idcompra1'
 						");
-						return "Registro Eliminado";
-			} catch(Exception $e) {
-				return $e->getMessage();
-			}
-
+			return "Registro Eliminado";
+		} catch (Exception $e) {
+			return $e->getMessage();
+		}
 	}
 }
