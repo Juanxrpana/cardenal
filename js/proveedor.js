@@ -37,7 +37,7 @@ function borrarproveedor(valor) {
 function modificarDatos(valor) {
     alert("ingresas un nuevo proveedor");
     var datos = new FormData();
-    datos.append('accion', 'incluir');
+    datos.append('accion', 'modificar');
     datos.append('cedula_fiscal_id', $("#cedula_fiscal_id").val());
     datos.append('identificacion', $("#identificacion").val());
     datos.append('telefono', $("#telefono").val());
