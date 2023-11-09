@@ -49,12 +49,11 @@ require_once("modelo/".$pagina.".php");
 			  $o->set_cantidad2($_POST['cantidad2']);
               
 			  if($accion=='incluir'){
-                echo "ewrwqerwerwe";
                 $o->set_proveedor($_POST['proveedor']);
 				echo  $o->agregarmateria_prima();
 			  }
 			  elseif($accion=='modificar'){
-                echo "12121212121";
+
                 $o->set_idcompra1($_POST['idcompra']);
 				echo  $o->modificar();
 			  }

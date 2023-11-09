@@ -266,41 +266,57 @@ class Registroproveedor extends Conexion
 			) VALUES (
 				LAST_INSERT_ID(), 
 				'$this->identificacion')");
-					return "Registro incluido";
-				} catch (Exception $e) {
-					return $e->getMessage();
-				}
-				//} 
-				//else{
-				//	return "Ya existe la cedula que desea ingresar";
-				//}
-			}
+			return "Registro incluido";
+		} catch (Exception $e) {
+			return $e->getMessage();
+		}
+		//} 
+		//else{
+		//	return "Ya existe la cedula que desea ingresar";
+		//}
+	}
 
-			function modificar()
-			{
-				$co = $this->conecta();
-				$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-				try {
-					$co->query("Update proveedor set
-							identificacion= '$this->identificacion',
-							nombre_prov= '$this->nombre_prov',
-							telefono= '$this->telefono',
-							cedula_fiscal_id= '$this->cedula_fiscal_id',
-							ubicacion= '$this->ubicacion' ,
-							nombre_finca= '$this->nombre_finca' ,
-							estado= '$this->estado' ,
-							municipio= '$this->municipio' ,
-							parroquia= '$this->parroquia' ,
-							ciudad= '$this->ciudad' ,
-							coordenadas= '$this->coordenadas' ,
-							
-							where
-							id_prov = '$this->id_prov'
-						");}
-						
-				catch (Exception $e) {
-					return $e->getMessage();}
-			}
+	function modificar()
+{
+    $co = $this->conecta();
+    $co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    try {
+        $co->beginTransaction();
+
+        $co->query("UPDATE datos_prov
+                    JOIN proveedor ON datos_prov.identificacion = proveedor.datos_prov_identificacion
+                    SET
+						datos_prov.identificacion = '$this->identificacion',
+                        datos_prov.nombre_prov = '$this->nombre_prov',
+                        datos_prov.telefono = '$this->telefono',
+                        datos_prov.cedula_fiscal_id = '$this->cedula_fiscal_id'
+                    WHERE
+                        proveedor.id_prov = '$this->id_prov'
+                ");
+
+        $co->query("UPDATE finca
+                    JOIN proveedor ON finca.idfinca = proveedor.finca_idfinca
+                    SET
+                        finca.ubicacion = '$this->ubicacion',
+                        finca.nombre_finca = '$this->nombre_finca',
+                        finca.estado = '$this->estado',
+                        finca.municipio = '$this->municipio',
+                        finca.parroquia = '$this->parroquia',
+                        finca.ciudad = '$this->ciudad',
+                        finca.coordenadas = '$this->coordenadas'
+                    WHERE
+                        proveedor.id_prov = '$this->id_prov'
+                ");
+
+        $co->commit();
+
+        return "Datos de datos_prov y finca actualizados";
+    } catch (Exception $e) {
+        $co->rollBack();
+        return $e->getMessage();
+    }
+}
 
 
 
@@ -322,18 +338,26 @@ class Registroproveedor extends Conexion
 	}
 
 	public function borrar()
-	{
-		$co = $this->conecta();
-		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+{
+    $co = $this->conecta();
+    $co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-		try {
-			$co->query("delete from proveedor
-						where
-						id_prov = '$this->id_prov'
-						");
-			return "Registro Eliminado";
-		} catch (Exception $e) {
-			return $e->getMessage();
-		}
-	}
+    try {
+        $co->query("DELETE dp, f, p
+		FROM proveedor p
+		LEFT JOIN datos_prov dp ON p.datos_prov_identificacion = dp.identificacion
+		LEFT JOIN finca f ON p.finca_idfinca = f.idfinca
+		WHERE p.id_prov = id_prov;
+		");
+
+
+        return "Registro Eliminado";
+    } catch (Exception $e) {
+        return $e->getMessage();
+    }
 }
+
+
+}
+
+

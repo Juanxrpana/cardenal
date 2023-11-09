@@ -35,9 +35,11 @@ function borrarproveedor(valor) {
 }
 
 function modificarDatos(valor) {
-    alert("ingresas un nuevo proveedor");
+
+    alert("Modificarás un proveedor");
     var datos = new FormData();
     datos.append('accion', 'modificar');
+    datos.append('id_prov', valor);
     datos.append('cedula_fiscal_id', $("#cedula_fiscal_id").val());
     datos.append('identificacion', $("#identificacion").val());
     datos.append('telefono', $("#telefono").val());
@@ -51,9 +53,11 @@ function modificarDatos(valor) {
     datos.append('coordenadas', $("#coordenadas").val());
     enviaAjax(datos, 'modificar');
 
-
-
 }
+
+
+
+
 
 
 
