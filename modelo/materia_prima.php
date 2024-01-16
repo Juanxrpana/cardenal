@@ -98,8 +98,7 @@ class Registromateria_prima extends Conexion
 	}
 
 
-	//----//Lo siguiente que demos hacer es crear los metodos para incluir, consultar y borrar----//----//
-	//lo primero es chequear si el id ya fue registrado//
+
 	public function existe($id_materia_prima)
 	{
 		$co = $this->conecta();
@@ -265,6 +264,23 @@ class Registromateria_prima extends Conexion
 			return $e->getMessage();
 		}
 	}
+
+
+	public function contadormateria_prima()
+{
+    $co = $this->conecta();
+    $co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    try {
+        $resultado = $co->query("SELECT SUM(cantidad) AS total_cafe_verde FROM quintal");
+        $totalCafeVerde = $resultado->fetch(PDO::FETCH_ASSOC)['total_cafe_verde'];
+
+        return $totalCafeVerde;
+    } catch (Exception $e) {
+        return $e->getMessage();
+    }
+}
+
 
 
 	public function mostrarmateria_prima()

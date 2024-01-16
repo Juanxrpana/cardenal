@@ -35,6 +35,8 @@ require_once("modelo/".$pagina.".php");
             
 			 echo  $o->consultar();
 		  }	  
+		  
+
 		  elseif($accion=='eliminar'){
 			 $o->set_idcompra1($_POST['idcompra']);
 			 echo  $o->borrarmateria_prima();

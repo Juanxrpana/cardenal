@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    mostrarcontador();
     mostrarDatosmateria_prima();
     llenarLista();
 
@@ -67,7 +68,7 @@ function enviaAjax(datos, accion) {
             } else {
 
                 mostrarDatosmateria_prima();
-
+                mostrarcontador();
 
 
                 $("#hola").html(respuesta);
@@ -115,13 +116,26 @@ function llenarLista() {
     enviaAjax(datos, 'consultar');
 }
 
+
+
 function mostrarDatosmateria_prima() {
     // La función realiza una petición AJAX al archivo mostrarDatosmateria_prima.php
-    console.log("entrando mostrando data Datosmateria_prima");
+    /*  console.log("entrando mostrando data Datosmateria_prima"); */
 
     $.ajax({ url: './Modelo/mostrarDatosmateria_prima.php' }).done(function(r) {
         // Cuando se recibe la respuesta de la petición AJAX, se agrega la tabla al elemento con el ID 'tablaDatosDatosmateria_prima'
-        console.log("Mostrando data satisfactoriamente");
+        console.log("Mostrando data de materiaprima satisfactoriamente");
         $('#tablaDatosmateria_prima').html(r);
+    });
+}
+
+function mostrarcontador() {
+    // La función realiza una petición AJAX al archivo contador.php
+    /*    console.log("entrando mostrando contador contador"); */
+
+    $.ajax({ url: './Modelo/contador.php' }).done(function(r) {
+        // Cuando se recibe la respuesta de la petición AJAX, se agrega la tabla al elemento con el ID 'tablaDatoscontador'
+        console.log("Mostrando contador satisfactoriamente");
+        $('#contador_materia_prima').html(r);
     });
 }

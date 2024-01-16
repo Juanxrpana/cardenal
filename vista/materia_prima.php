@@ -63,10 +63,7 @@
                 <span>Registro y control</span>
                 <h2>Materia Prima</h2>
             </div>
-            <div class="user--info">
-                <span><i class="fa-solid fa-magnifying-glass" style="color: #212121;"></i></span>
-                <input class="search--box" type="text" placeholder="texto">
-            </div>
+            <div id="contador_materia_prima" class="contador_materia_prima"></div>
         </div>
         <div class="contenedor--tarjetas">
             <h3 class="main--titulo">
