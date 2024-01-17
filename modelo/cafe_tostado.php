@@ -26,6 +26,10 @@ class Registrocafe_tostado extends Conexion
 	//Ok ya tenemos los atributos, pero como son privados no podemos acceder a ellos desde fueran
 	//por lo que debemos colcoar metodos (funciones) que me permitan leer (get) y colocar (set)
 
+	function set_idcafe_tostado($valor)
+	{
+		$this->idcafe_tostado  = $valor;
+	}
 	function set_cantidad($valor)
 	{
 		$this->cantidad  = $valor;
@@ -48,7 +52,10 @@ class Registrocafe_tostado extends Conexion
 	//ahora la misma cosa pero para leer, es decir get
 
 
-
+	function get_idcafe_tostado($valor)
+	{
+		$this->idcafe_tostado  = $valor;
+	}
     function get_cantidad($valor)
 	{
 		$this->cantidad  = $valor;
@@ -104,7 +111,7 @@ class Registrocafe_tostado extends Conexion
                 '$this->nivel_tostado',
                 '$this->nivel_molido',
                 '1',
-                NOW
+                NOW()
               )");
 			return "Registro de café para tostar";
 		} catch (Exception $e) {
@@ -127,7 +134,8 @@ class Registrocafe_tostado extends Conexion
 			$co->query("UPDATE cafe_tostado SET
             cantidad='$this->cantidad',
             nivel_tostado='$this->nivel_tostado',
-            nivel_molido='$this->nivel_molido'");
+            nivel_molido='$this->nivel_molido'
+			WHERE idcafe_tostado='$this->idcafe_tostado'");
 			return "Registro Modificado";
 		} catch (Exception $e) {
 			return $e->getMessage();
@@ -152,7 +160,19 @@ class Registrocafe_tostado extends Conexion
 						");
 	}
 
+	public function mostrar_contador()
+	{
+		$co = $this->conecta();
+		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		try {
+			$resultado = $co->query("SELECT SUM(cantidad) AS total_cafe_verde FROM cafe_tostado");
+			$totalCafeVerde = $resultado->fetch(PDO::FETCH_ASSOC)['total_cafe_verde'];
 
+			return $totalCafeVerde;
+		} catch (Exception $e) {
+			return $e->getMessage(); // O maneja el error de la manera que desees
+		}
+	}
 
 	public function mostrarcafe_tostado()
 	{
@@ -169,7 +189,7 @@ class Registrocafe_tostado extends Conexion
 
 
 
-	public function borrarmateria_prima()
+	public function borrarcafe_tostado()
 	{
 		$co = $this->conecta();
 		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

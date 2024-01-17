@@ -63,7 +63,7 @@ class Registromateria_prima extends Conexion
 	{
 		$this->cantidad2  = $valor;
 	}
-	
+
 
 	//ahora la misma cosa pero para leer, es decir get
 
@@ -275,18 +275,28 @@ class Registromateria_prima extends Conexion
 
 	public function contadormateria_prima()
 	{
-    $co = $this->conecta();
-    $co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$co = $this->conecta();
+		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-	$sql = $co->query("
+		$sql = $co->query("
 						INSERT INTO total_cafe (id_total_cafe, total)
 						SELECT 1, COALESCE(SUM(cantidad), 0)
 						FROM quintal
 						WHERE estado = 1
 						ON DUPLICATE KEY UPDATE TOTAL = VALUES(TOTAL);
 						");
+		
 	}
 
+	public function descontadormateria_prima(){
+		$co = $this->conecta();
+		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$sql = $co->query("
+						UPDATE quintal
+						SET estado = 0
+						WHERE estado = 1;
+						");
+	}
 
 
 	public function mostrarmateria_prima()
@@ -304,6 +314,20 @@ class Registromateria_prima extends Conexion
 		GROUP BY c.idcompra");
 
 		return $sql;
+	}
+
+	public function mostrar_contador()
+	{
+		$co = $this->conecta();
+		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		try {
+			$resultado = $co->query("SELECT SUM(cantidad) AS total_cafe_verde FROM quintal");
+			$totalCafeVerde = $resultado->fetch(PDO::FETCH_ASSOC)['total_cafe_verde'];
+
+			return $totalCafeVerde;
+		} catch (Exception $e) {
+			return $e->getMessage(); // O maneja el error de la manera que desees
+		}
 	}
 
 	public function borrarmateria_prima()
