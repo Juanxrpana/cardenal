@@ -26,6 +26,7 @@ class Registromateria_prima extends Conexion
 	private $calidad2;
 	private $cantidad1;
 	private $cantidad2;
+	private $estado;
 
 	//Ok ya tenemos los atributos, pero como son privados no podemos acceder a ellos desde fueran
 	//por lo que debemos colcoar metodos (funciones) que me permitan leer (get) y colocar (set)
@@ -62,6 +63,7 @@ class Registromateria_prima extends Conexion
 	{
 		$this->cantidad2  = $valor;
 	}
+	
 
 	//ahora la misma cosa pero para leer, es decir get
 
@@ -96,6 +98,7 @@ class Registromateria_prima extends Conexion
 	{
 		return $this->cantidad2;
 	}
+
 
 
 
@@ -140,11 +143,13 @@ class Registromateria_prima extends Conexion
 				$co->query("INSERT INTO quintal(
 					idcompra,
 					cantidad,
-					calidad_idcalidad
+					calidad_idcalidad,
+					estado
 					) VALUES (
 						'$idCompra',
 					'$this->cantidad1',
-					'$this->calidad1'
+					'$this->calidad1',
+					'1'
 					)");
 			}
 			if ($this->cantidad2 != NULL) {
@@ -152,11 +157,13 @@ class Registromateria_prima extends Conexion
 				$co->query("INSERT INTO quintal(
 				idcompra,
 				cantidad,
-				calidad_idcalidad
+				calidad_idcalidad,
+				estado
 				) VALUES (
 					'$idCompra',
 				'$this->cantidad2',
-				'$this->calidad2'
+				'$this->calidad2',
+				'1'
 				)");
 			}
 			return "Registro incluido";
@@ -267,19 +274,18 @@ class Registromateria_prima extends Conexion
 
 
 	public function contadormateria_prima()
-{
+	{
     $co = $this->conecta();
     $co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    try {
-        $resultado = $co->query("SELECT SUM(cantidad) AS total_cafe_verde FROM quintal");
-        $totalCafeVerde = $resultado->fetch(PDO::FETCH_ASSOC)['total_cafe_verde'];
-
-        return $totalCafeVerde;
-    } catch (Exception $e) {
-        return $e->getMessage();
-    }
-}
+	$sql = $co->query("
+						INSERT INTO total_cafe (id_total_cafe, total)
+						SELECT 1, COALESCE(SUM(cantidad), 0)
+						FROM quintal
+						WHERE estado = 1
+						ON DUPLICATE KEY UPDATE TOTAL = VALUES(TOTAL);
+						");
+	}
 
 
 

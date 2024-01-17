@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    mostrarcontador();
+
     mostrarDatosmateria_prima();
     llenarLista();
 
@@ -8,8 +8,7 @@ $(document).ready(function() {
     $("#incluir").on("click", function() {
         // if(validarenvio()){
         //console.log("I1")
-        alert("wakdhads");
-        alert("wakdhads");
+        alert("Funciona");
         var datos = new FormData();
         datos.append('accion', 'incluir');
         datos.append('proveedor', $("#proveedor").val());
@@ -18,7 +17,9 @@ $(document).ready(function() {
         datos.append('calidad2', $("#calidad2").val());
         datos.append('cantidad1', $("#cantidad1").val());
         datos.append('cantidad2', $("#cantidad2").val());
+
         enviaAjax(datos, 'incluir');
+        /* mostrarcontador(); */
     });
 
 
@@ -34,6 +35,7 @@ function borrarmateria_prima(valor) {
     datos.append('accion', 'eliminar');
     datos.append('idcompra', valor);
     enviaAjax(datos, 'eliminar');
+    mostrarcontador();
 }
 
 function modificarDatos(valor) {
@@ -49,6 +51,7 @@ function modificarDatos(valor) {
     console.log("sadasd");
     datos.append('idcompra', valor);
     enviaAjax(datos, 'modificar');
+    mostrarcontador();
 }
 
 function enviaAjax(datos, accion) {
