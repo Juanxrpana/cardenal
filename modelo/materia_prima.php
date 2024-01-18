@@ -323,19 +323,18 @@ class Registromateria_prima extends Conexion
 		return $sql;
 	}
 
-	/* public function mostrar_contador()
-	{
-		$co = $this->conecta();
-		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		try {
-			$resultado = $co->query("SELECT SUM(cantidad) AS total_cafe_verde FROM quintal");
-			$totalCafeVerde = $resultado->fetch(PDO::FETCH_ASSOC)['total_cafe_verde'];
-
-			return $totalCafeVerde;
-		} catch (Exception $e) {
-			return $e->getMessage(); // O maneja el error de la manera que desees
-		}
-	} */
+	public function mostrar_contador()
+{
+    $co = $this->conecta();
+    $co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    try {
+        $resultado = $co->query("SELECT total FROM total_cafe WHERE id_total_cafe = 1;");
+        $totalCafeVerde = $resultado->fetch(PDO::FETCH_ASSOC)['total'];
+        return $totalCafeVerde;
+    } catch (Exception $e) {
+        return $e->getMessage(); 
+    }
+}
 
 	public function borrarmateria_prima()
 	{

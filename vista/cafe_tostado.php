@@ -24,7 +24,7 @@
         </div>
         <div class="contenedor--tarjetas">
             <h3 class="main--titulo">
-                DATA
+                Registro para tostar café
             </h3>
             <div class="container">
                 <!-- <div class="row"><input placeholder="cafe-input" type="text" name="cafe-input" class="cafe-input" id="cafe-input"></div> -->
@@ -49,9 +49,10 @@
                             <div class="formulario__grupo-input">
                                 <select name="select" id="nivel_molido">
                                     <option selected>Seleccion</option>
-                                    <option value="1">Claro</option>
-                                    <option value="2" selected>Medio</option>
-                                    <option value="3">Oscuro</option>
+                                    <option value="1">Extra Fino</option>
+                                    <option value="2">Fino</option>
+                                    <option value="3" selected>Medio</option>
+                                    <option value="4">Grueso</option>
                                 </select>
                             </div>
                         </div>

@@ -34,13 +34,13 @@
                     <div class="tarjetas--cabezera">
                         <div class="ammount">
                             <span class="titulo">
-                                <h3>CLIENTES</h3>
+                                <h3>PROVEEDORES</h3>
                             </span>
-                            <span class="ammount-value">
+                            <span class="ammount-value" id="contador_proveedores">
                                 4
                             </span>
                             <span class="tarjetas--detalles">
-                                <i><a href="?pagina=tablas">VER ULTIMO REGISTRO</a><img src="./extras/eye-solid.svg" alt="./extras/eye-solid.svg">  </i>
+                                <i><a href="?pagina=consulta">VER ULTIMO REGISTRO</a></i>
                             </span>
                         </div>
                     </div>
@@ -49,13 +49,13 @@
                     <div class="tarjetas--cabezera">
                         <div class="ammount">
                             <span class="titulo">
-                                <h3>INVENTARIO</h3>
+                                <h3>CAFÉ TOSTADO</h3>
                             </span>
-                            <span class="ammount-value">
+                            <span class="ammount-value" id="contador_cafe_tostado">
                                 4
                             </span>
                             <span class="tarjetas--detalles">
-                                <i><a href="?pagina=tablas">VER ULTIMO REGISTRO</a><img src="./extras/eye-solid.svg" alt="./extras/eye-solid.svg">  </i>
+                                <i><a href="?pagina=consulta">VER ULTIMO REGISTRO</a></i>
                             </span>
                         </div>
                     </div>
@@ -64,13 +64,28 @@
                     <div class="tarjetas--cabezera">
                         <div class="ammount">
                             <span class="titulo">
-                               <h3> COMPRAS</h3>
+                               <h3>CAFÉ FINAL</h3>
                             </span>
                             <span class="ammount-value">
                                 4
                             </span>
-                            <span class="tarjetas--detalles">
-                              <i><a href="?pagina=tablas">VER ULTIMO REGISTRO</a><img src="./extras/eye-solid.svg" alt="./extras/eye-solid.svg">  </i>
+                            <span class="tarjetas--detalles" id="contador_cafe_final">
+                              <i><a href="?pagina=consulta">VER ULTIMO REGISTRO</a></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="tarjetas tarjetas--materia_prima">
+                    <div class="tarjetas--cabezera">
+                        <div class="ammount">
+                            <span class="titulo">
+                               <h3>MATERIA PRIMA</h3>
+                            </span>
+                            <span class="ammount-value">
+                                4
+                            </span>
+                            <span class="tarjetas--detalles" id="contador_cafe_final">
+                              <i><a href="?pagina=consulta">VER ULTIMO REGISTRO</a></i>
                             </span>
                         </div>
                     </div>

@@ -14,7 +14,7 @@
 
 
     $contador_cafe_tostado= $datos;
-    echo "contador de cafe tostado: ".$contador_cafe_tostado;
+    echo "contador de cafe tostado: ".$contador_cafe_tostado."/5";
  
 ?>
 

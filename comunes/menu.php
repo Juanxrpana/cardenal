@@ -31,7 +31,13 @@
             <li>
                 <a href="?pagina=cafe_tostado">
                 <i class="fa-solid fa-coffee-bean"></i>
-                    <span>cafe tostado</span>
+                    <span>Café tostado</span>
+                </a>
+            </li>
+            <li>
+                <a href="?pagina=cafe_final">
+                <i class="fa-solid fa-coffee-bean"></i>
+                    <span>Café Final</span>
                 </a>
             </li>
             <li class="logout">

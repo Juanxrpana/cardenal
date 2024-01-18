@@ -35,13 +35,16 @@
             <!-- Grupo: sd -->
 
                 <div class="row">
+                    <h3>Proveedor</h3>
                      <div class="col-6">
                         <select name="proveedor" id="proveedor">
                             <option value="232" selected>Proveedor</option>
                             
                         </select>
                     </div>
+                    <h3>Fecha</h3>
                     <div class="col-6">
+                        
                     <input type="date" class="datepicker_input form-control" id="fecha" placeholder="" required="">
                     </div>
                 </div>

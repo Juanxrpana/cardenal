@@ -1,60 +1,44 @@
 $(document).ready(function() {
-
-    mostrarDatosmateria_prima();
-    llenarLista();
-    llenar_contador_total();
-
-
-
+    mostrarDatoscafe_tostado_final();
+    mostrarDatoscafe_final();
 
     $("#incluir").on("click", function() {
-        // if(validarenvio()){
-        //console.log("I1")
         alert("Funciona");
         var datos = new FormData();
         datos.append('accion', 'incluir');
-        datos.append('proveedor', $("#proveedor").val());
-        datos.append('fecha', $("#fecha").val());
-        datos.append('calidad1', $("#calidad1").val());
-        datos.append('calidad2', $("#calidad2").val());
-        datos.append('cantidad1', $("#cantidad1").val());
-        datos.append('cantidad2', $("#cantidad2").val());
-
+        datos.append('nivel_tostado', $("#nivel_tostado").val());
+        datos.append('nivel_molido', $("#nivel_molido").val());
+        datos.append('cantidad', $("#cafe-input").val());
         enviaAjax(datos, 'incluir');
 
     });
 
-
-
 });
 
-//  }  
-
-
-
-function borrarmateria_prima(valor) {
+function borrarcafe_tostado(valor) {
     var datos = new FormData();
     datos.append('accion', 'eliminar');
-    datos.append('idcompra', valor);
+    datos.append('idcafe_tostado', valor);
     enviaAjax(datos, 'eliminar');
+
 
 }
 
 function modificarDatos(valor) {
     var datos = new FormData();
-    alert("gola");
+    alert("Modificar funciona");
     datos.append('accion', 'modificar');
-    datos.append('fecha', $("#fecha").val());
-    datos.append('calidad1', $("#calidad1").val());
-    datos.append('calidad2', $("#calidad2").val());
-    datos.append('cantidad1', $("#cantidad1").val());
-    datos.append('cantidad2', $("#cantidad2").val());
+    datos.append('nivel_tostado', $("#nivel_tostado").val());
+    datos.append('nivel_molido', $("#nivel_molido").val());
     console.log(valor);
     console.log("sadasd");
-    datos.append('idcompra', valor);
+    datos.append('idcafe_tostado', valor);
     enviaAjax(datos, 'modificar');
 
+
 }
+
+
 
 function enviaAjax(datos, accion) {
     $.ajax({
@@ -66,15 +50,15 @@ function enviaAjax(datos, accion) {
         processData: false,
         cache: false,
         success: function(respuesta) {
-
             //si resulto exitosa la transmision
             if (accion == "consultar") {
                 $("#proveedor").html(respuesta);
             } else {
+                mostrarDatoscafe_tostado_final();
+                mostrarDatoscafe_final();
 
-                mostrarDatosmateria_prima();
-                llenar_contador_total();
 
+                /*  mostrarcontador(); */
 
                 $("#hola").html(respuesta);
                 Swal.fire({
@@ -93,7 +77,6 @@ function enviaAjax(datos, accion) {
             }
         },
         error: function() {
-
             Swal.fire({
                 title: 'Error al ingresar el proveedor',
                 text: 'Hubo un problema al registrar el proveedor.',
@@ -106,38 +89,44 @@ function enviaAjax(datos, accion) {
                     console.log('Mensaje modal de error cerrado');
                 }
             });
-
-
         }
-
     });
-
-
 }
 
-function llenarLista() {
-    var datos = new FormData();
-    datos.append('accion', 'consultar');
-    enviaAjax(datos, 'consultar');
-}
+function mostrarDatoscafe_final() {
+    // La función realiza una petición AJAX al archivo mostrarDatoscafe_tostado.php
+    /*  console.log("entrando mostrando data Datoscafe_tostado"); */
 
-
-
-function mostrarDatosmateria_prima() {
-    // La función realiza una petición AJAX al archivo mostrarDatosmateria_prima.php
-    /*  console.log("entrando mostrando data Datosmateria_prima"); */
-
-    $.ajax({ url: './Modelo/mostrarDatosmateria_prima.php' }).done(function(r) {
-        // Cuando se recibe la respuesta de la petición AJAX, se agrega la tabla al elemento con el ID 'tablaDatosDatosmateria_prima'
-        console.log("Mostrando data de materiaprima satisfactoriamente");
-        $('#tablaDatosmateria_prima').html(r);
+    $.ajax({ url: './Modelo/mostrarDatoscafe_final.php' }).done(function(r) {
+        // Cuando se recibe la respuesta de la petición AJAX, se agrega la tabla al elemento con el ID 'tablaDatosDatoscafe_tostado'
+        console.log("Mostrando data de cafe final");
+        $('#tablaDatoscafe_final').html(r);
+        mostrarcontador();
     });
-
 }
 
-function llenar_contador_total() {
-    $.ajax({ url: './Modelo/contador_materia_prima.php' }).done(function(r) {
+function mostrarDatoscafe_tostado_final() {
+    // La función realiza una petición AJAX al archivo mostrarDatoscafe_tostado.php
+    /*  console.log("entrando mostrando data Datoscafe_tostado"); */
+
+    $.ajax({ url: './Modelo/mostrarDatoscafe_tostado_final.php' }).done(function(r) {
+        // Cuando se recibe la respuesta de la petición AJAX, se agrega la tabla al elemento con el ID 'tablaDatosDatoscafe_tostado'
+        console.log("Mostrando data de cafe tostado satisfactoriamente");
+        $('#tablaDatoscafe_tostado_final').html(r);
+        mostrarcontador();
+    });
+}
+
+/* function mostrarcontador() {
+    $.ajax({ url: './Modelo/contador_cafe_tostado.php' }).done(function(r) {
         console.log("Mostrando contador satisfactoriamente");
-        $('#contador_materia_prima').html(r);
+        $('#contador_cafe_tostado').html(r);
+    });
+} */
+
+
+function descontador() {
+    $.ajax({ url: './Modelo/descontador_materia_prima.php' }).done(function(r) {
+        console.log("desconto satisfactoriamente");
     });
 }
