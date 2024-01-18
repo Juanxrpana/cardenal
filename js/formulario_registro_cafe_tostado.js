@@ -9,7 +9,7 @@ $(document).ready(function() {
         datos.append('nivel_molido', $("#nivel_molido").val());
         datos.append('cantidad', $("#cafe-input").val());
         enviaAjax(datos, 'incluir');
-        descontador();
+
     });
 
 });
@@ -19,7 +19,7 @@ function borrarcafe_tostado(valor) {
     datos.append('accion', 'eliminar');
     datos.append('idcafe_tostado', valor);
     enviaAjax(datos, 'eliminar');
-    descontador();
+
 
 }
 
@@ -33,9 +33,11 @@ function modificarDatos(valor) {
     console.log("sadasd");
     datos.append('idcafe_tostado', valor);
     enviaAjax(datos, 'modificar');
-    descontador();
+
 
 }
+
+
 
 function enviaAjax(datos, accion) {
     $.ajax({
@@ -52,6 +54,7 @@ function enviaAjax(datos, accion) {
                 $("#proveedor").html(respuesta);
             } else {
                 mostrarDatoscafe_tostado();
+                descontador();
 
                 /*  mostrarcontador(); */
 

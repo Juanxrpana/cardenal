@@ -273,36 +273,43 @@ class Registromateria_prima extends Conexion
 	}
 
 
-	public function contadormateria_prima()
+	public function contador_total_materia_prima()
 	{
 		$co = $this->conecta();
 		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 		$sql = $co->query("
-						INSERT INTO total_cafe (id_total_cafe, total)
-						SELECT 1, COALESCE(SUM(cantidad), 0)
-						FROM quintal
-						WHERE estado = 1
-						ON DUPLICATE KEY UPDATE TOTAL = VALUES(TOTAL);
+						UPDATE total_cafe
+						SET total = COALESCE((SELECT SUM(cantidad) FROM quintal WHERE estado = 1), 0)
+						WHERE id_total_cafe = 1;
 						");
-		
 	}
 
-	public function descontadormateria_prima(){
+	public function inactivadormateria_prima()
+	{
 		$co = $this->conecta();
 		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		$sql = $co->query("
 						UPDATE quintal
 						SET estado = 0
 						WHERE estado = 1;
+						");	
+	}
+
+	public function descontador_total_materia_prima()
+	{
+		$co = $this->conecta();
+		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$sql = $co->query("
+						UPDATE total_cafe
+						SET total = total - (SELECT total FROM total_cafe WHERE id_total_cafe = 2)
+						WHERE id_total_cafe = 1;	
 						");
 	}
 
 
 	public function mostrarmateria_prima()
 	{
-
-
 		$co1 = $this->conecta();
 		$co1->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -316,7 +323,7 @@ class Registromateria_prima extends Conexion
 		return $sql;
 	}
 
-	public function mostrar_contador()
+	/* public function mostrar_contador()
 	{
 		$co = $this->conecta();
 		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -328,7 +335,7 @@ class Registromateria_prima extends Conexion
 		} catch (Exception $e) {
 			return $e->getMessage(); // O maneja el error de la manera que desees
 		}
-	}
+	} */
 
 	public function borrarmateria_prima()
 	{

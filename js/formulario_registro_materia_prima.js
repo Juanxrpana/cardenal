@@ -71,7 +71,7 @@ function enviaAjax(datos, accion) {
             } else {
 
                 mostrarDatosmateria_prima();
-                mostrarcontador();
+                llenar_contador_total();
 
 
                 $("#hola").html(respuesta);
@@ -130,10 +130,10 @@ function mostrarDatosmateria_prima() {
         console.log("Mostrando data de materiaprima satisfactoriamente");
         $('#tablaDatosmateria_prima').html(r);
     });
-    mostrarcontador();
+
 }
 
-function mostrarcontador() {
+function llenar_contador_total() {
     $.ajax({ url: './Modelo/contador_materia_prima.php' }).done(function(r) {
         console.log("Mostrando contador satisfactoriamente");
         $('#contador_materia_prima').html(r);

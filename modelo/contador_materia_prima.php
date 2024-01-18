@@ -9,8 +9,8 @@
 
     require_once ("../modelo/materia_prima.php");
     $obj= new Registromateria_prima();
-    $obj->contadormateria_prima();
-    $datos=$obj->mostrar_contador();
+    $obj->contador_total_materia_prima();
+    /* $datos=$obj->mostrar_contador(); */
 
 
     $contador_materia_prima= $datos;
