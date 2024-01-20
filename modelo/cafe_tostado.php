@@ -96,55 +96,104 @@ class Registrocafe_tostado extends Conexion
 	}
 	//ahora incluiremos una cafe_tostado//
 	function agregarcafe_tostado()
-	{
-		$co = $this->conecta();
-		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		//if (!$this->existe($this->id_cafe_tostado)) {
-		try {
-            $co->query("INSERT INTO cafe_tostado(
-              cantidad,
-              nivel_tostado,
-              nivel_molido,
-              estado,
-              fecha_tostado) VALUES (
-                '$this->cantidad',
-                '$this->nivel_tostado',
-                '$this->nivel_molido',
-                '1',
-                NOW()
-              )");
-			return "Registro de café para tostar";
-		} catch (Exception $e) {
-			return $e->getMessage();
-		}
-		//} 
-		//else{
-		//	return "Ya existe la cedula que desea ingresar";
-		//}
-	}
+{
+    $co = $this->conecta();
+    $co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    try {
+        // Consulta SQL con marcadores de posición
+        $sql = "INSERT INTO cafe_tostado (
+                    cantidad,
+                    nivel_tostado,
+                    nivel_molido,
+                    estado,
+                    fecha_tostado
+                ) VALUES (
+                    :cantidad,
+                    :nivel_tostado,
+                    :nivel_molido,
+                    1,
+                    NOW()
+                )";
+
+        // Preparar la consulta
+        $stmt = $co->prepare($sql);
+
+        // Asociar valores a los marcadores de posición con bindParam
+        $stmt->bindParam(':cantidad', $this->cantidad, PDO::PARAM_INT);
+        $stmt->bindParam(':nivel_tostado', $this->nivel_tostado, PDO::PARAM_STR);
+        $stmt->bindParam(':nivel_molido', $this->nivel_molido, PDO::PARAM_STR);
+
+        // Ejecutar la consulta preparada
+        $stmt->execute();
+
+        return "Registro de café para tostar exitoso";
+    } catch (Exception $e) {
+        return $e->getMessage();
+    }
+	
+}
+
+
+public function procesarCafeTostado($idcafe_tostado) {
+    try {
+        $co = $this->conecta();
+        $co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        // Obtener la cantidad de ID:2 en total_cafe
+        $stmtCantidadID2 = $co->query("SELECT total FROM total_cafe WHERE id_total_cafe = 2");
+        $cantidadID2 = $stmtCantidadID2->fetchColumn();
+
+        // Actualizar la cantidad de ID:1 en total_cafe restando la cantidad de ID:2
+        $stmtUpdateTotal = $co->prepare("UPDATE total_cafe SET total = total - :cantidadID2 WHERE id_total_cafe = 1");
+        $stmtUpdateTotal->bindParam(':cantidadID2', $cantidadID2, PDO::PARAM_INT);
+        $stmtUpdateTotal->execute();
+
+        // Actualizar el estado de cafe_tostado a 0
+        $stmtUpdateEstado = $co->prepare("UPDATE cafe_tostado SET estado = 0 WHERE id_cafe_tostado = :idcafe_tostado");
+        $stmtUpdateEstado->bindParam(':idcafe_tostado', $idcafe_tostado, PDO::PARAM_INT);
+        $stmtUpdateEstado->execute();
+
+        return "Procesamiento de café tostado exitoso";
+    } catch (Exception $e) {
+        return $e->getMessage();
+    }
+}
 
 
 
-	function modificarcafe_tostado()
-	{
-		$co = $this->conecta();
-		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		//if (!$this->existe($this->id_materia_prima)) {
-		try {
-			$co->query("UPDATE cafe_tostado SET
-            cantidad='$this->cantidad',
-            nivel_tostado='$this->nivel_tostado',
-            nivel_molido='$this->nivel_molido'
-			WHERE idcafe_tostado='$this->idcafe_tostado'");
-			return "Registro Modificado";
-		} catch (Exception $e) {
-			return $e->getMessage();
-		}
-		//} 
-		//else{
-		//	return "Ya existe la cedula que desea ingresar";
-		//}
-	}
+
+function modificarcafe_tostado()
+{
+    $co = $this->conecta();
+    $co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    try {
+        // Consulta SQL con marcadores de posición
+        $sql = "UPDATE cafe_tostado 
+                SET cantidad = :cantidad, 
+                    nivel_tostado = :nivel_tostado, 
+                    nivel_molido = :nivel_molido 
+                WHERE idcafe_tostado = :idcafe_tostado";
+
+        // Preparar la consulta
+        $stmt = $co->prepare($sql);
+
+        // Asociar valores a los marcadores de posición con bindParam
+        $stmt->bindParam(':cantidad', $this->cantidad, PDO::PARAM_INT);
+        $stmt->bindParam(':nivel_tostado', $this->nivel_tostado, PDO::PARAM_STR);
+        $stmt->bindParam(':nivel_molido', $this->nivel_molido, PDO::PARAM_STR);
+        $stmt->bindParam(':idcafe_tostado', $this->idcafe_tostado, PDO::PARAM_INT);
+
+        // Ejecutar la consulta preparada
+        $stmt->execute();
+
+        return "Registro Modificado";
+    } catch (Exception $e) {
+        return $e->getMessage();
+    }
+}
+
 
     public function contadorcafe_tostado()
 	{
@@ -170,10 +219,21 @@ class Registrocafe_tostado extends Conexion
 
 			return $totalCafeVerde;
 		} catch (Exception $e) {
-			return $e->getMessage(); // O maneja el error de la manera que desees
+			return $e->getMessage(); 
 		}
 	}
 
+	/* public function inactivadormateria_prima()
+	{
+		$co = $this->conecta();
+		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$sql = $co->query("
+						UPDATE cafe_tostado
+						SET estado = 0
+						WHERE estado = 1;
+						");	
+	}
+ */
 	public function mostrarcafe_tostado()
 	{
 
@@ -182,7 +242,7 @@ class Registrocafe_tostado extends Conexion
 		$co1->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 		$sql = $co1->query("SELECT *
-		FROM `cafe_tostado` where   `estado` = 1");
+		FROM `cafe_tostado`");
 
 		return $sql;
 	}

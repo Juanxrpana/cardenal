@@ -15,7 +15,7 @@
                      <thead>
                              <tr>
                                 <th scope="col">Indentificación</th>
-                                <th scope="col">Nombre (empresa/persona)</th>
+                                <th scope="col">Nombre</th>
                                 <th scope="col">Quintales</th>
                                 <th scope="col">Fecha Compra</th>
                                 <th scope="col">Modificar/borrar</th>

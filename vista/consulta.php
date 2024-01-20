@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="./CSS/inicio.css">
     <link rel="stylesheet" href="./CSS/bootstrap.css">
     <link rel="stylesheet" href="./CSS/consulta.css">
+    <link rel="stylesheet" href="./CSS/style.css">
     
     <script src="https://kit.fontawesome.com/ecd5745f4f.js" crossorigin="anonymous"></script>
     <title>CLIENTES</title>

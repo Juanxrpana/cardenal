@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="./CSS/inicio.css">
     <link rel="stylesheet" href="./CSS/bootstrap.css">
     <link rel="stylesheet" href="./CSS/formularios_registro_clientes.css">
+    <link rel="stylesheet" href="./CSS/style.css">
     <script src="https://kit.fontawesome.com/ecd5745f4f.js" crossorigin="anonymous"></script>
     <title>CLIENTES</title>
 </head>
@@ -39,20 +40,20 @@
                         <select name="cedula_fiscal_id" id="cedula_fiscal_id">
                             <option value="0">V</option>
                         </select>
-                        <input type="text" class="formulario__input" name="identificacion" id="identificacion" placeholder="123456789">
-                        <i class="formulario__validacion-estado fas fa-times-circle"></i>
+                        <span></span>
+                        <input type="text" class="formulario__input" name="identificacion" id="identificacion" placeholder="29873456">
+                        <span></span>
                     </div>
-                    <p class="formulario__input-error">la identificación</p>
+        
                 </div>
 
                 <!-- Grupo: Teléfono -->
                 <div class="formulario__grupo" id="grupo__telefono">
                     <label for="telefono" class="formulario__label">Teléfono</label>
                     <div class="formulario__grupo-input">
-                        <input type="text" class="formulario__input" name="telefono" id="telefono" placeholder="4491234567">
-                        <i class="formulario__validacion-estado fas fa-times-circle"></i>
+                        <input type="text" class="formulario__input" name="telefono" id="telefono" placeholder="04142648727">
+                        <span></span>
                     </div>
-                    <p class="formulario__input-error">El telefono solo puede contener numeros y el maximo 11 dígitos.</p>
                 </div>
 
                 <!-- Grupo: Nombre_prov -->
@@ -60,9 +61,8 @@
                     <label for="nombre_prov" class="formulario__label">Empresa /Nombre y Apellido del Proveedor</label>
                     <div class="formulario__grupo-input">
                         <input type="text" class="formulario__input" name="nombre_prov" id="nombre_prov" placeholder="Cafe Cardenal C.A.">
-                        <i class="formulario__validacion-estado fas fa-times-circle"></i>
+                        <span></span>
                     </div>
-                    <p class="formulario__input-error">Este campo debe contener al menos 6 caracteres</p>
                 </div>
 
                 <!-- Grupo: Nombre_finca -->
@@ -70,38 +70,28 @@
                     <label for="nombre_finca" class="formulario__label">Nombre de la finca</label>
                     <div class="formulario__grupo-input">
                         <input type="text" class="formulario__input" name="nombre_finca" id="nombre_finca" placeholder="Finca Jose Gregorio">
-                        <i class="formulario__validacion-estado fas fa-times-circle"></i>
+                        <span></span>
                     </div>
-                    <p class="formulario__input-error">El nombre_finca debe contener al menos 6 caracteres</p>
                 </div>
-
-                <!-- Grupo: coordenadas -->
-                <div class="formulario__grupo" id="grupo__coordenadas">
-                    <label for="coordenadas" class="formulario__label">Coordenadas de la finca</label>
-                    <div class="formulario__grupo-input">
-                        <input type="text" class="formulario__input" name="coordenadas" id="coordenadas" placeholder="Coordenadas UTM 29T 548929 4801142">
-                        <i class="formulario__validacion-estado fas fa-times-circle"></i>
-                    </div>
-                    <p class="formulario__input-error">El nombre_finca debe contener al menos 6 caracteres</p>
-                </div>
-
                 
-
                 <!-- Grupo: direccion -->
                 <div class="formulario__grupo" id="grupo__direccion">
                     <label for="direccion" class="formulario__label">Dirección</label>
                     <div class="formulario__grupo-select">
                         <input type="text" class="formulario__input" name="estado" id="estado" placeholder="estado">
+                        <span></span>
                         <input type="text" class="formulario__input" name="municipio" id="municipio" placeholder="municipio">
+                        <span></span>
                         <input type="text" class="formulario__input" name="parroquia" id="parroquia" placeholder="parroquia">
+                        <span></span>
                         <input type="text" class="formulario__input" name="ciudad" id="ciudad" placeholder="ciudad">
+                        <span></span>
                     </div>
 
                     <div class="formulario__grupo-input">
                         <input type="text" class="formulario__input" name="ubicacion" id="ubicacion" placeholder="Detalles de ubicacion">
-                        <i class="formulario__validacion-estado fas fa-times-circle"></i>
+                        <span></span>
                     </div>
-                    <p class="formulario__input-error">La dirección debe tener alguna referencia de la zona del cliente</p>
                 </div>
 
 

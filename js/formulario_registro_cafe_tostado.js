@@ -25,13 +25,12 @@ function borrarcafe_tostado(valor) {
 
 function modificarDatos(valor) {
     var datos = new FormData();
-    alert("Modificar funciona");
+    /*  alert("Modificar funciona"); */
     datos.append('accion', 'modificar');
+    datos.append('cantidad', $("#cafe-input").val());
     datos.append('nivel_tostado', $("#nivel_tostado").val());
     datos.append('nivel_molido', $("#nivel_molido").val());
-    console.log(valor);
-    console.log("sadasd");
-    datos.append('idcafe_tostado', valor);
+
     enviaAjax(datos, 'modificar');
 
 

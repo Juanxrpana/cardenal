@@ -125,112 +125,109 @@ class Registromateria_prima extends Conexion
 	{
 		$co = $this->conecta();
 		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		//if (!$this->existe($this->id_materia_prima)) {
+	
 		try {
-			$co->query("INSERT INTO compra(
-			  proveedor_id_proveedor,
-			  usuario_idusuario,
-			  fecha_compra
-			  ) VALUES (
-			  '$this->proveedor',
-			  '12312',
-			  '$this->fecha'
-			  )");
-
+			// Insertar en compra
+			$stmtCompra = $co->prepare("INSERT INTO compra (
+				proveedor_id_proveedor,
+				usuario_idusuario,
+				fecha_compra
+			) VALUES (
+				:proveedor,
+				'28150004',
+				:fecha
+			)");
+			$stmtCompra->bindParam(':proveedor', $this->proveedor, PDO::PARAM_INT);
+			$stmtCompra->bindParam(':fecha', $this->fecha, PDO::PARAM_STR);
+			$stmtCompra->execute();
+	
 			$idCompra = $co->lastInsertId();
+	
+			// Insertar en quintal
 			if ($this->cantidad1 != NULL) {
-
-				$co->query("INSERT INTO quintal(
+				$stmtQuintal1 = $co->prepare("INSERT INTO quintal (
 					idcompra,
 					cantidad,
 					calidad_idcalidad,
 					estado
-					) VALUES (
-						'$idCompra',
-					'$this->cantidad1',
-					'$this->calidad1',
-					'1'
-					)");
-			}
-			if ($this->cantidad2 != NULL) {
-
-				$co->query("INSERT INTO quintal(
-				idcompra,
-				cantidad,
-				calidad_idcalidad,
-				estado
 				) VALUES (
-					'$idCompra',
-				'$this->cantidad2',
-				'$this->calidad2',
-				'1'
+					:idCompra,
+					:cantidad1,
+					:calidad1,
+					'1'
 				)");
+				$stmtQuintal1->bindParam(':idCompra', $idCompra, PDO::PARAM_INT);
+				$stmtQuintal1->bindParam(':cantidad1', $this->cantidad1, PDO::PARAM_INT);
+				$stmtQuintal1->bindParam(':calidad1', $this->calidad1, PDO::PARAM_INT);
+				$stmtQuintal1->execute();
 			}
+	
+			if ($this->cantidad2 != NULL) {
+				$stmtQuintal2 = $co->prepare("INSERT INTO quintal (
+					idcompra,
+					cantidad,
+					calidad_idcalidad,
+					estado
+				) VALUES (
+					:idCompra,
+					:cantidad2,
+					:calidad2,
+					'1'
+				)");
+				$stmtQuintal2->bindParam(':idCompra', $idCompra, PDO::PARAM_INT);
+				$stmtQuintal2->bindParam(':cantidad2', $this->cantidad2, PDO::PARAM_INT);
+				$stmtQuintal2->bindParam(':calidad2', $this->calidad2, PDO::PARAM_INT);
+				$stmtQuintal2->execute();
+			}
+	
 			return "Registro incluido";
 		} catch (Exception $e) {
 			return $e->getMessage();
 		}
-		//} 
-		//else{
-		//	return "Ya existe la cedula que desea ingresar";
-		//}
 	}
+	
 
 
 
 	function modificar()
-	{
-		$co = $this->conecta();
-		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		//if (!$this->existe($this->id_materia_prima)) {
-		try {
-			$co->query("Update compra set
-					fecha_compra = '$this->fecha'
-					where
-					compra.idcompra = '$this->idcompra1'
-				");
+{
+    $co = $this->conecta();
+    $co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-			// Verificar si ya existe una entrada con calidad 2 para el mismo idcompra
-			$verificarSQL = "SELECT COUNT(*) AS count FROM quintal WHERE idcompra = '$this->idcompra1' AND calidad_idcalidad = '$this->calidad2'";
-			$resultado = $co->query($verificarSQL);
-			$registro = $resultado->fetch(PDO::FETCH_ASSOC);
+    try {
+        // Consulta SQL para actualizar la fecha de compra
+        $stmtFechaCompra = $co->prepare("UPDATE compra SET fecha_compra = :fecha WHERE idcompra = :idcompra");
+        $stmtFechaCompra->bindParam(':fecha', $this->fecha, PDO::PARAM_STR);
+        $stmtFechaCompra->bindParam(':idcompra', $this->idcompra1, PDO::PARAM_INT);
+        $stmtFechaCompra->execute();
 
-			if ($registro['count'] > 0) {
-				// Actualizar la cantidad existente para calidad 2
-				$co->query("UPDATE quintal
-        SET cantidad = '$this->cantidad1'
-        WHERE idcompra = '$this->idcompra1' AND calidad_idcalidad = '$this->calidad1'");
-			} else {
-				// Insertar una nueva fila para calidad 2
-				$co->query("INSERT INTO quintal (idcompra, calidad_idcalidad, cantidad)
-        VALUES ('$this->idcompra1', '$this->calidad1', '$this->cantidad1')");
-			}
+        // Consulta SQL para verificar la existencia de una entrada con calidad 2
+        $verificarSQL = "SELECT COUNT(*) AS count FROM quintal WHERE idcompra = :idcompra AND calidad_idcalidad = :calidad";
+        $stmtVerificar = $co->prepare($verificarSQL);
 
-			if ($registro['count'] > 0) {
-				// Actualizar la cantidad existente para calidad 2
-				$co->query("UPDATE quintal
-        SET cantidad = '$this->cantidad2'
-        WHERE idcompra = '$this->idcompra1' AND calidad_idcalidad = '$this->calidad2'");
-			} else {
-				// Insertar una nueva fila para calidad 2
-				$co->query("INSERT INTO quintal (idcompra, calidad_idcalidad, cantidad)
-        VALUES ('$this->idcompra1', '$this->calidad2', '$this->cantidad2')");
-			}
+        // Consulta SQL para actualizar o insertar en la tabla quintal para calidad 1
+        $stmtQuintal1 = $co->prepare("INSERT INTO quintal (idcompra, calidad_idcalidad, cantidad) VALUES (:idcompra, :calidad, :cantidad) ON DUPLICATE KEY UPDATE cantidad = :cantidad");
+        $stmtQuintal1->bindParam(':idcompra', $this->idcompra1, PDO::PARAM_INT);
+        $stmtQuintal1->bindParam(':calidad', $this->calidad1, PDO::PARAM_INT);
+        $stmtQuintal1->bindParam(':cantidad', $this->cantidad1, PDO::PARAM_INT);
+        $stmtQuintal1->execute();
 
-			$co->query("Update compra set
-					fecha_compra = '$this->fecha'
-					where
-					compra.idcompra = '$this->cantidad1'
-				");
-			return "Registro Modificado";
-		} catch (Exception $e) {
-			return $e->getMessage();
-		}
-		//} 
-		//else{
-		//	return "Ya existe la cedula que desea ingresar";
-		//}
-	}
+        // Consulta SQL para actualizar o insertar en la tabla quintal para calidad 2
+        $stmtQuintal2 = $co->prepare("INSERT INTO quintal (idcompra, calidad_idcalidad, cantidad) VALUES (:idcompra, :calidad, :cantidad) ON DUPLICATE KEY UPDATE cantidad = :cantidad");
+        $stmtQuintal2->bindParam(':idcompra', $this->idcompra1, PDO::PARAM_INT);
+        $stmtQuintal2->bindParam(':calidad', $this->calidad2, PDO::PARAM_INT);
+        $stmtQuintal2->bindParam(':cantidad', $this->cantidad2, PDO::PARAM_INT);
+        $stmtQuintal2->execute();
+
+        // Actualizar la fecha de compra nuevamente (¿es necesario?)
+        $stmtFechaCompra->execute();
+
+        return "Registro Modificado";
+    } catch (Exception $e) {
+        return $e->getMessage();
+    }
+}
+
 
 
 	function consultar()
@@ -301,6 +298,7 @@ class Registromateria_prima extends Conexion
 		$co = $this->conecta();
 		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		$sql = $co->query("
+						
 						UPDATE total_cafe
 						SET total = total - (SELECT total FROM total_cafe WHERE id_total_cafe = 2)
 						WHERE id_total_cafe = 1;	

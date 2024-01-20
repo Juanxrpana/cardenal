@@ -33,7 +33,14 @@ require_once("modelo/".$pagina.".php");
 
 		   if($accion=='consultar'){
 			 echo  $o->consultar();
-		  }	  
+		  }	
+		  
+		  if($accion=='identificacion'){
+			$o->set_id_prov($_POST['id_prov']);
+			echo  $o->existe($id_prov);
+			
+		 }	 
+		  
 		  elseif($accion=='eliminar'){
 			 $o->set_id_prov($_POST['id_prov']);
 			 echo  $o->borrar();
@@ -49,13 +56,13 @@ require_once("modelo/".$pagina.".php");
 			  $o->set_municipio($_POST['municipio']);
 			  $o->set_parroquia($_POST['parroquia']);
 			  $o->set_ciudad($_POST['ciudad']);
-			  $o->set_coordenadas($_POST['coordenadas']);
+			 
 			  
 			  if($accion=='incluir'){            
 				echo  $o->agregar_proveedor();
 			  }
 			  elseif($accion=='modificar'){
-                echo "12121212121";
+               /*  echo "12121212121"; */
                 $o->set_id_prov($_POST['id_prov']);
 				echo  $o->modificar();
 			  }

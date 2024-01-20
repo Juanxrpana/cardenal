@@ -6,43 +6,44 @@
         <ul class="menu">
             <li class="active">
                 <a href="?pagina=inicio">
-                    <i class="fa-solid fa-house"></i>
+                    <p1 class="icon-home3"></p1>
                     <span>Inicio</span>
                 </a>
             </li>
-            <li>
-                <a href="?pagina=consulta">
-                    <i class="fa-solid fa-clipboard"></i>
-                    <span>Consultas</span>
-                </a>
-            </li>
+            
             <li>
                 <a href="?pagina=proveedor">
-                    <i class="fa-solid fa-user"></i>
+                <p1 class="icon-users"></p1>
                     <span>Proveedores</span>
                 </a>
             </li>
             <li>
                 <a href="?pagina=materia_prima">
-                    <i class="fa-solid fa-cart-shopping"></i>
+                <p1 class="icon-truck"></p1>
                     <span>Materia prima</span>
                 </a>
             </li>
             <li>
                 <a href="?pagina=cafe_tostado">
-                <i class="fa-solid fa-coffee-bean"></i>
+                <p1 class="icon-contrast"></p1>
                     <span>Café tostado</span>
                 </a>
             </li>
             <li>
                 <a href="?pagina=cafe_final">
-                <i class="fa-solid fa-coffee-bean"></i>
+                <p1 class="icon-mug"></p1>
                     <span>Café Final</span>
+                </a>
+            </li>
+            <li>
+                <a href="?pagina=consulta">
+                <p1 class="icon-file-text2"></p1>
+                    <span>Reportes</span>
                 </a>
             </li>
             <li class="logout">
                 <a href="?pagina=logout">
-                    <i class="fa-solid fa-right-from-bracket"></i>
+                <p1 class="icon-reply1"></p1>
                     <span>Salir</span>
                 </a>
             </li>

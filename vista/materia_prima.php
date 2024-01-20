@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="CSS/inicio.css">
     <link rel="stylesheet" href="CSS/bootstrap.css">
     <link rel="stylesheet" href="CSS/formularios_registro_materia_prima.css">
+    <link rel="stylesheet" href="./CSS/style.css">
     <script src="https://kit.fontawesome.com/ecd5745f4f.js" crossorigin="anonymous"></script>
     <title>CLIENTES</title>
 </head>
@@ -24,7 +25,7 @@
         </div>
         <div class="contenedor--tarjetas">
             <h3 class="main--titulo">
-                Registro Materia Prima
+                Registro de Materia Prima
             </h3>
     <div class="container">
 
@@ -34,7 +35,7 @@
             
             <!-- Grupo: sd -->
 
-                <div class="row">
+                <div class="Proveedor">
                     <h3>Proveedor</h3>
                      <div class="col-6">
                         <select name="proveedor" id="proveedor">
@@ -42,7 +43,7 @@
                             
                         </select>
                     </div>
-                    <h3>Fecha</h3>
+                    <h3>Fecha de recepción</h3>
                     <div class="col-6">
                         
                     <input type="date" class="datepicker_input form-control" id="fecha" placeholder="" required="">
@@ -72,13 +73,11 @@
                     
                     
                     
-                    <div class="formulario__mensaje" id="formulario__mensaje">
-                        <p><i class="fas fa-exclamation-triangle"></i> <b>Error:</b> Por favor rellena el formulario correctamente. </p>
-                    </div>
+                   
                     
                     <div class="formulario__grupo formulario__grupo-btn-enviar">
                         <button type="button" class="btn btn-dark" id="incluir" name="incluir">INCLUIR</button>
-                        <p class="formulario__mensaje-exito" id="formulario__mensaje-exito">Formulario enviado exitosamente!</p>
+                        
                     </div>
                 </form>
             </div>

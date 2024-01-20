@@ -31,7 +31,7 @@ class Registroproveedor extends Conexion
 	private $municipio;
 	private $parroquia;
 	private $ciudad;
-	private $coordenadas;
+	
 
 
 
@@ -100,10 +100,7 @@ class Registroproveedor extends Conexion
 		$this->ciudad = $valor;
 	}
 
-	function set_coordenadas($valor)
-	{
-		$this->coordenadas = $valor;
-	}
+
 	//ahora la misma cosa pero para leer, es decir get
 
 
@@ -172,10 +169,7 @@ class Registroproveedor extends Conexion
 		$this->ciudad = $valor;
 	}
 
-	function get_coordenadas($valor)
-	{
-		$this->coordenadas = $valor;
-	}
+	
 
 	//copia
 	public function existe($id_prov)
@@ -228,63 +222,80 @@ class Registroproveedor extends Conexion
 	{
 		$co = $this->conecta();
 		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		//if (!$this->existe($this->id_materia_prima)) {
+
 		try {
-			$co->query("INSERT INTO  datos_prov (
-			 identificacion,
-			 nombre_prov ,
-			 telefono ,
-			 cedula_fiscal_id 
-			 ) VALUES (
-			'$this->identificacion',
-			'$this->nombre_prov',
-			'$this->telefono',
-			'$this->cedula_fiscal_id'
-			)");
+			// Insertar en datos_prov
+			$stmtDatosProv = $co->prepare("INSERT INTO datos_prov (
+            identificacion,
+            nombre_prov,
+            telefono,
+            cedula_fiscal_id
+        ) VALUES (
+            :identificacion,
+            :nombre_prov,
+            :telefono,
+            :cedula_fiscal_id
+        )");
+			$stmtDatosProv->bindParam(':identificacion', $this->identificacion, PDO::PARAM_STR);
+			$stmtDatosProv->bindParam(':nombre_prov', $this->nombre_prov, PDO::PARAM_STR);
+			$stmtDatosProv->bindParam(':telefono', $this->telefono, PDO::PARAM_STR);
+			$stmtDatosProv->bindParam(':cedula_fiscal_id', $this->cedula_fiscal_id, PDO::PARAM_STR);
+			$stmtDatosProv->execute();
 
-			$co->query("INSERT INTO finca(
-			ubicacion,
-			nombre_finca,
-			estado,
-			municipio,
-			parroquia,
-			ciudad,
-			coordenadas
-			) VALUES (
-			'$this->ubicacion',
-			'$this->nombre_finca',
-			'$this->estado',
-			'$this->municipio',
-			'$this->parroquia',
-			'$this->ciudad',
-			'$this->coordenadas'
-			)");
+			// Insertar en finca
+			$stmtFinca = $co->prepare("INSERT INTO finca (
+            ubicacion,
+            nombre_finca,
+            estado,
+            municipio,
+            parroquia,
+            ciudad
+            
+        ) VALUES (
+            :ubicacion,
+            :nombre_finca,
+            :estado,
+            :municipio,
+            :parroquia,
+            :ciudad
+           
+        )");
+			$stmtFinca->bindParam(':ubicacion', $this->ubicacion, PDO::PARAM_STR);
+			$stmtFinca->bindParam(':nombre_finca', $this->nombre_finca, PDO::PARAM_STR);
+			$stmtFinca->bindParam(':estado', $this->estado, PDO::PARAM_STR);
+			$stmtFinca->bindParam(':municipio', $this->municipio, PDO::PARAM_STR);
+			$stmtFinca->bindParam(':parroquia', $this->parroquia, PDO::PARAM_STR);
+			$stmtFinca->bindParam(':ciudad', $this->ciudad, PDO::PARAM_STR);
+			
+			$stmtFinca->execute();
 
-			$co->query("INSERT INTO proveedor (
-			finca_idfinca, 
-			datos_prov_identificacion
-			) VALUES (
-				LAST_INSERT_ID(), 
-				'$this->identificacion')");
+			// Insertar en proveedor
+			$stmtProveedor = $co->prepare("INSERT INTO proveedor (
+            finca_idfinca,
+            datos_prov_identificacion
+        ) VALUES (
+            LAST_INSERT_ID(),
+            :identificacion
+        )");
+			$stmtProveedor->bindParam(':identificacion', $this->identificacion, PDO::PARAM_STR);
+			$stmtProveedor->execute();
+
 			return "Registro incluido";
 		} catch (Exception $e) {
 			return $e->getMessage();
 		}
-		//} 
-		//else{
-		//	return "Ya existe la cedula que desea ingresar";
-		//}
 	}
 
+
 	function modificar()
-{
-    $co = $this->conecta();
-    $co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	{
+		$co = $this->conecta();
+		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    try {
-        $co->beginTransaction();
+		try {
+			$co->beginTransaction();
 
-        $co->query("UPDATE datos_prov
+			$co->query("UPDATE datos_prov
                     JOIN proveedor ON datos_prov.identificacion = proveedor.datos_prov_identificacion
                     SET
 						datos_prov.identificacion = '$this->identificacion',
@@ -295,7 +306,7 @@ class Registroproveedor extends Conexion
                         proveedor.id_prov = '$this->id_prov'
                 ");
 
-        $co->query("UPDATE finca
+			$co->query("UPDATE finca
                     JOIN proveedor ON finca.idfinca = proveedor.finca_idfinca
                     SET
                         finca.ubicacion = '$this->ubicacion',
@@ -304,19 +315,19 @@ class Registroproveedor extends Conexion
                         finca.municipio = '$this->municipio',
                         finca.parroquia = '$this->parroquia',
                         finca.ciudad = '$this->ciudad',
-                        finca.coordenadas = '$this->coordenadas'
+                        
                     WHERE
                         proveedor.id_prov = '$this->id_prov'
                 ");
 
-        $co->commit();
+			$co->commit();
 
-        return "Datos de datos_prov y finca actualizados";
-    } catch (Exception $e) {
-        $co->rollBack();
-        return $e->getMessage();
-    }
-}
+			return "Datos de datos_prov y finca actualizados";
+		} catch (Exception $e) {
+			$co->rollBack();
+			return $e->getMessage();
+		}
+	}
 
 
 
@@ -338,26 +349,27 @@ class Registroproveedor extends Conexion
 	}
 
 	public function borrar()
-{
-    $co = $this->conecta();
-    $co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	{
+		$co = $this->conecta();
+		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    try {
-        $co->query("DELETE dp, f, p
-		FROM proveedor p
-		LEFT JOIN datos_prov dp ON p.datos_prov_identificacion = dp.identificacion
-		LEFT JOIN finca f ON p.finca_idfinca = f.idfinca
-		WHERE p.id_prov = id_prov;
-		");
+		try {
 
 
-        return "Registro Eliminado";
-    } catch (Exception $e) {
-        return $e->getMessage();
-    }
+			$stmt = $co->prepare("DELETE dp, f, p
+                     FROM proveedor p
+                     LEFT JOIN datos_prov dp ON p.datos_prov_identificacion = dp.identificacion
+                     LEFT JOIN finca f ON p.finca_idfinca = f.idfinca
+                     WHERE p.id_prov = :id_prov");
+
+			$stmt->bindParam(':id_prov', $this->id_prov, PDO::PARAM_STR);
+			$stmt->execute();
+
+
+
+			return "Registro Eliminado";
+		} catch (Exception $e) {
+			return $e->getMessage();
+		}
+	}
 }
-
-
-}
-
-

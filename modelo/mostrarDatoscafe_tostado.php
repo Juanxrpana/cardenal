@@ -19,6 +19,7 @@
                                 <th scope="col">Fecha de Tostado</th>
                                 <th scope="col">Tipo de Molido</th>
                                 <th scope="col">Tipo de Tostado</th>
+                                <th scope="col">Estado</th>
                                 <th scope="col">Modificar/borrar</th>
                             </tr>
                      </thead>
@@ -33,6 +34,7 @@
                                 <td>'.$value['fecha_tostado'].'</td>
                                 <td>'.$value['nivel_molido'].'</td>
                                 <td>'.$value['nivel_tostado'].'</td>
+                                <td>'.$value['estado'].'</td>
                                 <td>                              
                                 <a id="modificar" class="btn btn-success btn" data-toggle="modal" data-target="#Modalcafe_tostado" data-id="'.$value['idcafe_tostado'].'"onclick="modificarDatos('.$value['idcafe_tostado'].')"><i class="fa-solid fa-user-pen"></i></a>
                                 <a class="btn btn-danger id="eliminar" btn" data-id="'.$value['idcafe_tostado'].'" onclick="borrarcafe_tostado('.$value['idcafe_tostado'].')"><i class="fa-solid fa-user-xmark"></i></a>

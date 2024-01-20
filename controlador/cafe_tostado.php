@@ -49,10 +49,10 @@ require_once("modelo/".$pagina.".php");
 				echo  $o->agregarcafe_tostado();
 			  }
 			  elseif($accion=='modificar'){
-
-                $o->set_idcafe_tostado($_POST['idcafe_tostado']);
-				echo  $o->modificarcafe_tostado();
-			  }
+				
+				 $o->set_idcafe_tostado($_POST['idcafe_tostado']);
+				 echo  $o->modificarcafe_tostado();
+			   }
 		  }
 		  exit;
 	  }

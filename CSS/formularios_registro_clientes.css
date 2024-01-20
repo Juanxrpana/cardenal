@@ -39,7 +39,7 @@
         padding-top: 15px;
         padding-bottom: 15px;
         display: grid;
-        grid-template-columns: auto;
+        grid-template-columns: auto auto;
         gap: 25px;
     }
     
@@ -101,4 +101,23 @@
         justify-content: space-between;
         padding: 1%;
         flex-direction: row;
+    }
+    
+    select {
+        position: relative;
+        border: #932828 3px solid;
+        border-radius: 8px;
+        width: 20em;
+        height: 3em;
+    }
+    /*validacion de los input*/
+    
+    .error {
+        color: red;
+        display: block;
+    }
+    
+    .invalido {
+        border: solid 1px red;
+        box-shadow: 0 0 1px red;
     }
