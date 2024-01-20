@@ -2,7 +2,7 @@ $(document).ready(function() {
 
     mostrarDatosmateria_prima();
     llenarLista();
-    llenar_contador_total();
+
 
 
 
@@ -22,6 +22,7 @@ $(document).ready(function() {
 
         enviaAjax(datos, 'incluir');
 
+
     });
 
 
@@ -38,6 +39,7 @@ function borrarmateria_prima(valor) {
     datos.append('idcompra', valor);
     enviaAjax(datos, 'eliminar');
 
+
 }
 
 function modificarDatos(valor) {
@@ -53,6 +55,7 @@ function modificarDatos(valor) {
     console.log("sadasd");
     datos.append('idcompra', valor);
     enviaAjax(datos, 'modificar');
+
 
 }
 
@@ -74,6 +77,7 @@ function enviaAjax(datos, accion) {
 
                 mostrarDatosmateria_prima();
                 llenar_contador_total();
+
 
 
                 $("#hola").html(respuesta);

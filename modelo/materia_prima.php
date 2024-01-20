@@ -277,7 +277,7 @@ class Registromateria_prima extends Conexion
 
 		$sql = $co->query("
 						UPDATE total_cafe
-						SET total = COALESCE((SELECT SUM(cantidad) FROM quintal WHERE estado = 1), 0)
+						SET total = COALESCE((SELECT SUM(cantidad) FROM quintal WHERE estado = 1), 0) + total where id_total_cafe = 1;
 						WHERE id_total_cafe = 1;
 						");
 	}
@@ -294,32 +294,50 @@ class Registromateria_prima extends Conexion
 	}
 
 	public function descontador_total_materia_prima()
-	{
-		$co = $this->conecta();
-		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = $co->query("
-						
-						UPDATE total_cafe
-						SET total = total - (SELECT total FROM total_cafe WHERE id_total_cafe = 2)
-						WHERE id_total_cafe = 1;	
-						");
-	}
+{
+    $co = $this->conecta();
+    $co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // Habilitar las consultas múltiples
+    $co->exec("SET SESSION sql_mode = 'NO_ENGINE_SUBSTITUTION'");
+
+    // Consulta SQL con múltiples declaraciones
+    $sql = "
+        SET @total_cantidad := 0;
+        SELECT @total_cantidad := total FROM total_cafe WHERE id_total_cafe = 1;
+        
+        SET @total_cantidad2 := 0;
+        SELECT @total_cantidad2 := total FROM total_cafe WHERE id_total_cafe = 2;
+        
+        SET @total := 0;
+        SELECT @total := @total_cantidad - @total_cantidad2;
+        
+        UPDATE `total_cafe` SET `total` = @total WHERE id_total_cafe = 1;
+    ";
+
+    // Ejecutar la consulta
+    $co->exec($sql);
+}
 
 
 	public function mostrarmateria_prima()
-	{
-		$co1 = $this->conecta();
-		$co1->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+{
+    $co1 = $this->conecta();
+    $co1->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-		$sql = $co1->query("SELECT c.fecha_compra, pn.nombre_prov, p.datos_prov_identificacion, SUM(q.cantidad) AS total_cantidad, c.idcompra
-		FROM proveedor p
-		INNER JOIN datos_prov pn ON p.datos_prov_identificacion = pn.identificacion
-		LEFT JOIN compra c ON p.id_prov = c.proveedor_id_proveedor
-		LEFT JOIN quintal q ON c.idcompra = q.idcompra
-		GROUP BY c.idcompra");
+    $sql = $co1->query("SELECT q.estado, c.fecha_compra, pn.nombre_prov, p.datos_prov_identificacion, SUM(q.cantidad) AS total_cantidad, c.idcompra
+                        FROM proveedor p
+                        INNER JOIN datos_prov pn ON p.datos_prov_identificacion = pn.identificacion
+                        LEFT JOIN compra c ON p.id_prov = c.proveedor_id_proveedor
+                        LEFT JOIN quintal q ON c.idcompra = q.idcompra
+                        
+                        GROUP BY c.idcompra");
 
-		return $sql;
-	}
+    return $sql;
+}
+
+
+
 
 	public function mostrar_contador()
 {

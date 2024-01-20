@@ -10,6 +10,7 @@ $(document).ready(function() {
         datos.append('cantidad', $("#cafe-input").val());
         enviaAjax(datos, 'incluir');
 
+
     });
 
 });
@@ -54,6 +55,7 @@ function enviaAjax(datos, accion) {
             } else {
                 mostrarDatoscafe_tostado();
                 descontador();
+
 
                 /*  mostrarcontador(); */
 
@@ -112,6 +114,7 @@ function mostrarcontador() {
 
 function descontador() {
     $.ajax({ url: './Modelo/descontador_materia_prima.php' }).done(function(r) {
+        alert("DESCONTANDO");
         console.log("desconto satisfactoriamente");
     });
 }
