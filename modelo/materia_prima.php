@@ -312,12 +312,13 @@ class Registromateria_prima extends Conexion
         SET @total := 0;
         SELECT @total := @total_cantidad - @total_cantidad2;
         
-        UPDATE `total_cafe` SET `total` = @total WHERE id_total_cafe = 1;
+        UPDATE `total_cafe` SET `total` = GREATEST(0, @total) WHERE id_total_cafe = 1;
     ";
 
     // Ejecutar la consulta
     $co->exec($sql);
 }
+
 
 
 	public function mostrarmateria_prima()

@@ -10,7 +10,7 @@ $(document).ready(function() {
     $("#incluir").on("click", function() {
         // if(validarenvio()){
         //console.log("I1")
-        alert("Funciona");
+
         var datos = new FormData();
         datos.append('accion', 'incluir');
         datos.append('proveedor', $("#proveedor").val());
@@ -20,7 +20,17 @@ $(document).ready(function() {
         datos.append('cantidad1', $("#cantidad1").val());
         datos.append('cantidad2', $("#cantidad2").val());
 
-        enviaAjax(datos, 'incluir');
+
+        if (validarSuma() && validarselect()) {
+            // Si todos los campos son válidos, envía los datos al servidor
+            enviaAjax(datos, 'incluir');
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Hay un error en los datos. Por favor, verifica los datos.'
+            });
+        }
 
 
     });
@@ -32,6 +42,51 @@ $(document).ready(function() {
 //  }  
 
 
+function validarSuma() {
+    console.log("validarSuma");
+    var cantidad1 = parseInt(document.getElementById('cantidad1').value) || 0;
+    var cantidad2 = parseInt(document.getElementById('cantidad2').value) || 0;
+    var suma = cantidad1 + cantidad2;
+
+    if (suma > 2010) {
+        // Utilizar SweetAlert para mostrar el mensaje
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'La suma total de quintales no puede ser mayor a 2010',
+        });
+        return false;
+    } else {
+        // Utilizar SweetAlert para mostrar el mensaje
+        Swal.fire({
+            icon: 'success',
+            title: 'Éxito',
+            text: 'La suma de quintaleses: ' + suma,
+        });
+        return true;
+
+    }
+}
+
+
+function validarselect() {
+    console.log("validarselect");
+    // Obtener los valores de los campos select
+    var valorOpcion1 = document.getElementById('proveedor').value;
+
+    // Validar si alguno de los campos tiene valor 0
+    if (valorOpcion1 === '1000') {
+        console.log("fuera d ranking");
+
+        return false; // Evita que el formulario se envíe
+    }
+
+    // Si llegamos aquí, el formulario es válido y se puede enviar
+    else {
+        return true;
+        console.log("en ranking");
+    }
+}
 
 function borrarmateria_prima(valor) {
     var datos = new FormData();

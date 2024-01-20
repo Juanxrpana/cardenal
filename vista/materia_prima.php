@@ -39,7 +39,7 @@
                     <h3>Proveedor</h3>
                      <div class="col-6">
                         <select name="proveedor" id="proveedor">
-                            <option value="232" selected>Proveedor</option>
+                            <option value="1000" selected>Proveedor</option>
                             
                         </select>
                     </div>

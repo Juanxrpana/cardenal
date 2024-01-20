@@ -11,6 +11,7 @@
     $obj= new Registrocafe_tostado();
     $obj->contadorcafe_tostado();
     $datos=$obj->mostrar_contador();
+    
 
 
     $contador_cafe_tostado= $datos;
