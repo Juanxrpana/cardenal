@@ -8,13 +8,43 @@ $(document).ready(function() {
         datos.append('nivel_tostado', $("#nivel_tostado").val());
         datos.append('nivel_molido', $("#nivel_molido").val());
         datos.append('cantidad', $("#cafe-input").val());
-        enviaAjax(datos, 'incluir');
+        if (validartostado()) {
+            // Si todos los campos son válidos, envía los datos al servidor
+            enviaAjax(datos, 'incluir');
+            descontador();
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Error, verifique los datos'
+            });
+        }
 
+        /*   enviaAjax(datos, 'incluir');
+          descontador(); */
 
 
     });
 
 });
+
+function validartostado() {
+    console.log("validartostado");
+    var cantidad1 = parseInt(document.getElementById('cafe-input').value) || 0;
+    if (cantidad1 > 5) {
+        // Utilizar SweetAlert para mostrar el mensaje
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'No se pueden tostar mas de 5 quintales a la vez',
+        });
+        return false;
+    } else {
+        console.log("cantidad valida");
+        return true;
+
+    }
+}
 
 function borrarcafe_tostado(valor) {
     var datos = new FormData();
@@ -55,7 +85,7 @@ function enviaAjax(datos, accion) {
                 $("#proveedor").html(respuesta);
             } else {
 
-                descontador();
+
                 mostrarDatoscafe_tostado();
 
 
@@ -175,7 +205,6 @@ function mostrarcontador() {
 
 function descontador() {
     $.ajax({ url: './Modelo/descontador_materia_prima.php' }).done(function(r) {
-
         console.log("desconto satisfactoriamente");
     });
 }

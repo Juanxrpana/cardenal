@@ -28,7 +28,7 @@ $(document).ready(function() {
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
-                text: 'Hay un error en los datos. Por favor, verifica los datos.'
+                text: 'Hay un error en los datos. Debes seleccionar un proveedor y llenar todos los campos.'
             });
         }
 
@@ -75,7 +75,7 @@ function validarselect() {
     var valorOpcion1 = document.getElementById('proveedor').value;
 
     // Validar si alguno de los campos tiene valor 0
-    if (valorOpcion1 === '1000') {
+    if (valorOpcion1 === '') {
         console.log("fuera d ranking");
 
         return false; // Evita que el formulario se envíe
@@ -83,8 +83,9 @@ function validarselect() {
 
     // Si llegamos aquí, el formulario es válido y se puede enviar
     else {
-        return true;
         console.log("en ranking");
+        return true;
+
     }
 }
 

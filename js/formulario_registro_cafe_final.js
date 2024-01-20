@@ -3,17 +3,17 @@ $(document).ready(function() {
     mostrarDatoscafe_final();
 
     $("#incluir").on("click", function() {
+        console.log("incluir");
         alert("Funciona");
         var datos = new FormData();
         datos.append('accion', 'incluir');
-        datos.append('nivel_tostado', $("#nivel_tostado").val());
-        datos.append('nivel_molido', $("#nivel_molido").val());
-        datos.append('cantidad', $("#cafe-input").val());
+        datos.append('cantidad_paquetes', $(cantidad_paquetes).val());
         enviaAjax(datos, 'incluir');
 
     });
 
 });
+
 
 function borrarcafe_tostado(valor) {
     var datos = new FormData();
@@ -54,9 +54,9 @@ function enviaAjax(datos, accion) {
             if (accion == "consultar") {
                 $("#proveedor").html(respuesta);
             } else {
-                mostrarDatoscafe_tostado_final();
+                /*  mostrarDatoscafe_tostado_final();
                 mostrarDatoscafe_final();
-
+ */
 
                 /*  mostrarcontador(); */
 
@@ -101,7 +101,7 @@ function mostrarDatoscafe_final() {
         // Cuando se recibe la respuesta de la petición AJAX, se agrega la tabla al elemento con el ID 'tablaDatosDatoscafe_tostado'
         console.log("Mostrando data de cafe final");
         $('#tablaDatoscafe_final').html(r);
-        mostrarcontador();
+        /* mostrarcontador(); */
     });
 }
 
@@ -113,7 +113,7 @@ function mostrarDatoscafe_tostado_final() {
         // Cuando se recibe la respuesta de la petición AJAX, se agrega la tabla al elemento con el ID 'tablaDatosDatoscafe_tostado'
         console.log("Mostrando data de cafe tostado satisfactoriamente");
         $('#tablaDatoscafe_tostado_final').html(r);
-        mostrarcontador();
+        /*  mostrarcontador(); */
     });
 }
 

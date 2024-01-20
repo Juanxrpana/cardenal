@@ -22,6 +22,7 @@ class Registrocafe_tostado extends Conexion
 	private $fecha_tostado;
     private $nivel_tostado;
     private $nivel_molido;
+	private $usuario;
 
 	//Ok ya tenemos los atributos, pero como son privados no podemos acceder a ellos desde fueran
 	//por lo que debemos colcoar metodos (funciones) que me permitan leer (get) y colocar (set)
@@ -46,6 +47,11 @@ class Registrocafe_tostado extends Conexion
     function set_nivel_molido($valor)
 	{
 		$this->nivel_molido  = $valor;
+	}
+
+	function set_usuario($valor)
+	{
+		$this->usuario  = $valor;
 	}
 	
 
@@ -72,6 +78,11 @@ class Registrocafe_tostado extends Conexion
     function get_nivel_molido($valor)
 	{
 		$this->nivel_molido  = $valor;
+	}
+
+	function get_usuario($valor)
+	{
+		$this->usuario  = $valor;
 	}
 	
 
@@ -107,13 +118,16 @@ class Registrocafe_tostado extends Conexion
                     nivel_tostado,
                     nivel_molido,
                     estado,
-                    fecha_tostado
+                    fecha_tostado,
+					usuario_idusuario
                 ) VALUES (
                     :cantidad,
                     :nivel_tostado,
                     :nivel_molido,
                     1,
-                    NOW()
+                    NOW(),
+					'28150004'
+
                 )";
 
         // Preparar la consulta

@@ -34,7 +34,8 @@
                                 <td>'.$value['nivel_molido'].'</td>
                                 <td>'.$value['nivel_tostado'].'</td>
                                 <td>                              
-                                <a id="finalizar" class="btn btn-success btn" data-toggle="modal" data-target="#Modalcafe_tostado" data-id="'.$value['idcafe_tostado'].'"onclick="finalizarDatos('.$value['idcafe_tostado'].')"><i class="fa-solid fa-check"></i></a>
+                                <button type="button" class="btn btn-success" id="incluir" name="incluir" type="button" data-id="'.$value['idcafe_tostado'].'"><span class="icon-checkmark1"></span></a>Añadir</button>
+                                
                                 </td>
                                 
                                

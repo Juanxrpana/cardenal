@@ -18,7 +18,7 @@
     <div class="main--content">
         <div class="header--wrapper">
             <div class="header--titulo">
-
+            <span>Registro y control</span>
                 <h2>Café Tostado</h2>
             </div>
             <div id="contador_cafe_tostado" class="contador_cafe_tostado"></div>
@@ -61,7 +61,7 @@
                         <div class="cafe-input">
                             <span class="title">Añade café para tostar</span>
                             <div>
-                                <input name="cafe-input" id="cafe-input">
+                                <input name="cafe-input" id="cafe-input" type="number" placeholder="Cantidad de quintales" />
 
                             </div>
                         </div>

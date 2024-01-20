@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="./CSS/formularios_registro_clientes.css">
     <link rel="stylesheet" href="./CSS/style.css">
     <script src="https://kit.fontawesome.com/ecd5745f4f.js" crossorigin="anonymous"></script>
-    <title>CLIENTES</title>
+    <title>Proveedores</title>
 </head>
 
 <body>

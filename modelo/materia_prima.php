@@ -125,7 +125,7 @@ class Registromateria_prima extends Conexion
 	{
 		$co = $this->conecta();
 		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	
+
 		try {
 			// Insertar en compra
 			$stmtCompra = $co->prepare("INSERT INTO compra (
@@ -140,9 +140,9 @@ class Registromateria_prima extends Conexion
 			$stmtCompra->bindParam(':proveedor', $this->proveedor, PDO::PARAM_INT);
 			$stmtCompra->bindParam(':fecha', $this->fecha, PDO::PARAM_STR);
 			$stmtCompra->execute();
-	
+
 			$idCompra = $co->lastInsertId();
-	
+
 			// Insertar en quintal
 			if ($this->cantidad1 != NULL) {
 				$stmtQuintal1 = $co->prepare("INSERT INTO quintal (
@@ -161,7 +161,7 @@ class Registromateria_prima extends Conexion
 				$stmtQuintal1->bindParam(':calidad1', $this->calidad1, PDO::PARAM_INT);
 				$stmtQuintal1->execute();
 			}
-	
+
 			if ($this->cantidad2 != NULL) {
 				$stmtQuintal2 = $co->prepare("INSERT INTO quintal (
 					idcompra,
@@ -179,54 +179,54 @@ class Registromateria_prima extends Conexion
 				$stmtQuintal2->bindParam(':calidad2', $this->calidad2, PDO::PARAM_INT);
 				$stmtQuintal2->execute();
 			}
-	
+
 			return "Registro incluido";
 		} catch (Exception $e) {
 			return $e->getMessage();
 		}
 	}
-	
+
 
 
 
 	function modificar()
-{
-    $co = $this->conecta();
-    $co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	{
+		$co = $this->conecta();
+		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    try {
-        // Consulta SQL para actualizar la fecha de compra
-        $stmtFechaCompra = $co->prepare("UPDATE compra SET fecha_compra = :fecha WHERE idcompra = :idcompra");
-        $stmtFechaCompra->bindParam(':fecha', $this->fecha, PDO::PARAM_STR);
-        $stmtFechaCompra->bindParam(':idcompra', $this->idcompra1, PDO::PARAM_INT);
-        $stmtFechaCompra->execute();
+		try {
+			// Consulta SQL para actualizar la fecha de compra
+			$stmtFechaCompra = $co->prepare("UPDATE compra SET fecha_compra = :fecha WHERE idcompra = :idcompra");
+			$stmtFechaCompra->bindParam(':fecha', $this->fecha, PDO::PARAM_STR);
+			$stmtFechaCompra->bindParam(':idcompra', $this->idcompra1, PDO::PARAM_INT);
+			$stmtFechaCompra->execute();
 
-        // Consulta SQL para verificar la existencia de una entrada con calidad 2
-        $verificarSQL = "SELECT COUNT(*) AS count FROM quintal WHERE idcompra = :idcompra AND calidad_idcalidad = :calidad";
-        $stmtVerificar = $co->prepare($verificarSQL);
+			// Consulta SQL para verificar la existencia de una entrada con calidad 2
+			$verificarSQL = "SELECT COUNT(*) AS count FROM quintal WHERE idcompra = :idcompra AND calidad_idcalidad = :calidad";
+			$stmtVerificar = $co->prepare($verificarSQL);
 
-        // Consulta SQL para actualizar o insertar en la tabla quintal para calidad 1
-        $stmtQuintal1 = $co->prepare("INSERT INTO quintal (idcompra, calidad_idcalidad, cantidad) VALUES (:idcompra, :calidad, :cantidad) ON DUPLICATE KEY UPDATE cantidad = :cantidad");
-        $stmtQuintal1->bindParam(':idcompra', $this->idcompra1, PDO::PARAM_INT);
-        $stmtQuintal1->bindParam(':calidad', $this->calidad1, PDO::PARAM_INT);
-        $stmtQuintal1->bindParam(':cantidad', $this->cantidad1, PDO::PARAM_INT);
-        $stmtQuintal1->execute();
+			// Consulta SQL para actualizar o insertar en la tabla quintal para calidad 1
+			$stmtQuintal1 = $co->prepare("INSERT INTO quintal (idcompra, calidad_idcalidad, cantidad) VALUES (:idcompra, :calidad, :cantidad) ON DUPLICATE KEY UPDATE cantidad = :cantidad");
+			$stmtQuintal1->bindParam(':idcompra', $this->idcompra1, PDO::PARAM_INT);
+			$stmtQuintal1->bindParam(':calidad', $this->calidad1, PDO::PARAM_INT);
+			$stmtQuintal1->bindParam(':cantidad', $this->cantidad1, PDO::PARAM_INT);
+			$stmtQuintal1->execute();
 
-        // Consulta SQL para actualizar o insertar en la tabla quintal para calidad 2
-        $stmtQuintal2 = $co->prepare("INSERT INTO quintal (idcompra, calidad_idcalidad, cantidad) VALUES (:idcompra, :calidad, :cantidad) ON DUPLICATE KEY UPDATE cantidad = :cantidad");
-        $stmtQuintal2->bindParam(':idcompra', $this->idcompra1, PDO::PARAM_INT);
-        $stmtQuintal2->bindParam(':calidad', $this->calidad2, PDO::PARAM_INT);
-        $stmtQuintal2->bindParam(':cantidad', $this->cantidad2, PDO::PARAM_INT);
-        $stmtQuintal2->execute();
+			// Consulta SQL para actualizar o insertar en la tabla quintal para calidad 2
+			$stmtQuintal2 = $co->prepare("INSERT INTO quintal (idcompra, calidad_idcalidad, cantidad) VALUES (:idcompra, :calidad, :cantidad) ON DUPLICATE KEY UPDATE cantidad = :cantidad");
+			$stmtQuintal2->bindParam(':idcompra', $this->idcompra1, PDO::PARAM_INT);
+			$stmtQuintal2->bindParam(':calidad', $this->calidad2, PDO::PARAM_INT);
+			$stmtQuintal2->bindParam(':cantidad', $this->cantidad2, PDO::PARAM_INT);
+			$stmtQuintal2->execute();
 
-        // Actualizar la fecha de compra nuevamente (¿es necesario?)
-        $stmtFechaCompra->execute();
+			// Actualizar la fecha de compra nuevamente (¿es necesario?)
+			$stmtFechaCompra->execute();
 
-        return "Registro Modificado";
-    } catch (Exception $e) {
-        return $e->getMessage();
-    }
-}
+			return "Registro Modificado";
+		} catch (Exception $e) {
+			return $e->getMessage();
+		}
+	}
 
 
 
@@ -279,6 +279,7 @@ class Registromateria_prima extends Conexion
 						UPDATE total_cafe
 						SET total = COALESCE((SELECT SUM(cantidad) FROM quintal WHERE estado = 1), 0) + total where id_total_cafe = 1;
 						WHERE id_total_cafe = 1;
+						
 						");
 	}
 
@@ -286,47 +287,59 @@ class Registromateria_prima extends Conexion
 	{
 		$co = $this->conecta();
 		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = $co->query("
-						UPDATE quintal
+		try {
+			$co->query("UPDATE quintal
 						SET estado = 0
-						WHERE estado = 1;
-						");	
+						WHERE estado = 1;");
+			return "Desactivando estados";
+		} catch (Exception $e) {
+			return $e->getMessage();
+		}
 	}
 
 	public function descontador_total_materia_prima()
-{
-    $co = $this->conecta();
-    $co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	{
+		$co = $this->conecta();
+		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // Habilitar las consultas múltiples
-    $co->exec("SET SESSION sql_mode = 'NO_ENGINE_SUBSTITUTION'");
-
-    // Consulta SQL con múltiples declaraciones
-    $sql = "
-        SET @total_cantidad := 0;
-        SELECT @total_cantidad := total FROM total_cafe WHERE id_total_cafe = 1;
-        
-        SET @total_cantidad2 := 0;
-        SELECT @total_cantidad2 := total FROM total_cafe WHERE id_total_cafe = 2;
-        
-        SET @total := 0;
-        SELECT @total := @total_cantidad - @total_cantidad2;
-        
-        UPDATE `total_cafe` SET `total` = GREATEST(0, @total) WHERE id_total_cafe = 1;
-    ";
-
-    // Ejecutar la consulta
-    $co->exec($sql);
-}
+		$sql = $co->query("DELIMITER //
+	CREATE TRIGGER restar_valor_total_cafe
+	AFTER INSERT ON cafe_tostado
+	FOR EACH ROW
+	BEGIN
+		-- Restar el valor de cantidad al campo total de id_total_cafe 2 en total_cafe
+		UPDATE total_cafe
+		SET total = total - NEW.cantidad
+		WHERE id_total_cafe = 1;
+	END;
+	//
+	
+	-- Modificar el trigger para también ejecutarse después de una actualización
+	CREATE TRIGGER restar_valor_total_cafe_update
+	AFTER UPDATE ON cafe_tostado
+	FOR EACH ROW
+	BEGIN
+		-- Obtener la diferencia entre el nuevo y viejo valor de cantidad
+		DECLARE diferencia INT;
+		SET diferencia = NEW.cantidad - OLD.cantidad;
+	
+		-- Restar la diferencia al campo total de id_total_cafe 2 en total_cafe
+		UPDATE total_cafe
+		SET total = total - diferencia
+		WHERE id_total_cafe = 1;
+	END;
+	//
+	DELIMITER ;");
+	}
 
 
 
 	public function mostrarmateria_prima()
-{
-    $co1 = $this->conecta();
-    $co1->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	{
+		$co1 = $this->conecta();
+		$co1->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $sql = $co1->query("SELECT q.estado, c.fecha_compra, pn.nombre_prov, p.datos_prov_identificacion, SUM(q.cantidad) AS total_cantidad, c.idcompra
+		$sql = $co1->query("SELECT q.estado, c.fecha_compra, pn.nombre_prov, p.datos_prov_identificacion, SUM(q.cantidad) AS total_cantidad, c.idcompra
                         FROM proveedor p
                         INNER JOIN datos_prov pn ON p.datos_prov_identificacion = pn.identificacion
                         LEFT JOIN compra c ON p.id_prov = c.proveedor_id_proveedor
@@ -334,24 +347,24 @@ class Registromateria_prima extends Conexion
                         
                         GROUP BY c.idcompra");
 
-    return $sql;
-}
+		return $sql;
+	}
 
 
 
 
 	public function mostrar_contador()
-{
-    $co = $this->conecta();
-    $co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    try {
-        $resultado = $co->query("SELECT total FROM total_cafe WHERE id_total_cafe = 1;");
-        $totalCafeVerde = $resultado->fetch(PDO::FETCH_ASSOC)['total'];
-        return $totalCafeVerde;
-    } catch (Exception $e) {
-        return $e->getMessage(); 
-    }
-}
+	{
+		$co = $this->conecta();
+		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		try {
+			$resultado = $co->query("SELECT total FROM total_cafe WHERE id_total_cafe = 1;");
+			$totalCafeVerde = $resultado->fetch(PDO::FETCH_ASSOC)['total'];
+			return $totalCafeVerde;
+		} catch (Exception $e) {
+			return $e->getMessage();
+		}
+	}
 
 	public function borrarmateria_prima()
 	{

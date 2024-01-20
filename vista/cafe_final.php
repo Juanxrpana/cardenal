@@ -11,23 +11,27 @@
     <link rel="stylesheet" href="./CSS/cafe_tostado.css">
     <link rel="stylesheet" href="./CSS/style.css">
     <script src="https://kit.fontawesome.com/ecd5745f4f.js" crossorigin="anonymous"></script>
-    <title>Café Tostado</title>
+    <title>Café Final</title>
 </head>
 
 <body>
     <div class="main--content">
         <div class="header--wrapper">
             <div class="header--titulo">
-                <h2>Café Tostado</h2>
+            <span>Registro y control</span>    
+            <h2>Café Final</h2>
             </div>
-            <div id="contador_cafe_tostado" class="contador_cafe_tostado"></div>
+            <div id="contador_cafe_final" class="contador_cafe_final"></div>
         </div>
         
         <div class="contenedor--tarjetas">
             <h3 class="main--titulo">
                 Registro de café empaquetado
             </h3>
-            <div id="tablaDatoscafe_tostado_final"></div>
+            <form class="formulario" action="POST" method="POST">
+            <input type="text" name="accion" id="accion" style="display:none" />
+                <div id="tablaDatoscafe_tostado_final"></div>
+        </form>
             <div id="tablaDatoscafe_final"></div>
 
         </div>

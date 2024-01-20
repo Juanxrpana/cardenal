@@ -105,34 +105,43 @@ class Registrocafe_final extends Conexion
 	}
 	//ahora incluiremos una cafe_final//
 	function agregarcafe_final()
-{
-    $co = $this->conecta();
-    $co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-    try {
-        // Obtener el último id_cafe_tostado
-        $resultado = $co->query("SELECT MAX(id_cafe_tostado) AS ultimo_id FROM cafe_tostado");
-        $ultimoIdCafeTostado = $resultado->fetch(PDO::FETCH_ASSOC)['ultimo_id'];
-
-        // Insertar en cafe_final
-        $co->query("INSERT INTO cafe_final(
-            idcafe_tostado,
-            cantidad_paquetes,
-            fecha_empaquetado,
-            id_bulto,
-            estado) VALUES (
-                '$ultimoIdCafeTostado',
-                '$this->cantidad_paquetes',
-                NOW(),
-                '$this->id_bulto',
-                1
-            )");
-
-        return "Registro de café final exitoso";
-    } catch (Exception $e) {
-        return $e->getMessage();
-    }
-}
+	{
+		$co = $this->conecta();
+		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	
+		try {
+			// Obtener el último id_cafe_tostado
+			$stmt = $co->prepare("SELECT MAX(id_cafe_tostado) AS ultimo_id FROM cafe_tostado");
+			$stmt->execute();
+			$resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+			$ultimoIdCafeTostado = $resultado['ultimo_id'];
+	
+			// Insertar en cafe_final
+			$stmt = $co->prepare("INSERT INTO cafe_final(
+				idcafe_tostado,
+				cantidad_paquetes,
+				fecha_empaquetado,
+				id_bulto,
+				estado) VALUES (
+					:ultimoIdCafeTostado,
+					:cantidadPaquetes,
+					NOW(),
+					:idBulto,
+					1
+				)");
+	
+			$stmt->bindParam(':ultimoIdCafeTostado', $ultimoIdCafeTostado, PDO::PARAM_INT);
+			$stmt->bindParam(':cantidadPaquetes', $this->cantidad_paquetes, PDO::PARAM_INT);
+			$stmt->bindParam(':idBulto', $ultimoIdCafeTostado, PDO::PARAM_INT);
+	
+			$stmt->execute();
+	
+			return "Registro de café final exitoso";
+		} catch (Exception $e) {
+			return $e->getMessage();
+		}
+	}
+	
 
 	function modificarcafe_final()
 	{
