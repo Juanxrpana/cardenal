@@ -1,5 +1,8 @@
 $(document).ready(function() {
     mostrarDatoscafe_tostado();
+    mostrarcontador_materia_prima();
+    mostrarcontador();
+
 
     $("#incluir").on("click", function() {
         /*  alert("Funciona"); */
@@ -8,33 +11,30 @@ $(document).ready(function() {
         datos.append('nivel_tostado', $("#nivel_tostado").val());
         datos.append('nivel_molido', $("#nivel_molido").val());
         datos.append('cantidad', $("#cafe-input").val());
-        if (validartostado()) {
+        if (validarSuma()) {
             // Si todos los campos son válidos, envía los datos al servidor
             enviaAjax(datos, 'incluir');
             descontador();
         } else {
             Swal.fire({
-                icon: 'error',
+                icon: 'warning',
                 title: 'Error',
-                text: 'Error, verifique los datos'
+                text: 'No se pueden tostar mas de 5 quintales a la vez'
             });
         }
-
-        /*   enviaAjax(datos, 'incluir');
-          descontador(); */
-
-
     });
 
 });
 
-function validartostado() {
-    console.log("validartostado");
+function validarSuma() {
+    console.log("validarsumatostado");
+    var contador = parseInt(document.getElementById('contador_cafe_tostado').innerText);
     var cantidad1 = parseInt(document.getElementById('cafe-input').value) || 0;
-    if (cantidad1 > 5) {
+    var total = cantidad1 + contador;
+    if (total > 5) {
         // Utilizar SweetAlert para mostrar el mensaje
         Swal.fire({
-            icon: 'error',
+            icon: 'warning',
             title: 'Error',
             text: 'No se pueden tostar mas de 5 quintales a la vez',
         });
@@ -87,6 +87,7 @@ function enviaAjax(datos, accion) {
 
 
                 mostrarDatoscafe_tostado();
+                mostrarcontador_materia_prima();
 
 
 
@@ -94,7 +95,7 @@ function enviaAjax(datos, accion) {
 
                 $("#hola").html(respuesta);
                 Swal.fire({
-                    title: 'Proveedor ingresado exitosamente',
+                    title: 'Datos ingresados exitosamente',
                     text: respuesta,
                     icon: 'success',
                     timer: 4033330, // Establece el tiempo en milisegundos (5 segundos en este caso)
@@ -150,7 +151,7 @@ function enviaAjax2(datos, accion) {
 
                 $("#hola").html(respuesta);
                 Swal.fire({
-                    title: 'Proveedor ingresado exitosamente',
+                    title: 'Datos eliminados exitosamente',
                     text: respuesta,
                     icon: 'success',
                     timer: 4033330, // Establece el tiempo en milisegundos (5 segundos en este caso)
@@ -189,6 +190,12 @@ function mostrarDatoscafe_tostado() {
         // Cuando se recibe la respuesta de la petición AJAX, se agrega la tabla al elemento con el ID 'tablaDatosDatoscafe_tostado'
         console.log("Mostrando data de cafe tostado satisfactoriamente");
         $('#tablaDatoscafe_tostado').html(r);
+        $('#tabla_cafe_tostado').DataTable({
+            "language": {
+                "url": "./js/es-ES.json"
+            }
+        });
+
         mostrarcontador();
     });
 }
@@ -197,6 +204,13 @@ function mostrarcontador() {
     $.ajax({ url: './Modelo/contador_cafe_tostado.php' }).done(function(r) {
         console.log("Mostrando contador satisfactoriamente");
         $('#contador_cafe_tostado').html(r);
+    });
+}
+
+function mostrarcontador_materia_prima() {
+    $.ajax({ url: './Modelo/contador_materia_prima.php' }).done(function(r) {
+        console.log("Mostrando contador satisfactoriamente");
+        $('#contador_materia_prima').html(r);
     });
 }
 

@@ -1,3 +1,10 @@
+.contador_texto {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    align-items: baseline;
+    text-size-adjust: 10px;
+}
+
 .myTabs {
     width: 100%;
     text-align: center;
@@ -43,6 +50,27 @@ h3 {
     height: 3em;
     box-shadow: 0px 0px 20px -18px;
 }
+
+.proveedor2 {
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: center;
+}
+
+
+/* .icon-user-plus {
+    color: #ffff;
+    font-size: 35px;
+    text-decoration: none;
+}
+
+#nuevo_proveedor {
+    color: #ffff;
+    background: #2c8012;
+    border-radius: 15px;
+    text-align: center;
+}
+ */
 
 
 /* Cambiar el color del contenido de las pestañas */

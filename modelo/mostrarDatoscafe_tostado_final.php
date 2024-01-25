@@ -11,7 +11,7 @@
     $obj= new Registrocafe_tostado();
     $datos=$obj->mostrarcafe_tostado();
 
-    $tablacafe_tostado='<table class="table table-striped table-hover" id="tcafe_tostado">
+    $tablacafe_tostado='<table class="table table-striped table-hover" id="tabla_cafe_tostado">
                      <thead>
                              <tr>
                                 <th scope="col">Indentificación</th>
@@ -19,6 +19,7 @@
                                 <th scope="col">Fecha de Tostado</th>
                                 <th scope="col">Tipo de Molido</th>
                                 <th scope="col">Tipo de Tostado</th>
+                                <th scope="col">Estado</th>
                                 <th scope="col">Finalizar</th>
                             </tr>
                      </thead>
@@ -29,13 +30,13 @@
         $datosTablacafe_tostado=$datosTablacafe_tostado.'  
                             <tr style="cursor:pointer">
                                 <td>'.$value['idcafe_tostado'].'</td>
-                                <td>'.$value['cantidad'].'</td>
-                                <td>'.$value['fecha_tostado'].'</td>
+                                <td id="cantidad" class="cantidad">'.$value['cantidad'].'</td>
+                                <td id="fecha_tostado">'.$value['fecha_tostado'].'</td>
                                 <td>'.$value['nivel_molido'].'</td>
                                 <td>'.$value['nivel_tostado'].'</td>
+                                <td>'.$value['estado'].'</td>
                                 <td>                              
-                                <button type="button" class="btn btn-success" id="incluir" name="incluir" type="button" data-id="'.$value['idcafe_tostado'].'"><span class="icon-checkmark1"></span></a>Añadir</button>
-                                
+                                <a class="btn btn-success" id="incluir_final" btn" data-id="'.$value['idcafe_tostado'].'" onclick="incluir_final('.$value['idcafe_tostado'].')">Añadir</a>
                                 </td>
                                 
                                

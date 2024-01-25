@@ -28,9 +28,9 @@ require_once("modelo/".$pagina.".php");
 		  //clase es guardar esos valores en ella //con los metodos set
 		  $accion = $_POST['accion'];
 
-		   if($accion=='consultar'){
+		   if($accion=='existe'){
             
-			 echo  $o->consultar();
+			 echo  $o->existe($id_cafe_final);
 		  }	  
 		  
 
@@ -43,8 +43,9 @@ require_once("modelo/".$pagina.".php");
            
               $o->set_idcafe_tostado($_POST['idcafe_tostado']);
 			  $o->set_cantidad_paquetes($_POST['cantidad_paquetes']);
-			  $o->set_fecha_empaquetado($_POST['fecha_empaquetado']);
-			  $o->set_fecha_empaquetado($_POST['fecha_empaquetado']);
+			 
+		
+			  
               
 			  if($accion=='incluir'){
 				echo  $o->agregarcafe_final();

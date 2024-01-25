@@ -6,10 +6,6 @@ $(document).ready(function() {
     llenarLista();
     mostrarDatosproveedor();
 
-
-
-
-
     $("#incluir").on("click", function() {
 
 
@@ -147,6 +143,65 @@ function enviaAjax(datos, accion) {
 
 }
 
+function enviaAjax(datos, accion) {
+    $.ajax({
+        async: true,
+        url: '', //la pagina a donde se envia por estar en mvc, se omite la ruta ya que siempre estaremos en la misma pagina
+        type: 'POST', //tipo de envio 
+        contentType: false,
+        data: datos,
+        processData: false,
+        cache: false,
+        success: function(respuesta) {
+
+            //si resulto exitosa la transmision
+            if (accion == "consultar") {
+                $("#cedula_fiscal_id").html(respuesta);
+            } else {
+
+                mostrarDatosproveedor();
+
+
+
+                $("#hola").html(respuesta);
+                Swal.fire({
+                    title: 'Eliminado exitosamente',
+                    text: respuesta,
+                    icon: 'success',
+                    timer: 4000, // Establece el tiempo en milisegundos (5 segundos en este caso)
+
+                }).then((result) => {
+                    if (result.dismiss === Swal.DismissReason.timer) {
+                        // Esto se ejecutará después de que se cierre el mensaje automáticamente
+                        console.log('Mensaje modal cerrado');
+                    }
+                });
+
+            }
+        },
+        error: function() {
+
+            Swal.fire({
+                title: 'Error en los datos',
+                text: 'Hubo un problema al eliminar los datos.',
+                icon: 'error',
+                timer: 4000, // Establece el tiempo en milisegundos (5 segundos en este caso)
+                showConfirmButton: false // Oculta el botón "Aceptar"
+            }).then((result) => {
+                if (result.dismiss === Swal.DismissReason.timer) {
+                    // Esto se ejecutará después de que se cierre el mensaje automáticamente
+                    console.log('Mensaje modal de error cerrado');
+                }
+            });
+
+
+        }
+
+    });
+
+
+}
+
 function llenarLista() {
     var datos = new FormData();
     datos.append('accion', 'consultar');
@@ -155,12 +210,18 @@ function llenarLista() {
 
 function mostrarDatosproveedor() {
     // La función realiza una petición AJAX al archivo mostrarDatosmateria_prima.php
-    console.log("entrando data DatosProveedor");
+    /*  console.log("entrando data DatosProveedor"); */
 
     $.ajax({ url: './Modelo/mostrarDatosProveedor.php' }).done(function(r) {
         // Cuando se recibe la respuesta de la petición AJAX, se agrega la tabla al elemento con el ID 'tablaDatosDatosProveedor'
-        console.log("Mostrando data satisfactoriamente");
+        /*  console.log("Mostrando data satisfactoriamente"); */
         $('#tablaDatosProveedor').html(r);
+        $('#tproveedor').DataTable({
+            "language": {
+                "url": "./js/es-ES.json"
+            }
+        });
+
     });
 }
 

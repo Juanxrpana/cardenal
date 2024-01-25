@@ -211,33 +211,47 @@ function modificarcafe_tostado()
 
     public function contadorcafe_tostado()
 	{
-    $co = $this->conecta();
-    $co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-	$sql = $co->query("
-						INSERT INTO total_cafe (id_total_cafe, total)
-						SELECT 2, COALESCE(SUM(cantidad), 0)
+		try {
+			$co = $this->conecta();
+			$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		
+			// Crear la consulta preparada
+			$sql = "UPDATE total_cafe
+					SET total = (
+						SELECT COALESCE(SUM(cantidad), 0)
 						FROM cafe_tostado
 						WHERE estado = 1
-						ON DUPLICATE KEY UPDATE TOTAL = VALUES(TOTAL);
-						");
+					)
+					WHERE id_total_cafe = 2";
+		
+			// Preparar la consulta
+			$stmt = $co->prepare($sql);
+		
+			// Ejecutar la consulta
+			$stmt->execute();		
+			return "contador café tostado consulta exitosa";
+		} catch (PDOException $e) {
+			return "Error: " . $e->getMessage();
+		}
 	}
 
-	public function mostrar_contador()
+	public function mostrar_contador_cafe_tostado()
 	{
 		$co = $this->conecta();
 		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		try {
-			$resultado = $co->query("SELECT SUM(cantidad) AS total_cafe_verde FROM cafe_tostado");
-			$totalCafeVerde = $resultado->fetch(PDO::FETCH_ASSOC)['total_cafe_verde'];
+			$resultado = $co->query("SELECT total FROM total_cafe where	id_total_cafe=2");
+			$totalCafeTostado = $resultado->fetch(PDO::FETCH_ASSOC)['total'];
 
-			return $totalCafeVerde;
+			return $totalCafeTostado;
 		} catch (Exception $e) {
 			return $e->getMessage(); 
 		}
 	}
 
-	/* public function inactivadormateria_prima()
+	
+
+	public function inactivadorcafe_tostado()
 	{
 		$co = $this->conecta();
 		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -247,7 +261,6 @@ function modificarcafe_tostado()
 						WHERE estado = 1;
 						");	
 	}
- */
 	public function mostrarcafe_tostado()
 	{
 

@@ -8,15 +8,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./CSS/inicio.css">
     <link rel="stylesheet" href="./CSS/bootstrap.css">
-    <link rel="stylesheet" href="./CSS/formularios_registro_clientes.css">
+    <link rel="stylesheet" href="./CSS/formularios_registro_proveedor.css">
     <link rel="stylesheet" href="./CSS/style.css">
-    <script src="https://kit.fontawesome.com/ecd5745f4f.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./CSS/datatables.min.css">
+
     <title>Proveedores</title>
 </head>
 
 <body>
-
-        <div class="main--content">
+<div class="todo">
+    <div class="main--content">
         <div class="header--wrapper">
             <div class="header--titulo" id="hola">
                 <span>Registro y control</span>
@@ -32,7 +33,7 @@
                 Registro Proveedor
             </h3>
             <form method="POST" class="formulario" id="formulario">
-            <input type="text" name="accion" id="accion" style="display:none"/>
+                <input type="text" name="accion" id="accion" style="display:none" />
                 <!-- Grupo: identificacion -->
                 <div class="formulario__grupo" id="grupo__identificacion">
                     <label for="identificacion" class="formulario__label">Identificacion</label>
@@ -44,7 +45,7 @@
                         <input type="text" class="formulario__input" name="identificacion" id="identificacion" placeholder="29873456">
                         <span></span>
                     </div>
-        
+
                 </div>
 
                 <!-- Grupo: Teléfono -->
@@ -73,7 +74,7 @@
                         <span></span>
                     </div>
                 </div>
-                
+
                 <!-- Grupo: direccion -->
                 <div class="formulario__grupo" id="grupo__direccion">
                     <label for="direccion" class="formulario__label">Dirección</label>
@@ -100,7 +101,7 @@
                 </div>
 
                 <div class="formulario__grupo formulario__grupo-btn-enviar">
-                <button type="button" class="btn btn-dark" id="incluir" name="incluir">INCLUIR</button>
+                    <button type="button" class="btn btn-dark" id="incluir" name="incluir">INCLUIR</button>
                     <p class="formulario__mensaje-exito" id="formulario__mensaje-exito">Formulario enviado exitosamente!</p>
                 </div>
             </form>
@@ -109,17 +110,21 @@
 
             <br>
             <div class="Proveedor" id="Proveedor">
-            <span>Lista Proveedores</span>
-            <div class="tablaDatosProveedor" id="tablaDatosProveedor"></div>
-        </div>
+                <span>Lista Proveedores</span>
+                <div class="tablaDatosProveedor" id="tablaDatosProveedor"></div>
+            </div>
 
 
         </div>
-        
+
     </div>
-    <script src="./js/jquery-3.6.0.min.js"></script>
+ </div>    
+    <script src="./js/jquery-3.7.1.min.js"></script>
+    <script src="./js/datatables.js"></script>
+    <script src="./js/bootstrap.bundle.js"></script>
     <script src="./js/proveedor.js"></script>
     <script src="./js/sweetalert2.js"></script>
+
 </body>
 
 </html>

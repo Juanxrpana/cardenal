@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="./CSS/bootstrap.css">
     <link rel="stylesheet" href="./CSS/cafe_tostado.css">
     <link rel="stylesheet" href="./CSS/style.css">
-    <script src="https://kit.fontawesome.com/ecd5745f4f.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./CSS/datatables.min.css">
     <title>Café Final</title>
 </head>
 
@@ -26,7 +26,7 @@
         
         <div class="contenedor--tarjetas">
             <h3 class="main--titulo">
-                Registro de café empaquetado
+                Registro de café molido para empaquetar
             </h3>
             <form class="formulario" action="POST" method="POST">
             <input type="text" name="accion" id="accion" style="display:none" />
@@ -39,7 +39,8 @@
      </div>
 
     <script src="./js/bootstrap.bundle.js"></script>
-    <script src="./js/jquery-3.6.0.min.js"></script>
+    <script src="./js/jquery-3.7.1.min.js"></script>
+    <script src="./js/datatables.js"></script>
     <script src="./js/formulario_registro_cafe_final.js"></script>
     <script src="./js/sweetalert2.js"></script>
 </body>

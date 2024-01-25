@@ -1,8 +1,5 @@
 <div class="sidebar">
-        <div class="logo">
-            <div class="cardenal"><img src="./extras/LOGO.png" alt=""></div>
-        </div>
-        <div class="cardenal"><img src="./extras/LOGO.png" alt=""></div>
+        
         <ul class="menu">
             <li class="active">
                 <a href="?pagina=inicio">

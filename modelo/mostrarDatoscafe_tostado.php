@@ -11,7 +11,7 @@
     $obj= new Registrocafe_tostado();
     $datos=$obj->mostrarcafe_tostado();
 
-    $tablacafe_tostado='<table class="table table-striped table-hover" id="tcafe_tostado">
+    $tablacafe_tostado='<table class="table table-striped table-hover" id="tabla_cafe_tostado">
                      <thead>
                              <tr>
                                 <th scope="col">Indentificación</th>

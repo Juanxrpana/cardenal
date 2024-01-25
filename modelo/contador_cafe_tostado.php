@@ -10,11 +10,12 @@
     require_once ("../modelo/cafe_tostado.php");
     $obj= new Registrocafe_tostado();
     $obj->contadorcafe_tostado();
-    $datos=$obj->mostrar_contador();
+    $datos=$obj->mostrar_contador_cafe_tostado();
 
 
-    $contador_cafe_tostado= $datos;
-    echo "contador de cafe tostado: ".$contador_cafe_tostado."/5";
+
+   
+    echo $datos;
  
 ?>
 

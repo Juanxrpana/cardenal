@@ -1,17 +1,14 @@
 <?php
+if (!is_file("../modelo/proveedor.php")) {
+    echo "Falta definir la clase proveedor";
+    exit;
+}
 
-    
-    if (!is_file("../modelo/proveedor.php")){
+require_once("../modelo/proveedor.php");
+$obj = new Registroproveedor();
+$datos = $obj->mostrarproveedor();
 
-        echo "Falta definir la clase proveedor";
-        exit;
-    }
-
-    require_once ("../modelo/proveedor.php");
-    $obj= new Registroproveedor();
-    $datos=$obj->mostrarproveedor();
-
-    $tablaproveedor='<table class="table table-striped table-hover" id="tproveedor">
+$tablaproveedor = '<table class="table table-striped table-hover" id="tproveedor">
                      <thead>
                              <tr id="tr">
                                 <th scope="col">ID</th>
@@ -23,26 +20,22 @@
                             </tr>
                      </thead>
                      <tbody>';
-    $datosTablaproveedor="";
-    foreach ($datos as $key => $value){
-        $a = $value['id_prov'];
-        $datosTablaproveedor=$datosTablaproveedor.'  
+$datosTablaproveedor = "";
+foreach ($datos as $key => $value) {
+    $a = $value['id_prov'];
+    $datosTablaproveedor .= '  
                             <tr style="cursor:pointer">
-                                <td>'.$value['id_prov'].'</td>
-                                <td>'.$value['identificacion'].'</td>
-                                <td>'.$value['nombre_prov'].'</td>
-                                <td>'.$value['ubicacion'].'</td>
-                                <td>'.$value['nombre_finca'].'</td>
+                                <td>' . $value['id_prov'] . '</td>
+                                <td>' . $value['identificacion'] . '</td>
+                                <td>' . $value['nombre_prov'] . '</td>
+                                <td>' . $value['ubicacion'] . '</td>
+                                <td>' . $value['nombre_finca'] . '</td>
                                 <td>                              
-                                <a id="modificar" class="btn btn-success btn" data-id="'.$value['id_prov'].'"onclick="modificarDatos('.$value['id_prov'].')"><i class="fa-solid fa-user-pen"></i></a>
-                                <a class="btn btn-danger id="eliminar" btn" data-id="'.$value['id_prov'].'" onclick="borrarproveedor('.$value['id_prov'].')"><i class="fa-solid fa-user-xmark"></i></a>
+                                <a id="modificar" class="btn btn-success btn" data-id="' . $value['id_prov'] . '" onclick="modificarDatos(' . $value['id_prov'] . ')"><i class="fa-solid fa-user-pen"></i></a>
+                                <a class="btn btn-danger" id="eliminar" btn" data-id="' . $value['id_prov'] . '" onclick="borrarproveedor(' . $value['id_prov'] . ')"><i class="fa-solid fa-user-xmark"></i></a>
                                 </td>
-                                
-                               
-                                
                             </tr>';
+}
 
-    }
-    echo $tablaproveedor.$datosTablaproveedor.'</tbody></table>';
+echo $tablaproveedor . $datosTablaproveedor . '</tbody></table>';
 ?>
-

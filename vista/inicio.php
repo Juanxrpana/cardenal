@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="./CSS/inicio.css">
     <link rel="stylesheet" href="./CSS/bootstrap.css">
     <link rel="stylesheet" href="./CSS/style.css">
+    
     <script src="https://kit.fontawesome.com/ecd5745f4f.js" crossorigin="anonymous"></script>
     <title>INICIO</title>
 </head>
@@ -82,11 +83,8 @@
                             <span class="titulo">
                                <h3>MATERIA PRIMA</h3>
                             </span>
-                            <span class="ammount-value">
-                                4
-                            </span>
-                            <span class="tarjetas--detalles" id="contador_cafe_final">
-                              <i><a href="?pagina=consulta">VER ULTIMO REGISTRO</a></i>
+                            <div class="contador_texto" id="contador_texto"><div id="contador_materia_prima" class="contador_materia_prima"></div><h6>/2000</h6></div>
+                              <!-- <i><a href="?pagina=consulta">VER ULTIMO REGISTRO</a></i> -->
                             </span>
                         </div>
                     </div>
@@ -98,5 +96,8 @@
         </div>
     </div>
 </body>
-
+<script src="./js/bootstrap.bundle.js"></script>
+        <script src="./js/jquery-3.6.0.min.js"></script>
+        <script src="./js/formulario_registro_materia_prima.js"></script>
+        <script src="./js/sweetalert2.js"></script>
 </html>

@@ -10,6 +10,13 @@
     box-shadow: 0px 0px 20px -18px;
 }
 
+#contador_texto {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    align-items: baseline;
+    text-size-adjust: 10px;
+}
+
 #cafe-input:hover {
     border: 2px solid lightgrey;
     box-shadow: 0px 0px 20px -17px;

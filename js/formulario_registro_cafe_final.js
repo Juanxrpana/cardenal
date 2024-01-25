@@ -2,17 +2,29 @@ $(document).ready(function() {
     mostrarDatoscafe_tostado_final();
     mostrarDatoscafe_final();
 
-    $("#incluir").on("click", function() {
-        console.log("incluir");
-        alert("Funciona");
-        var datos = new FormData();
-        datos.append('accion', 'incluir');
-        datos.append('cantidad_paquetes', $(cantidad_paquetes).val());
-        enviaAjax(datos, 'incluir');
-
-    });
 
 });
+
+
+function incluir_final(valor) {
+
+    var cantidad = document.getElementById('cantidad').innerText;
+    var cantidad_paquetes = (parseFloat(cantidad) * 37) / 5;
+    var cantidad_paquetesredondeado = Math.round(cantidad_paquetes, 2);
+    var idcafe_tostado = valor;
+    var datos = new FormData();
+    datos.append('accion', 'incluir');
+    datos.append('idcafe_tostado', idcafe_tostado); //toma el id de la tabla
+    datos.append('cantidad_paquetes', cantidad_paquetes);
+    console.log(valor);
+    console.log("cantidad" + cantidad);
+    console.log("Cantidad Paquetes: " + cantidad_paquetes);
+    console.log("Cantidad Paquetesredondeado: " + cantidad_paquetesredondeado);
+
+    enviaAjax(datos, 'incluir');
+
+
+}
 
 
 function borrarcafe_tostado(valor) {
@@ -100,7 +112,13 @@ function mostrarDatoscafe_final() {
     $.ajax({ url: './Modelo/mostrarDatoscafe_final.php' }).done(function(r) {
         // Cuando se recibe la respuesta de la petición AJAX, se agrega la tabla al elemento con el ID 'tablaDatosDatoscafe_tostado'
         console.log("Mostrando data de cafe final");
+
         $('#tablaDatoscafe_final').html(r);
+        $('#tabla_cafe_final').DataTable({
+            "language": {
+                "url": "./js/es-ES.json"
+            }
+        });
         /* mostrarcontador(); */
     });
 }
@@ -113,6 +131,11 @@ function mostrarDatoscafe_tostado_final() {
         // Cuando se recibe la respuesta de la petición AJAX, se agrega la tabla al elemento con el ID 'tablaDatosDatoscafe_tostado'
         console.log("Mostrando data de cafe tostado satisfactoriamente");
         $('#tablaDatoscafe_tostado_final').html(r);
+        $('#tabla_cafe_tostado').DataTable({
+            "language": {
+                "url": "./js/es-ES.json"
+            }
+        });
         /*  mostrarcontador(); */
     });
 }
@@ -123,10 +146,3 @@ function mostrarDatoscafe_tostado_final() {
         $('#contador_cafe_tostado').html(r);
     });
 } */
-
-
-function descontador() {
-    $.ajax({ url: './Modelo/descontador_materia_prima.php' }).done(function(r) {
-        console.log("desconto satisfactoriamente");
-    });
-}

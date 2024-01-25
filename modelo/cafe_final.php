@@ -103,45 +103,46 @@ class Registrocafe_final extends Conexion
 			return false;
 		}
 	}
-	//ahora incluiremos una cafe_final//
+	
 	function agregarcafe_final()
-	{
-		$co = $this->conecta();
+	{$co = $this->conecta();
 		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	
 		try {
-			// Obtener el último id_cafe_tostado
-			$stmt = $co->prepare("SELECT MAX(id_cafe_tostado) AS ultimo_id FROM cafe_tostado");
-			$stmt->execute();
-			$resultado = $stmt->fetch(PDO::FETCH_ASSOC);
-			$ultimoIdCafeTostado = $resultado['ultimo_id'];
+			
 	
-			// Insertar en cafe_final
-			$stmt = $co->prepare("INSERT INTO cafe_final(
-				idcafe_tostado,
-				cantidad_paquetes,
-				fecha_empaquetado,
-				id_bulto,
-				estado) VALUES (
-					:ultimoIdCafeTostado,
-					:cantidadPaquetes,
-					NOW(),
-					:idBulto,
-					1
-				)");
+			// Insertar en la tabla cafe_final
+			$sql ="INSERT INTO cafe_final (
+							   idcafe_tostado, 
+							   cantidad_paquetes, 
+							   fecha_empaquetado, 
+							   id_bulto, 
+							   estado
+				)  VALUES (
+						:idcafe_tostado, 
+						:cantidad_paquetes, 
+						NOW(), 
+						:id_bulto, 
+						1
+						)";
+
+			$stmt= $co->prepare($sql);
+
+			$stmt->bindParam(':idcafe_tostado', $this->idcafe_tostado, PDO::PARAM_INT);
+			$stmt->bindParam(':cantidad_paquetes', $this->cantidad_paquetes, PDO::PARAM_INT);
+			$stmt->bindParam(':id_bulto', $this->idcafe_tostado, PDO::PARAM_INT);
 	
-			$stmt->bindParam(':ultimoIdCafeTostado', $ultimoIdCafeTostado, PDO::PARAM_INT);
-			$stmt->bindParam(':cantidadPaquetes', $this->cantidad_paquetes, PDO::PARAM_INT);
-			$stmt->bindParam(':idBulto', $ultimoIdCafeTostado, PDO::PARAM_INT);
-	
+			// Ejecutar la consulta
 			$stmt->execute();
 	
 			return "Registro de café final exitoso";
 		} catch (Exception $e) {
-			return $e->getMessage();
+			return "Error: " . $e->getMessage();
 		}
+		
 	}
 	
+	
+
 
 	function modificarcafe_final()
 	{

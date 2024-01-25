@@ -180,7 +180,7 @@ class Registromateria_prima extends Conexion
 				$stmtQuintal2->execute();
 			}
 
-			return "Registro incluido";
+			return "Cantidad";
 		} catch (Exception $e) {
 			return $e->getMessage();
 		}
@@ -376,7 +376,7 @@ class Registromateria_prima extends Conexion
 						where
 						idcompra = '$this->idcompra1'
 						");
-			return "Registro Eliminado";
+			return "La entrada fue eliminada";
 		} catch (Exception $e) {
 			return $e->getMessage();
 		}

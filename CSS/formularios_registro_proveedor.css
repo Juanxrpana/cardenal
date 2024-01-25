@@ -21,8 +21,6 @@
     }
     
     form {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
         gap: 20px;
     }
     
@@ -39,7 +37,7 @@
         padding-top: 15px;
         padding-bottom: 15px;
         display: grid;
-        grid-template-columns: auto auto;
+        grid-template-columns: 200px 250px 200px 250px;
         gap: 25px;
     }
     
@@ -95,12 +93,19 @@
     .formulario__mensaje-exito {
         display: none;
     }
-    
-    .botonera {
+    /*    .botonera {
         display: flex;
         justify-content: space-between;
         padding: 1%;
         flex-direction: row;
+    } */
+    
+    .formulario__grupo-btn-enviar {
+        text-align: center;
+    }
+    
+    #incluir {
+        width: 200px;
     }
     
     select {

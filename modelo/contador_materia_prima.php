@@ -11,10 +11,11 @@
     $obj= new Registromateria_prima();
     $obj->contador_total_materia_prima();
     $datos=$obj->mostrar_contador();
+    $obj->inactivadormateria_prima();
 
 
     
-    echo "contador de materia prima: ".$datos. "/2.000 QUINTALES";
+    echo $datos;
  
 ?>
 

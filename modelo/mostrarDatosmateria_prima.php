@@ -11,7 +11,7 @@
     $obj= new Registromateria_prima();
     $datos=$obj->mostrarmateria_prima();
 
-    $tablamateria_prima='<table class="table table-striped table-hover" id="tmateria_prima">
+    $tablamateria_prima='<table class="table table-striped table-hover" id="tabla_materia_prima">
                      <thead>
                              <tr>
                                 <th scope="col">Indentificación</th>
