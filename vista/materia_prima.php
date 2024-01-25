@@ -98,7 +98,7 @@
                 <div class="tablaDatosmateria_prima" id="tablaDatosmateria_prima"></div>
             </div>
 
-            <div id="ejemplo" class="ejemplo"></div>
+            <button type="button" class="btn btn-danger" id="imprimir" name="imprimir">IMPRIMIR</button>
 
 
 

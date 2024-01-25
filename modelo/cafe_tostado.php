@@ -251,16 +251,7 @@ function modificarcafe_tostado()
 
 	
 
-	public function inactivadorcafe_tostado()
-	{
-		$co = $this->conecta();
-		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = $co->query("
-						UPDATE cafe_tostado
-						SET estado = 0
-						WHERE estado = 1;
-						");	
-	}
+	
 	public function mostrarcafe_tostado()
 	{
 
@@ -290,5 +281,36 @@ function modificarcafe_tostado()
 		} catch (Exception $e) {
 			return $e->getMessage();
 		}
+	}
+
+	public function inactivadorcafe_tostado()
+	{
+		$co = $this->conecta();
+		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$sql = $co->query("
+						UPDATE cafe_tostado
+						SET estado = 0
+						WHERE estado = 1;
+						");	
+	}
+
+	public function descontador_total_cafe_tostado()
+	{
+		$co = $this->conecta();
+		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$sql = $co->query("
+		DELIMITER //
+
+		CREATE TRIGGER actualizar_total_cafe_despues_insert
+		AFTER INSERT ON cafe_final
+		FOR EACH ROW
+		BEGIN
+			-- Actualizar el total en total_cafe donde id_total_cafe = 2 a 0
+			UPDATE total_cafe SET total = 0 WHERE id_total_cafe = 2;
+		END;
+		
+		//
+		DELIMITER ;
+						");
 	}
 }

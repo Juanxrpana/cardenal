@@ -133,6 +133,7 @@ class Registrocafe_final extends Conexion
 	
 			// Ejecutar la consulta
 			$stmt->execute();
+			
 	
 			return "Registro de café final exitoso";
 		} catch (Exception $e) {
@@ -190,7 +191,7 @@ class Registrocafe_final extends Conexion
 	}
 
 
-	public function borrarcafe_final()
+	/* public function borrarcafe_final()
 	{
 		$co = $this->conecta();
 		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -204,5 +205,5 @@ class Registrocafe_final extends Conexion
 		} catch (Exception $e) {
 			return $e->getMessage();
 		}
-	}
+	} */
 }

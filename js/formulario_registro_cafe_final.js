@@ -6,35 +6,45 @@ $(document).ready(function() {
 });
 
 
-function incluir_final(valor) {
+function incluir_final(boton) {
 
     var cantidad = document.getElementById('cantidad').innerText;
     var cantidad_paquetes = (parseFloat(cantidad) * 37) / 5;
     var cantidad_paquetesredondeado = Math.round(cantidad_paquetes, 2);
-    var idcafe_tostado = valor;
+
+    var idcafe_tostado = boton.getAttribute('data-id');
+
     var datos = new FormData();
     datos.append('accion', 'incluir');
     datos.append('idcafe_tostado', idcafe_tostado); //toma el id de la tabla
     datos.append('cantidad_paquetes', cantidad_paquetes);
-    console.log(valor);
+
+    console.log(idcafe_tostado);
     console.log("cantidad" + cantidad);
     console.log("Cantidad Paquetes: " + cantidad_paquetes);
     console.log("Cantidad Paquetesredondeado: " + cantidad_paquetesredondeado);
 
+    var elementoTexto = document.createElement('span');
+    elementoTexto.className = 'finalizado';
+    elementoTexto.setAttribute('data-id', idcafe_tostado);
+    elementoTexto.textContent = 'Finalizado';
+
+    boton.parentNode.replaceChild(elementoTexto, boton);
     enviaAjax(datos, 'incluir');
+    /* descontador_cafe_tostado(); */
 
 
 }
 
 
-function borrarcafe_tostado(valor) {
+/* function borrarcafe_tostado(valor) {
     var datos = new FormData();
     datos.append('accion', 'eliminar');
     datos.append('idcafe_tostado', valor);
     enviaAjax(datos, 'eliminar');
 
 
-}
+} */
 
 function modificarDatos(valor) {
     var datos = new FormData();
@@ -140,9 +150,9 @@ function mostrarDatoscafe_tostado_final() {
     });
 }
 
-/* function mostrarcontador() {
-    $.ajax({ url: './Modelo/contador_cafe_tostado.php' }).done(function(r) {
-        console.log("Mostrando contador satisfactoriamente");
-        $('#contador_cafe_tostado').html(r);
+
+function descontador_cafe_tostado() {
+    $.ajax({ url: './Modelo/descontador_cafe_tostado.php' }).done(function(r) {
+        console.log("cafe tostado a 0");
     });
-} */
+}

@@ -36,7 +36,7 @@
                                 <td>'.$value['nivel_tostado'].'</td>
                                 <td>'.$value['estado'].'</td>
                                 <td>                              
-                                <a class="btn btn-success" id="incluir_final" btn" data-id="'.$value['idcafe_tostado'].'" onclick="incluir_final('.$value['idcafe_tostado'].')">Añadir</a>
+                                <a class="btn btn-success" id="incluir_final" btn" data-id="'.$value['idcafe_tostado'].'" onclick="incluir_final(this)">Añadir</a>
                                 </td>
                                 
                                
