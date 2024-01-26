@@ -18,22 +18,24 @@
 <body>
 <div class="todo">
     <div class="main--content">
-        <div class="header--wrapper">
-            <div class="header--titulo" id="hola">
-                <span>Registro y control</span>
-                <h2>Proveedores</h2>
-            </div>
-            <div class="user--info">
-                <span><i class="fa-solid fa-magnifying-glass" style="color: #212121;"></i></span>
-                <input class="search--box" type="text" placeholder="texto">
-            </div>
-        </div>
-        <div class="contenedor--tarjetas">
-            <h3 class="main--titulo">
-                Registro Proveedor
-            </h3>
-            <form method="POST" class="formulario" id="formulario">
+
+    <!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="false" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Proveedores</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+
+      <form method="POST" class="formulario" id="formulario">
                 <input type="text" name="accion" id="accion" style="display:none" />
+                <input type="text" name="id_prov" id="id_prov" style="display:none" />
                 <!-- Grupo: identificacion -->
                 <div class="formulario__grupo" id="grupo__identificacion">
                     <label for="identificacion" class="formulario__label">Identificacion</label>
@@ -101,10 +103,33 @@
                 </div>
 
                 <div class="formulario__grupo formulario__grupo-btn-enviar">
-                    <button type="button" class="btn btn-dark" id="incluir" name="incluir">INCLUIR</button>
                     <p class="formulario__mensaje-exito" id="formulario__mensaje-exito">Formulario enviado exitosamente!</p>
                 </div>
             </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-dark" id="incluir" name="incluir">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+        <div class="header--wrapper">
+            <div class="header--titulo" id="hola">
+                <span>Registro y control</span>
+                <h2>Proveedores</h2>
+            </div>
+            
+        </div>
+        <div class="contenedor--tarjetas">
+            <h3 class="main--titulo">
+                Registro Proveedor
+            </h3>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" id="nuevo" data-bs-target="#staticBackdrop">
+  Nuevo Registro
+</button>
+
+            
 
 
 

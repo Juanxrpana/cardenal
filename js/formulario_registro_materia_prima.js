@@ -4,13 +4,6 @@ $(document).ready(function() {
     llenarLista();
     llenar_contador_total();
 
-
-
-
-
-
-
-
     $("#incluir").on("click", function() {
         var datos = new FormData();
         datos.append('accion', 'incluir');
@@ -24,6 +17,8 @@ $(document).ready(function() {
             if (validarselect()) {
                 // Si todos los campos son válidos, envía los datos al servidor
                 enviaAjax(datos, 'incluir');
+                enviaAjax_imprimir(datos, 'generar_individual');
+
             } else {
                 Swal.fire({
                     icon: 'warning',
@@ -33,22 +28,25 @@ $(document).ready(function() {
             }
         } else {
             Swal.fire({
-                icon: 'error',
+                icon: 'warning',
                 title: 'Error en almacén',
-                text: 'El almacén no tiene capacidad para recibir esta cantidad de materia prima. Intente con una cantidad menor.'
+                text: 'El almacén no tiene capacidad para recibir esta cantidad de materia prima. Debe vaciar almacén.'
             });
         }
-        /*  if (validarSuma() && validarselect()) {
-             // Si todos los campos son válidos, envía los datos al servidor
-             enviaAjax(datos, 'incluir');
-         } else {
-             Swal.fire({
-                 icon: 'error',
-                 title: 'Error',
-                 text: 'Hay un error en los datos. Almacén lleno'
-             });
-         } */
     });
+
+    $("#incluir").on("click", function() {
+        var datos = new FormData();
+        datos.append('accion', 'generar_individual');
+        datos.append('proveedor', $("#proveedor").val());
+        datos.append('idcompra', idcompra);
+        enviaAjax_imprimir(datos, 'generar_individual');
+        //imprime
+
+
+    });
+
+
 
 
 
@@ -64,7 +62,7 @@ function validarSuma() {
     if (total > 2000) {
         // Utilizar SweetAlert para mostrar el mensaje
         Swal.fire({
-            icon: 'error',
+            icon: 'warning',
             title: 'Error',
             text: 'Ya hay 2000 quintaleses. Por favor, verifica la información.',
         });
@@ -131,7 +129,7 @@ function enviaAjax(datos, accion) {
 
                 Swal.fire({
                     title: 'Cantidad registrada exitosamente',
-                    text: respuesta,
+                    text: "",
                     icon: 'success',
                     timer: 4000, // Establece el tiempo en milisegundos (5 segundos en este caso)
 
@@ -147,8 +145,8 @@ function enviaAjax(datos, accion) {
         error: function() {
 
             Swal.fire({
-                title: 'Error al ingresar el proveedor',
-                text: 'Hubo un problema al registrar el proveedor.',
+                title: 'Error al ingresar la materia primar',
+                text: 'Hubo un problema al registrar la materia primar.',
                 icon: 'error',
                 timer: 4000, // Establece el tiempo en milisegundos (5 segundos en este caso)
                 showConfirmButton: false // Oculta el botón "Aceptar"
@@ -248,9 +246,62 @@ function mostrarDatosmateria_prima() {
 
 }
 
+
+
 function llenar_contador_total() {
     $.ajax({ url: './Modelo/contador_materia_prima.php' }).done(function(r) {
         console.log("Mostrando contador satisfactoriamente");
         $('#contador_materia_prima').html(r);
+    });
+}
+
+
+
+
+function enviaAjax_imprimir(datos, accion) {
+    $.ajax({
+        async: true,
+        url: '', //la pagina a donde se envia por estar en mvc, se omite la ruta ya que siempre estaremos en la misma pagina
+        type: 'POST', //tipo de envio 
+        contentType: false,
+        data: datos,
+        processData: false,
+        cache: false,
+        success: function(respuesta) {
+            //si resulto exitosa la transmision
+            if (accion == "consultar") {
+                $("#proveedor").html(respuesta);
+            } else {
+
+                console.log("imprimir");
+                Swal.fire({
+                    title: 'Proveedor ingresado exitosamente',
+                    text: respuesta,
+                    icon: 'success',
+                    timer: 4033330, // Establece el tiempo en milisegundos (5 segundos en este caso)
+
+                }).then((result) => {
+                    if (result.dismiss === Swal.DismissReason.timer) {
+                        // Esto se ejecutará después de que se cierre el mensaje automáticamente
+                        console.log('Mensaje modal cerrado');
+                    }
+                });
+
+            }
+        },
+        error: function() {
+            Swal.fire({
+                title: 'Error al ingresar el proveedor',
+                text: 'Hubo un problema al registrar el proveedor.',
+                icon: 'error',
+                timer: 4000, // Establece el tiempo en milisegundos (5 segundos en este caso)
+                showConfirmButton: false // Oculta el botón "Aceptar"
+            }).then((result) => {
+                if (result.dismiss === Swal.DismissReason.timer) {
+                    // Esto se ejecutará después de que se cierre el mensaje automáticamente
+                    console.log('Mensaje modal de error cerrado');
+                }
+            });
+        }
     });
 }

@@ -1,5 +1,5 @@
 <?php
-
+ob_start();
     
     if (!is_file("../modelo/materia_prima.php")){
 
@@ -17,9 +17,9 @@
                                 <th scope="col">Indentificación</th>
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Quintales</th>
-                                <th scope="col">Fecha Compra</th>
+                                <th scope="col">Fecha de Compra</th>
                                 <th scope="col">Estado</th>
-                                <th scope="col">Modificar/borrar</th>
+                               
                             </tr>
                      </thead>
                      <tbody>';
@@ -33,10 +33,7 @@
                                 <td>'.$value['total_cantidad'].'</td>
                                 <td>'.$value['fecha_compra'].'</td>
                                 <td>'.$value['estado'].'</td>
-                                <td>                              
-                                <a id="modificar" class="btn btn-success btn" data-toggle="modal" data-target="#Modalmateria_prima" data-id="'.$value['idcompra'].'"onclick="modificarDatos('.$value['idcompra'].')"><i class="fa-solid fa-user-pen"></i></a>
-                                <a class="btn btn-danger id="eliminar" btn" data-id="'.$value['idcompra'].'" onclick="borrarmateria_prima('.$value['idcompra'].')"><i class="fa-solid fa-user-xmark"></i></a>
-                                </td>
+                                
                                 
                                
                                 
@@ -45,4 +42,11 @@
     }
     echo $tablamateria_prima.$datosTablamateria_prima.'</tbody></table>';
 ?>
+ 
+<?php
+$html=ob_get_clean();
+echo $html;
+?>
+
+
 

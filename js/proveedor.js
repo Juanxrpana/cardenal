@@ -6,11 +6,51 @@ $(document).ready(function() {
     llenarLista();
     mostrarDatosproveedor();
 
+    $('#nuevo').click(function() {
+        console.log("dsdsd");
+       
+            $('#staticBackdropLabel').text('Incluir Nuevo Proveedor'); // Reemplaza 'Nuevo Título' con el texto que desees
+       
+        // Obtiene el valor de la columna 'identificacion' de la fila clicada
+      
+        $('#accion').val("incluir");
+
+    });
+
     $("#incluir").on("click", function() {
+        console.log("oke");
+
+        var condicional = $("#accion").val();
+        if (condicional == "incluir"){
+            incluirdatos();
+        }
+        else if(condicional == "modificar"){
+            modificarDatos2()
+        }
+        
+    });
 
 
-        var datos = new FormData();
-        datos.append('accion', 'incluir');
+
+});
+
+
+
+
+function borrarproveedor(valor) {
+    var datos = new FormData();
+    datos.append('accion', 'eliminar');
+    datos.append('id_prov', valor);
+    enviaAjax(datos, 'eliminar');
+}
+
+function modificarDatos(){
+console.log("oskadiojsd");
+};
+
+function incluirdatos(){
+    var datos = new FormData();
+        datos.append('accion', $("#accion").val());
         datos.append('cedula_fiscal_id', $("#cedula_fiscal_id").val());
         datos.append('identificacion', $("#identificacion").val());
         datos.append('telefono', $("#telefono").val());
@@ -33,27 +73,13 @@ $(document).ready(function() {
             });
         }
 
-    });
+};
 
-
-
-});
-
-
-
-
-function borrarproveedor(valor) {
-    var datos = new FormData();
-    datos.append('accion', 'eliminar');
-    datos.append('id_prov', valor);
-    enviaAjax(datos, 'eliminar');
-}
-
-function modificarDatos(valor) {
+function modificarDatos2() {
 
     var datos = new FormData();
-    datos.append('accion', 'modificar');
-    datos.append('id_prov', valor);
+    datos.append('accion', $("#accion").val());
+    datos.append('id_prov', $("#id_prov").val());
     datos.append('cedula_fiscal_id', $("#cedula_fiscal_id").val());
     datos.append('identificacion', $("#identificacion").val());
     datos.append('telefono', $("#telefono").val());
@@ -98,7 +124,33 @@ function enviaAjax(datos, accion) {
             //si resulto exitosa la transmision
             if (accion == "consultar") {
                 $("#cedula_fiscal_id").html(respuesta);
-            } else {
+            } else if(accion=='consultatr'){
+                lee = JSON.parse(respuesta);
+
+               //console.log(lee['resultado']);
+                if(lee['resultado']=='encontro'){
+                      //habilita los botones para poder eliminar y modificar
+
+                      botonOn();
+                     $("#incluir").prop('disabled', true);
+                     $("#apellidos").val(lee[0].apellidos);
+                     $("#nombres").val(lee[0].nombres);
+                     $("#fechadenacimiento").val(lee[0].fechadenacimiento);
+                     $("#sexo").val(lee[0].sexo);
+                     $("#correo").val(lee[0].correo);
+                     $("#telefono").val(lee[0].telefono);
+                     $("#cargo").val(lee[0].cargo);
+
+                 }
+                else if(lee['resultado']=='noencontro'){
+
+                }
+                else {
+                    muestraMensaje(lee['resultado']);
+                }
+
+
+            }else {
 
                 mostrarDatosproveedor();
 
@@ -143,64 +195,7 @@ function enviaAjax(datos, accion) {
 
 }
 
-function enviaAjax(datos, accion) {
-    $.ajax({
-        async: true,
-        url: '', //la pagina a donde se envia por estar en mvc, se omite la ruta ya que siempre estaremos en la misma pagina
-        type: 'POST', //tipo de envio 
-        contentType: false,
-        data: datos,
-        processData: false,
-        cache: false,
-        success: function(respuesta) {
 
-            //si resulto exitosa la transmision
-            if (accion == "consultar") {
-                $("#cedula_fiscal_id").html(respuesta);
-            } else {
-
-                mostrarDatosproveedor();
-
-
-
-                $("#hola").html(respuesta);
-                Swal.fire({
-                    title: 'Eliminado exitosamente',
-                    text: respuesta,
-                    icon: 'success',
-                    timer: 4000, // Establece el tiempo en milisegundos (5 segundos en este caso)
-
-                }).then((result) => {
-                    if (result.dismiss === Swal.DismissReason.timer) {
-                        // Esto se ejecutará después de que se cierre el mensaje automáticamente
-                        console.log('Mensaje modal cerrado');
-                    }
-                });
-
-            }
-        },
-        error: function() {
-
-            Swal.fire({
-                title: 'Error en los datos',
-                text: 'Hubo un problema al eliminar los datos.',
-                icon: 'error',
-                timer: 4000, // Establece el tiempo en milisegundos (5 segundos en este caso)
-                showConfirmButton: false // Oculta el botón "Aceptar"
-            }).then((result) => {
-                if (result.dismiss === Swal.DismissReason.timer) {
-                    // Esto se ejecutará después de que se cierre el mensaje automáticamente
-                    console.log('Mensaje modal de error cerrado');
-                }
-            });
-
-
-        }
-
-    });
-
-
-}
 
 function llenarLista() {
     var datos = new FormData();
@@ -216,11 +211,27 @@ function mostrarDatosproveedor() {
         // Cuando se recibe la respuesta de la petición AJAX, se agrega la tabla al elemento con el ID 'tablaDatosDatosProveedor'
         /*  console.log("Mostrando data satisfactoriamente"); */
         $('#tablaDatosProveedor').html(r);
-        $('#tproveedor').DataTable({
-            "language": {
-                "url": "./js/es-ES.json"
-            }
+        $('tr').click(function() {
+            console.log("dsdsd");
+            // Obtiene el valor de la columna 'identificacion' de la fila clicada
+            var identificacion = $(this).find('td:eq(1)').text();
+            var nombre = $(this).find('td:eq(2)').text();
+            var finca = $(this).find('td:eq(4)').text();
+            var idval = $(this).find('td:eq(0)').text();
+    
+            // Coloca el valor en el input con id 'inputIdentificacion'
+            $('#identificacion').val(identificacion);
+            $('#nombre_prov').val(nombre);
+            $('#nombre_finca').val(finca);
+            $('#id_prov').val(idval);
+            $('#staticBackdrop').modal('show');
+            $('#accion').val("modificar");
+            $('#staticBackdropLabel').text('Modificar Proveedor'); 
+
         });
+           
+            
+        
 
     });
 }
@@ -276,7 +287,10 @@ function validarenvio() {
             value.classList.remove("invalido");
             value.nextElementSibling.classList.remove("error");
             value.nextElementSibling.innerText = "";
-
+            var datos = new FormData();
+		    datos.append('accion','consultatr');
+			datos.append('cedula',$(this).val());
+			enviaAjax(datos,'consultatr');
         }
     }
 

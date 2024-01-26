@@ -1,6 +1,9 @@
 $(document).ready(function() {
     mostrarDatoscafe_tostado_final();
     mostrarDatoscafe_final();
+    mostrarcontador();
+    mostrarcontador_materia_prima();
+
 
 
 });
@@ -31,20 +34,19 @@ function incluir_final(boton) {
 
     boton.parentNode.replaceChild(elementoTexto, boton);
     enviaAjax(datos, 'incluir');
-    /* descontador_cafe_tostado(); */
+    descontador_cafe_tostado();
+    mostrarDatoscafe_final();
 
 
 }
 
 
-/* function borrarcafe_tostado(valor) {
+function borrarcafe_final(valor) {
     var datos = new FormData();
     datos.append('accion', 'eliminar');
-    datos.append('idcafe_tostado', valor);
+    datos.append('id_cafe_final', valor);
     enviaAjax(datos, 'eliminar');
-
-
-} */
+}
 
 function modificarDatos(valor) {
     var datos = new FormData();
@@ -154,5 +156,19 @@ function mostrarDatoscafe_tostado_final() {
 function descontador_cafe_tostado() {
     $.ajax({ url: './Modelo/descontador_cafe_tostado.php' }).done(function(r) {
         console.log("cafe tostado a 0");
+    });
+}
+
+function mostrarcontador() {
+    $.ajax({ url: './Modelo/contador_cafe_tostado.php' }).done(function(r) {
+        console.log("Mostrando contador satisfactoriamente");
+        $('#contador_cafe_tostado').html(r);
+    });
+}
+
+function mostrarcontador_materia_prima() {
+    $.ajax({ url: './Modelo/contador_materia_prima.php' }).done(function(r) {
+        console.log("Mostrando contador satisfactoriamente");
+        $('#contador_materia_prima').html(r);
     });
 }

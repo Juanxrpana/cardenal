@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="CSS/bootstrap.css">
     <link rel="stylesheet" href="CSS/formularios_registro_materia_prima.css">
     <link rel="stylesheet" href="./CSS/style.css">
+    <link rel="stylesheet" href="./CSS/modal.css">
     <link href="./CSS/datatables.min.css" rel="stylesheet">
     <!--     <script src="https://kit.fontawesome.com/ecd5745f4f.js" crossorigin="anonymous"></script>
  -->
@@ -50,8 +51,19 @@
                             <select name="proveedor" id="proveedor">
                                 <option value="" selected>Proveedor</option>
                             </select>
-                            <button type="button" id="nuevo_proveedor" class="btn btn-success">agregar nuevo proveedor<h4 class="icon-user-plus"></h4></button>
+                            <div><a href="?pagina=proveedor" type="button" id="nuevo_proveedor" class="btn btn-success">Proveedor<h4 class="icon-user-plus"></h4></a>
+                            <!-- Botón para abrir el modal -->
+                            <button id="openModalBtn" class="btn btn-success">Lista proveedores<h4 class="icon-search"></h4></button>
 
+                            <!-- El modal -->
+                            <div id="myModal" class="modal">
+                                <div class="modal-content">
+                                    <span class="close">&times;</span>
+                                    <h2>Lista de proveedores</h2>
+                                    <div class="tablaDatosProveedor" id="tablaDatosProveedor"></div>
+                                </div>
+                            </div>
+                            </div>
 
                         </div>
                         <h3>Fecha de recepción</h3>
@@ -112,6 +124,7 @@
         <script src="./js/datatables.min.js"></script>
         <script src="./js/bootstrap.bundle.js"></script>
         <script src="./js/formulario_registro_materia_prima.js"></script>
+        <script src="./js/modal.js"></script>
         <script src="./js/sweetalert2.js"></script>
 </body>
 

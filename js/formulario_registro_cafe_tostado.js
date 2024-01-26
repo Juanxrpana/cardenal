@@ -19,7 +19,7 @@ $(document).ready(function() {
             Swal.fire({
                 icon: 'warning',
                 title: 'Error',
-                text: 'No se pueden tostar mas de 5 quintales a la vez'
+                text: 'No se pueden tostar mas de 5 quintales a la vez. No se tostaran menos de 5 quintales a la vez'
             });
         }
     });
@@ -31,12 +31,12 @@ function validarSuma() {
     var contador = parseInt(document.getElementById('contador_cafe_tostado').innerText);
     var cantidad1 = parseInt(document.getElementById('cafe-input').value) || 0;
     var total = cantidad1 + contador;
-    if (total > 5) {
+    if (total != 5) {
         // Utilizar SweetAlert para mostrar el mensaje
         Swal.fire({
             icon: 'warning',
             title: 'Error',
-            text: 'No se pueden tostar mas de 5 quintales a la vez',
+            text: 'No se pueden tostar mas de 5 quintales a la vez. No se tostaran menos de 5 quintales a la vez',
         });
         return false;
     } else {
@@ -50,7 +50,7 @@ function borrarcafe_tostado(valor) {
     var datos = new FormData();
     datos.append('accion', 'eliminar');
     datos.append('idcafe_tostado', valor);
-    enviaAjax2(datos, 'eliminar');
+    /* enviaAjax2(datos, 'eliminar'); */
 
 
 }

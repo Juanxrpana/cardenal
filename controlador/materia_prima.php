@@ -54,6 +54,17 @@ require_once("modelo/".$pagina.".php");
                 $o->set_proveedor($_POST['proveedor']);
 				echo  $o->agregarmateria_prima();
 			  }
+			  if ($accion == 'generar_individual') {
+
+
+				//bien si estamos aca es porque existe la vista y la clase
+				//por lo que lo primero que debemos hace es realizar una instancia de la clase
+				//instanciar es crear una variable local, que contiene los metodos de la clase
+				//para poderlos usar
+				$o->set_idcompra1($_POST['idcompra']);
+				$o->set_proveedor($_POST['proveedor']);
+				$o->generar_reporte_compra_individual();
+			}
 			  elseif($accion=='modificar'){
 
                 $o->set_idcompra1($_POST['idcompra']);

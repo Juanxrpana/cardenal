@@ -314,7 +314,7 @@ class Registroproveedor extends Conexion
                         finca.estado = '$this->estado',
                         finca.municipio = '$this->municipio',
                         finca.parroquia = '$this->parroquia',
-                        finca.ciudad = '$this->ciudad',
+                        finca.ciudad = '$this->ciudad'
                         
                     WHERE
                         proveedor.id_prov = '$this->id_prov'

@@ -21,7 +21,8 @@
             <span>Registro y control</span>    
             <h2>Café Final</h2>
             </div>
-            <div id="contador_cafe_final" class="contador_cafe_final"></div>
+            <div class="contador_texto" id="contador_texto"><h6>Contador de café tostado: </h6><div id="contador_cafe_tostado" class="contador_cafe_tostado"></div><h6>/5</h6></div>
+            <div class="contador_texto" id="contador_texto"><h6>Contador de materia prima: </h6><div id="contador_materia_prima" class="contador_materia_prima"></div><h6>/2000</h6></div>
         </div>
         
         <div class="contenedor--tarjetas">

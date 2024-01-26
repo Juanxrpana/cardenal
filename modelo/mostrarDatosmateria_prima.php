@@ -34,8 +34,8 @@
                                 <td>'.$value['fecha_compra'].'</td>
                                 <td>'.$value['estado'].'</td>
                                 <td>                              
-                                <a id="modificar" class="btn btn-success btn" data-toggle="modal" data-target="#Modalmateria_prima" data-id="'.$value['idcompra'].'"onclick="modificarDatos('.$value['idcompra'].')"><i class="fa-solid fa-user-pen"></i></a>
-                                <a class="btn btn-danger id="eliminar" btn" data-id="'.$value['idcompra'].'" onclick="borrarmateria_prima('.$value['idcompra'].')"><i class="fa-solid fa-user-xmark"></i></a>
+                                <a id="modificar" class="btn btn-success btn" data-toggle="modal" data-target="#Modalmateria_prima" data-id="'.$value['idcompra'].'"onclick="modificarDatos('.$value['idcompra'].')"><span class="icon-pencil"></span></a>
+                                <a class="btn btn-danger id="eliminar" btn" data-id="'.$value['idcompra'].'" onclick="borrarmateria_prima('.$value['idcompra'].')"><span class="icon-trashcan"></span></a>
                                 </td>
                                 
                                

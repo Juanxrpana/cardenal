@@ -19,32 +19,73 @@ function mostrarproveedor() {
 
 function mostrarmateria_prima() {
     // La función realiza una petición AJAX al archivo mostrarmateria_prima.php
-    console.log("entrando mostrando data materia_prima");
+    console.log("entrando mostrando data materia_prima_reporte");
 
-    $.ajax({ url: './modelo/mostrarDatosmateria_prima.php' }).done(function(r) {
+    $.ajax({ url: './modelo/mostrarDatosmateria_prima_reporte.php' }).done(function(r) {
         // Cuando se recibe la respuesta de la petición AJAX, se agrega la tabla al elemento con el ID 'tablaDatosmateria_prima'
         console.log("Mostrando data materia_prima satisfactoriamente");
         $('#tablaDatosmateria_prima').html(r);
     });
 }
 
-$(document).on('click', '.borrar', function() {
-    var rif = $(this).data("rif");
-    if (confirm("Estas seguro de que quieres borrar este registro?:" + rif)) {
-        console.log("entrando a borrar parte ajax");
-        $.ajax({
-            method: "POST",
-            url: "",
-            data: {
-                accion: "borrar",
-                rif: rif
-            },
+function generar_reporte_compra(boton) {
+    var idcompra = boton.getAttribute('data-id');
+    var proveedor = document.getElementById('datos_prov_identificacion').innerText;
 
-            success: function(data) {
-                console.log("esto es data: " + data);
-                /* mostrarproveedor(); */
+    var datos = new FormData();
+    datos.append('accion', 'generar');
+    datos.append('idcompra', idcompra);
+    datos.append('proveedor', proveedor);
+    console.log(proveedor);
+
+    enviaAjax(datos, 'generar');
+
+}
+
+function enviaAjax(datos, accion) {
+    $.ajax({
+        async: true,
+        url: '', //la pagina a donde se envia por estar en mvc, se omite la ruta ya que siempre estaremos en la misma pagina
+        type: 'POST', //tipo de envio 
+        contentType: false,
+        data: datos,
+        processData: false,
+        cache: false,
+        success: function(respuesta) {
+            //si resulto exitosa la transmision
+            if (accion == "consultar") {
+                $("#proveedor").html(respuesta);
+            } else {
+
+                $("#hola").html(respuesta);
+                Swal.fire({
+                    title: 'Proveedor ingresado exitosamente',
+                    text: respuesta,
+                    icon: 'success',
+                    timer: 4033330, // Establece el tiempo en milisegundos (5 segundos en este caso)
+
+                }).then((result) => {
+                    if (result.dismiss === Swal.DismissReason.timer) {
+                        // Esto se ejecutará después de que se cierre el mensaje automáticamente
+                        console.log('Mensaje modal cerrado');
+                    }
+                });
+
             }
-        })
-
-    }
-})
+        },
+        error: function() {
+            Swal.fire({
+                title: 'Error al ingresar el proveedor',
+                text: 'Hubo un problema al registrar el proveedor.',
+                icon: 'error',
+                timer: 4000, // Establece el tiempo en milisegundos (5 segundos en este caso)
+                showConfirmButton: false // Oculta el botón "Aceptar"
+            }).then((result) => {
+                if (result.dismiss === Swal.DismissReason.timer) {
+                    // Esto se ejecutará después de que se cierre el mensaje automáticamente
+                    console.log('Mensaje modal de error cerrado');
+                }
+            });
+        }
+    });
+}

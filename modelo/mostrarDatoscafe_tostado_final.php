@@ -9,7 +9,7 @@
 
     require_once ("../modelo/cafe_tostado.php");
     $obj= new Registrocafe_tostado();
-    $datos=$obj->mostrarcafe_tostado();
+    $datos=$obj->mostrarcafe_tostado_final();
 
     $tablacafe_tostado='<table class="table table-striped table-hover" id="tabla_cafe_tostado">
                      <thead>

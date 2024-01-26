@@ -35,8 +35,8 @@
                                 <td>'.$value['id_bulto'].'</td>
                                 <td>'.$value['estado'].'</td>
                                 <td>                              
-                                <a id="modificar" class="btn btn-success btn" data-toggle="modal" data-target="#Modalcafe_final" data-id="'.$value['id_cafe_final'].'"onclick="modificarDatos('.$value['id_cafe_final'].')"><i class="fa-solid fa-user-pen"></i></a>
-                                <a class="btn btn-danger id="eliminar" btn" data-id="'.$value['id_cafe_final'].'" onclick="borrarcafe_final('.$value['id_cafe_final'].')"><i class="fa-solid fa-user-xmark"></i></a>
+                                <a id="modificar" class="btn btn-success btn" data-toggle="modal" data-target="#Modalcafe_final" data-id="'.$value['id_cafe_final'].'"onclick="modificarDatos('.$value['id_cafe_final'].')"><span class="icon-pencil"></span></a>
+                                <a class="btn btn-danger id="eliminar" btn" data-id="'.$value['id_cafe_final'].'" onclick="borrarcafe_final('.$value['id_cafe_final'].')"><span class="icon-trashcan"></span></a>
                                 </td>
                                 
                                

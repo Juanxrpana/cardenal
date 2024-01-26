@@ -36,8 +36,8 @@
                                 <td>'.$value['nivel_tostado'].'</td>
                                 <td>'.$value['estado'].'</td>
                                 <td>                              
-                                <a id="modificar" class="btn btn-success btn" data-toggle="modal" data-target="#Modalcafe_tostado" data-id="'.$value['idcafe_tostado'].'"onclick="modificarDatos('.$value['idcafe_tostado'].')"><i class="fa-solid fa-user-pen"></i></a>
-                                <a class="btn btn-danger id="eliminar" btn" data-id="'.$value['idcafe_tostado'].'" onclick="borrarcafe_tostado('.$value['idcafe_tostado'].')"><i class="fa-solid fa-user-xmark"></i></a>
+                                <a id="modificar" class="btn btn-success btn" data-toggle="modal" data-target="#Modalcafe_tostado" data-id="'.$value['idcafe_tostado'].'"onclick="modificarDatos('.$value['idcafe_tostado'].')"><span class="icon-pencil"></span></a>
+                                <a class="btn btn-danger id="eliminar" btn" data-id="'.$value['idcafe_tostado'].'" onclick="borrarcafe_tostado('.$value['idcafe_tostado'].')"><span class="icon-trashcan"></span></a>
                                 </td>
                                 
                                

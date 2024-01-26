@@ -266,6 +266,21 @@ function modificarcafe_tostado()
 	}
 
 
+	public function mostrarcafe_tostado_final()
+	{
+
+
+		$co1 = $this->conecta();
+		$co1->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+		$sql = $co1->query("SELECT *
+		FROM `cafe_tostado` 
+		Where estado= 1");
+
+		return $sql;
+	}
+
+
 
 	public function borrarcafe_tostado()
 	{

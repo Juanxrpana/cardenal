@@ -33,7 +33,7 @@
                 </a>
             </li>
             <li>
-                <a href="?pagina=consulta">
+                <a href="?pagina=reporte">
                 <p1 class="icon-file-text2"></p1>
                     <span>Reportes</span>
                 </a>

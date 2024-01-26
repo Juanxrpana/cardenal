@@ -31,8 +31,8 @@ foreach ($datos as $key => $value) {
                                 <td>' . $value['ubicacion'] . '</td>
                                 <td>' . $value['nombre_finca'] . '</td>
                                 <td>                              
-                                <a id="modificar" class="btn btn-success btn" data-id="' . $value['id_prov'] . '" onclick="modificarDatos(' . $value['id_prov'] . ')"><i class="fa-solid fa-user-pen"></i></a>
-                                <a class="btn btn-danger" id="eliminar" btn" data-id="' . $value['id_prov'] . '" onclick="borrarproveedor(' . $value['id_prov'] . ')"><i class="fa-solid fa-user-xmark"></i></a>
+                                <a id="modificar" class="btn btn-success btn" data-id="' . $value['id_prov'] . '" onclick="modificarDatos(' . $value['id_prov'] . ')"><span class="icon-pencil"></span></a>
+                                <a class="btn btn-danger" id="eliminar" btn" data-id="' . $value['id_prov'] . '" onclick="borrarproveedor(' . $value['id_prov'] . ')"><span class="icon-trashcan"></span></a>
                                 </td>
                             </tr>';
 }
