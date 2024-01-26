@@ -171,12 +171,24 @@ class Registrocafe_final extends Conexion
     $co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 	$sql = $co->query("
-						INSERT INTO total_cafe (id_total_cafe, total)
-						SELECT 3, COALESCE(SUM(cantidad), 0)
-						FROM cafe_final
-						WHERE estado = 1
-						ON DUPLICATE KEY UPDATE TOTAL = VALUES(TOTAL);
+	UPDATE total_cafe
+	SET total = (SELECT COALESCE(SUM(cantidad_paquetes), 0) FROM cafe_final WHERE estado = 1)
+	WHERE id_total_cafe = 3;
+	
 						");
+	}
+
+	public function mostrar_contador_cafe_final()
+	{
+		$co = $this->conecta();
+		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		try {
+			$resultado = $co->query("SELECT total FROM total_cafe WHERE id_total_cafe = 3;");
+			$totalCafeVerde = $resultado->fetch(PDO::FETCH_ASSOC)['total'];
+			return $totalCafeVerde;
+		} catch (Exception $e) {
+			return $e->getMessage();
+		}
 	}
 
 

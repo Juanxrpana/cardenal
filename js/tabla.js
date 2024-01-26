@@ -59,7 +59,7 @@ function enviaAjax(datos, accion) {
 
                 $("#hola").html(respuesta);
                 Swal.fire({
-                    title: 'Proveedor ingresado exitosamente',
+                    title: 'Factura exitosa',
                     text: respuesta,
                     icon: 'success',
                     timer: 4033330, // Establece el tiempo en milisegundos (5 segundos en este caso)
@@ -75,9 +75,9 @@ function enviaAjax(datos, accion) {
         },
         error: function() {
             Swal.fire({
-                title: 'Error al ingresar el proveedor',
-                text: 'Hubo un problema al registrar el proveedor.',
-                icon: 'error',
+                title: 'Success',
+                text: 'Factura registrada.',
+                icon: 'success',
                 timer: 4000, // Establece el tiempo en milisegundos (5 segundos en este caso)
                 showConfirmButton: false // Oculta el botón "Aceptar"
             }).then((result) => {

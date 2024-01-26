@@ -21,10 +21,7 @@
                 <span>inicio</span>
                 <h2>Controles</h2>
             </div>
-            <div class="user--info">
-                <span><i class="fa-solid fa-magnifying-glass" style="color: #212121;"></i></span>
-                <input class="search--box" type="text" placeholder="texto">
-            </div>
+            
         </div>
         <div class="contenedor--tarjetas">
             <h3 class="main--titulo">
@@ -32,33 +29,15 @@
             </h3>
             <div class="tarjetas--wrapper">
                 <!-- aqui empiezan las tarjetas -->
-                <div class="tarjetas tarjetas--clientes">
-                    <div class="tarjetas--cabezera">
-                        <div class="ammount">
-                            <span class="titulo">
-                                <h3>PROVEEDORES</h3>
-                            </span>
-                            <span class="ammount-value" id="contador_proveedores">
-                                4
-                            </span>
-                            <span class="tarjetas--detalles">
-                                <i><a href="?pagina=consulta">VER ULTIMO REGISTRO</a></i>
-                            </span>
-                        </div>
-                    </div>
-                </div>
+                
                 <div class="tarjetas tarjetas--inventario">
                     <div class="tarjetas--cabezera">
                         <div class="ammount">
                             <span class="titulo">
                                 <h3>CAFÉ TOSTADO</h3>
                             </span>
-                            <span class="ammount-value" id="contador_cafe_tostado">
-                                4
-                            </span>
-                            <span class="tarjetas--detalles">
-                                <i><a href="?pagina=consulta">VER ULTIMO REGISTRO</a></i>
-                            </span>
+                            <div class="contador_texto_t" id="contador_texto_cafe_t"><div id="contador_cafe_tostado" class="contador_cafe_tostado"></div><h6>/5</h6></div>  
+                            
                         </div>
                     </div>
                 </div>
@@ -66,14 +45,9 @@
                     <div class="tarjetas--cabezera">
                         <div class="ammount">
                             <span class="titulo">
-                               <h3>CAFÉ FINAL</h3>
+                               <h3>CAFÉ FINAL (BULTO)</h3>
                             </span>
-                            <span class="ammount-value">
-                                4
-                            </span>
-                            <span class="tarjetas--detalles" id="contador_cafe_final">
-                              <i><a href="?pagina=consulta">VER ULTIMO REGISTRO</a></i>
-                            </span>
+                            <div class="contador_texto_f" id="contador_texto"><div id="contador_cafe_final" class="contador_cafe_final"></div><h6>/3000</h6></div>  
                         </div>
                     </div>
                 </div>
@@ -99,5 +73,7 @@
 <script src="./js/bootstrap.bundle.js"></script>
         <script src="./js/jquery-3.6.0.min.js"></script>
         <script src="./js/formulario_registro_materia_prima.js"></script>
+        <script src="./js/formulario_registro_cafe_tostado.js"></script>
+        <script src="./js/formulario_registro_cafe_final.js"></script>
         <script src="./js/sweetalert2.js"></script>
 </html>

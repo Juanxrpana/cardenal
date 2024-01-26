@@ -163,7 +163,7 @@ class reporte extends Conexion
             // Enviar el PDF al navegador del usuario
             $dompdf->stream('factura.pdf', array('Attachment' => false));
         } catch (Exception $e) {
-            echo "Error al generar la factura: " . $e->getMessage();
+            echo "Factura: " . $e->getMessage();
         }
     }
 

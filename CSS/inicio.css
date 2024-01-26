@@ -14,7 +14,21 @@ body {
 
 #contador_texto {
     display: grid;
-    grid-template-columns: 30px auto;
+    grid-template-columns: 50px auto;
+    align-items: baseline;
+    text-size-adjust: 10px;
+}
+
+.contador_texto_t {
+    display: grid;
+    grid-template-columns: 12px auto;
+    align-items: baseline;
+    text-size-adjust: 10px;
+}
+
+.contador_texto_f {
+    display: grid;
+    grid-template-columns: 1px auto;
     align-items: baseline;
     text-size-adjust: 10px;
 }
@@ -129,7 +143,8 @@ body {
 
 .tarjetas--wrapper {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    align-items: baseline;
     /*     box-shadow: 0 6px 10px -4px rgba(0, 0, 0, 0.15)
  */
 }

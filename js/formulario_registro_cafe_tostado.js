@@ -50,7 +50,7 @@ function borrarcafe_tostado(valor) {
     var datos = new FormData();
     datos.append('accion', 'eliminar');
     datos.append('idcafe_tostado', valor);
-    /* enviaAjax2(datos, 'eliminar'); */
+    enviaAjax2(datos, 'eliminar');
 
 
 }

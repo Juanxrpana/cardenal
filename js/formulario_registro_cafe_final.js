@@ -3,6 +3,7 @@ $(document).ready(function() {
     mostrarDatoscafe_final();
     mostrarcontador();
     mostrarcontador_materia_prima();
+    mostrarcontador_cafe_final();
 
 
 
@@ -33,6 +34,7 @@ function incluir_final(boton) {
     elementoTexto.textContent = 'Finalizado';
 
     boton.parentNode.replaceChild(elementoTexto, boton);
+
     enviaAjax(datos, 'incluir');
     descontador_cafe_tostado();
     mostrarDatoscafe_final();
@@ -40,6 +42,17 @@ function incluir_final(boton) {
 
 }
 
+function limite() {
+    var cafe_final = document.getElementById('cafe_final').innerText;
+    if (cafe_final == 3000) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Error',
+            text: 'No se pueden tostar mas de 5 quintales a la vez. No se tostaran menos de 5 quintales a la vez',
+        });
+    }
+    return false;
+}
 
 function borrarcafe_final(valor) {
     var datos = new FormData();
@@ -170,5 +183,12 @@ function mostrarcontador_materia_prima() {
     $.ajax({ url: './Modelo/contador_materia_prima.php' }).done(function(r) {
         console.log("Mostrando contador satisfactoriamente");
         $('#contador_materia_prima').html(r);
+    });
+}
+
+function mostrarcontador_cafe_final() {
+    $.ajax({ url: './Modelo/contador_cafe_final.php' }).done(function(r) {
+        console.log("Mostrando contador final satisfactoriamente");
+        $('#contador_cafe_final').html(r);
     });
 }
