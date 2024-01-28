@@ -8,11 +8,11 @@ $(document).ready(function() {
 
     $('#nuevo').click(function() {
         console.log("dsdsd");
-       
-            $('#staticBackdropLabel').text('Incluir Nuevo Proveedor'); // Reemplaza 'Nuevo Título' con el texto que desees
-       
+
+        $('#staticBackdropLabel').text('Incluir Nuevo Proveedor'); // Reemplaza 'Nuevo Título' con el texto que desees
+
         // Obtiene el valor de la columna 'identificacion' de la fila clicada
-      
+
         $('#accion').val("incluir");
 
     });
@@ -21,13 +21,12 @@ $(document).ready(function() {
         console.log("oke");
 
         var condicional = $("#accion").val();
-        if (condicional == "incluir"){
+        if (condicional == "incluir") {
             incluirdatos();
-        }
-        else if(condicional == "modificar"){
+        } else if (condicional == "modificar") {
             modificarDatos2()
         }
-        
+
     });
 
 
@@ -44,34 +43,34 @@ function borrarproveedor(valor) {
     enviaAjax(datos, 'eliminar');
 }
 
-function modificarDatos(){
-console.log("oskadiojsd");
+function modificarDatos() {
+    console.log("oskadiojsd");
 };
 
-function incluirdatos(){
+function incluirdatos() {
     var datos = new FormData();
-        datos.append('accion', $("#accion").val());
-        datos.append('cedula_fiscal_id', $("#cedula_fiscal_id").val());
-        datos.append('identificacion', $("#identificacion").val());
-        datos.append('telefono', $("#telefono").val());
-        datos.append('nombre_prov', $("#nombre_prov").val());
-        datos.append('nombre_finca', $("#nombre_finca").val());
-        datos.append('estado', $("#estado").val());
-        datos.append('municipio', $("#municipio").val());
-        datos.append('parroquia', $("#parroquia").val());
-        datos.append('ciudad', $("#ciudad").val());
-        datos.append('ubicacion', $("#ubicacion").val());
-        if (validarenvio() && validarselect()) {
-            // Si todos los campos son válidos, envía los datos al servidor
-            enviaAjax(datos, 'incluir');
-        } else {
-            // Muestra un mensaje de error con SweetAlert
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'Hay campos incorrectos. Por favor, verifica la información.'
-            });
-        }
+    datos.append('accion', $("#accion").val());
+    datos.append('cedula_fiscal_id', $("#cedula_fiscal_id").val());
+    datos.append('identificacion', $("#identificacion").val());
+    datos.append('telefono', $("#telefono").val());
+    datos.append('nombre_prov', $("#nombre_prov").val());
+    datos.append('nombre_finca', $("#nombre_finca").val());
+    datos.append('estado', $("#estado").val());
+    datos.append('municipio', $("#municipio").val());
+    datos.append('parroquia', $("#parroquia").val());
+    datos.append('ciudad', $("#ciudad").val());
+    datos.append('ubicacion', $("#ubicacion").val());
+    if (validarenvio() && validarselect()) {
+        // Si todos los campos son válidos, envía los datos al servidor
+        enviaAjax(datos, 'incluir');
+    } else {
+        // Muestra un mensaje de error con SweetAlert
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Hay campos incorrectos. Por favor, verifica la información.'
+        });
+    }
 
 };
 
@@ -124,33 +123,31 @@ function enviaAjax(datos, accion) {
             //si resulto exitosa la transmision
             if (accion == "consultar") {
                 $("#cedula_fiscal_id").html(respuesta);
-            } else if(accion=='consultatr'){
+            } else if (accion == 'consultatr') {
                 lee = JSON.parse(respuesta);
 
-               //console.log(lee['resultado']);
-                if(lee['resultado']=='encontro'){
-                      //habilita los botones para poder eliminar y modificar
+                //console.log(lee['resultado']);
+                if (lee['resultado'] == 'encontro') {
+                    //habilita los botones para poder eliminar y modificar
 
-                      botonOn();
-                     $("#incluir").prop('disabled', true);
-                     $("#apellidos").val(lee[0].apellidos);
-                     $("#nombres").val(lee[0].nombres);
-                     $("#fechadenacimiento").val(lee[0].fechadenacimiento);
-                     $("#sexo").val(lee[0].sexo);
-                     $("#correo").val(lee[0].correo);
-                     $("#telefono").val(lee[0].telefono);
-                     $("#cargo").val(lee[0].cargo);
+                    botonOn();
+                    $("#incluir").prop('disabled', true);
+                    $("#apellidos").val(lee[0].apellidos);
+                    $("#nombres").val(lee[0].nombres);
+                    $("#fechadenacimiento").val(lee[0].fechadenacimiento);
+                    $("#sexo").val(lee[0].sexo);
+                    $("#correo").val(lee[0].correo);
+                    $("#telefono").val(lee[0].telefono);
+                    $("#cargo").val(lee[0].cargo);
 
-                 }
-                else if(lee['resultado']=='noencontro'){
+                } else if (lee['resultado'] == 'noencontro') {
 
-                }
-                else {
+                } else {
                     muestraMensaje(lee['resultado']);
                 }
 
 
-            }else {
+            } else {
 
                 mostrarDatosproveedor();
 
@@ -218,7 +215,7 @@ function mostrarDatosproveedor() {
             var nombre = $(this).find('td:eq(2)').text();
             var finca = $(this).find('td:eq(4)').text();
             var idval = $(this).find('td:eq(0)').text();
-    
+
             // Coloca el valor en el input con id 'inputIdentificacion'
             $('#identificacion').val(identificacion);
             $('#nombre_prov').val(nombre);
@@ -226,12 +223,12 @@ function mostrarDatosproveedor() {
             $('#id_prov').val(idval);
             $('#staticBackdrop').modal('show');
             $('#accion').val("modificar");
-            $('#staticBackdropLabel').text('Modificar Proveedor'); 
+            $('#staticBackdropLabel').text('Modificar Proveedor');
 
         });
-           
-            
-        
+
+
+
 
     });
 }
@@ -288,9 +285,9 @@ function validarenvio() {
             value.nextElementSibling.classList.remove("error");
             value.nextElementSibling.innerText = "";
             var datos = new FormData();
-		    datos.append('accion','consultatr');
-			datos.append('cedula',$(this).val());
-			enviaAjax(datos,'consultatr');
+            datos.append('accion', 'consultatr');
+            datos.append('cedula', $(this).val());
+            enviaAjax(datos, 'consultatr');
         }
     }
 

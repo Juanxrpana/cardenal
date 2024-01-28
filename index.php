@@ -5,6 +5,8 @@
 //paginas en nuetro sitio web
 
 
+
+
 //$pagina, Variable que se recibe por GET y que indica que
 //pagina sera cargada, se le asigna un valor por defecto
 //en este caso principal para cuando se carga por primera vez
