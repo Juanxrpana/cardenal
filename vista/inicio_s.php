@@ -71,14 +71,10 @@
           <hr>
           <button class="finalizacion" id="iniciar"><span>Ingresar</span></button>
         </form>
-        <button type="button" class="finalizacion" id="registrarse" data-bs-toggle="modal" data-bs-target="#registroModal"><span>Registrar</span></button>
+        <button type="button" class="finalizacion" id="recordar" data-bs-toggle="modal" data-bs-target="#recordarModal"><span>Recordar</span></button>
         <br>
-        <p1 id="registrarse" data-bs-toggle="modal" data-bs-target="#recordarModal"><span>Recordar contraseña</span></p1>
 
       </div>
-
-      <!-- MODAL DE OLVIDO CONTRASEÑA -->
-
 
       <!-- Modal de Recordar Contraseña -->
       <div class="modal fade" id="recordarModal" tabindex="-1" aria-labelledby="recordarModalLabel" aria-hidden="true">
@@ -91,13 +87,16 @@
             <div class="modal-body recordar">
               <!-- Campo de entrada para la contraseña -->
               <div class="mb-3">
-                <label for="recordar_cedula" class="form-label recordar">Cedula</label>
+                <label for="recordar_cedula" class="form-label recordar">Ingrese sus datos</label>
                 <input type="text" class="form-control" id="recordar_cedula" placeholder="Ingrese su cedula">
+               
+                <hr>
+                <input type="text" class="form-control" id="pregunta" placeholder="Su pregunta de seguridad" disabled>
               </div>
             </div>
             <div class="modal-footer">
               <!-- Botón "Siguiente" -->
-              <button type="button" class="btn btn-primary">Siguiente</button>
+              <button id="v_usuario" class="btn btn-primary">Siguiente</button>
               <!-- Botón "Cerrar" -->
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
             </div>
@@ -107,49 +106,7 @@
 
 
       <!-- MODAL DE REGISTRO -->
-      <div class="modal fade" id="registroModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content" style=" background: linear-gradient(to right, #962828, #6b3f3f); -webkit-box-shadow: -20px 20px 43px -21px rgba(0,0,0,0.51); -moz-box-shadow: -20px 20px 43px -21px rgba(0,0,0,0.51); box-shadow: -20px 20px 43px -21px rgba(0,0,0,0.51);">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Nuevo Usuario</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <!-- Aquí irá el formulario -->
-              <form method="POST" class="formulario" id="formulario" style="color: #343a40;">
-                <div class="form-group">
-                  <label for="usuario">Cédula</label>
-                  <input type="text" class="form-control" id="usuario" name="usuario">
-                </div>
-                <div class="form-group">
-                  <label for="nombres">Nombres</label>
-                  <input type="text" class="form-control" id="nombres" name="nombres">
-                </div>
-                <div class="form-group">
-                  <label for="apellidos">apellidos</label>
-                  <input type="text" class="form-control" id="apellidos" name="apellidos">
-                </div>
-                <div class="form-group">
-                  <label for="clave">clave</label>
-                  <input type="password" class="form-control" id="clave" name="clave">
-                </div>
-                <div class="form-group">
-                  <label for="id_pregunta_s">Pregunta de Seguridad</label>
-                  <select class="form-control" id="id_pregunta_s" name="id_pregunta_s">
-                    <!-- Este select se llenará con JavaScript -->
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="respuesta">Respuesta de Seguridad</label>
-                  <input type="text" class="form-control" id="respuesta" name="respuesta">
-                </div>
-                <button class="finalizacion">Registrarse</button>
-                <button type="button" id="incluir" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
+      
 
 
 
@@ -188,5 +145,7 @@
 <script src="./js/popper.min.js"></script>
 <script src="./js/sweetalert2.js"></script>
 <script src="./js/inicio_sesion.js"></script>
+<script src="./js/formulario_registro_usuario.js"></script>
+
 
 </html>

@@ -2,6 +2,7 @@ $(document).ready(function() {
 
 
 
+
     //Seccion para mostrar lo enviado en el modal mensaje//
 
     //Función que verifica que exista algo dentro de un div
@@ -36,13 +37,17 @@ $(document).ready(function() {
     $("#incluir").on("click", function() {
         var datos = new FormData();
         datos.append('accion', 'incluir');
-        datos.append('usuario', $("#usuario").val());
+        datos.append('nuevo_usuario', $("#nuevo_usuario").val());
         datos.append('clave', $("#clave").val());
         datos.append('nombres', $("#nombres").val());
         datos.append('apellidos', $("#apellidos").val());
         datos.append('id_pregunta_s', $("#preguntaSeguridad").val());
         datos.append('respuesta', $("#respuestaSeguridad").val());
         enviaAjax(datos, 'incluir');
+    });
+
+    $("#registrarse").on("click", function() {
+        llenarLista();
     })
 });
 
@@ -59,7 +64,7 @@ function enviaAjax(datos, accion) {
             console.log(respuesta);
             //si resulto exitosa la transmision
             if (accion == "consultar") {
-                $("#proveedor").html(respuesta);
+                $("#id_pregunta_s").html(respuesta);
             } else {
                 Swal.fire({
                     title: 'Usuario registrado exitosamente',
@@ -98,6 +103,15 @@ function enviaAjax(datos, accion) {
 
 
 }
+
+
+function llenarLista() {
+    console.log("llena lista");
+    var datos = new FormData();
+    datos.append('accion', 'consultar');
+    enviaAjax(datos, 'consultar');
+}
+
 
 //console.log("aisdioj");
 

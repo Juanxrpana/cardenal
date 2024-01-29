@@ -1,16 +1,17 @@
 //En esta parte añadiremos el codigo necesario para validar antes de enviar
 //al servidor, anteriormente validamos las entradas, pero es necesario
 //verificar antes de enviar que a pesar de que se le dijo al usuario que hacer
-//este no haya pulsado 
 document.addEventListener('DOMContentLoaded', function() {
     var nivel_usuario = document.getElementById("nivelUsuario").value;
     // Obtener el elemento de la lista de proveedores y si es usuario, entonces se elimina proveedores
     if (nivel_usuario == 1) {
 
         proveedores = document.getElementById("proveedor-lista");
-        if (proveedores) {
-            console.log("Eliminando proveedores");
+        usuarios = document.getElementById("usuario-lista");
+        if (proveedores || usuarios) {
+            console.log("Eliminando proveedores y usuarios");
             proveedores.parentNode.removeChild(proveedores);
+            usuarios.parentNode.removeChild(usuarios);
         };
 
 

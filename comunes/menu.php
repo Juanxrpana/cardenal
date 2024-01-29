@@ -40,6 +40,12 @@
                     <span>Reportes</span>
                 </a>
             </li>
+            <li id="usuario-lista">
+                <a href="?pagina=usuario">
+                <p1 class="icon-user-tie"></p1>
+                    <span>Usuarios</span>
+                </a>
+            </li>
             <li class="logout">
                 <a href="?pagina=logout">
                 <p1 class="icon-reply1"></p1>

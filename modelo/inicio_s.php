@@ -4,9 +4,6 @@ require_once('Conexion.php');
 
 class inicio extends Conexion
 {
-
-
-
 	private $usuario;
 	private $nombres;
 	private $apellidos;
@@ -50,7 +47,7 @@ class inicio extends Conexion
 	{
 		$this->cargo = $valor;
 	}
-	
+
 
 
 
@@ -89,8 +86,9 @@ class inicio extends Conexion
 		$this->cargo = $valor;
 	}
 
+	
 
-	function busca()
+	public function busca()
 	{
 		$co = $this->conecta();
 		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -132,7 +130,7 @@ class inicio extends Conexion
 		$co = $this->conecta();
 		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		try {
-			$resultado = $co->query("Select * from cafe_tostado where idusuario	='$idusuario'");
+			$resultado = $co->query("Select * from usuario where idusuario	='$idusuario'");
 			$fila = $resultado->fetchAll(PDO::FETCH_BOTH);
 			if ($fila) {
 
@@ -146,51 +144,41 @@ class inicio extends Conexion
 		}
 	}
 
-	function agregarcafe_tostado()
-	{
+	
+
+
+
+	/* public function actualizarPassword($idusuario, $nuevaPassword, $respuesta) {
 		$co = $this->conecta();
 		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
+		
 		try {
-			// Consulta SQL con marcadores de posición
-			$sql = "INSERT INTO usuario (
-                idusuario,
-                nombres,
-                apellidos,
-                password,
-                cargo_idcargo,
-                id_pregunta_s,
-                respuesta
-            ) VALUES (
-                :idusuario,
-                :nombres,
-                :apellidos,
-                :password,
-                1,  -- cargo_idcargo siempre es igual a 1
-                :id_pregunta_s,
-                :respuesta
-            )";
-
-			// Preparar la consulta
-			$stmt = $co->prepare($sql);
-
-			// Asociar valores a los marcadores de posición con bindParam
-			$stmt->bindParam(':idusuario', $this->usuario, PDO::PARAM_STR);
-			$stmt->bindParam(':nombres', $this->nombres, PDO::PARAM_STR);
-			$stmt->bindParam(':apellidos', $this->apellidos, PDO::PARAM_STR);
-			$stmt->bindParam(':password', $this->clave, PDO::PARAM_STR);
-			$stmt->bindParam(':id_pregunta_s', $this->id_pregunta_s, PDO::PARAM_INT);
-			$stmt->bindParam(':respuesta', $this->respuesta, PDO::PARAM_STR);
-
-			// Aquí debes asignar valores a las variables $idusuario, $nombres, $apellidos, $password, $id_pregunta_s, $respuesta
-			// Estos valores deben provenir de tus variables o de algún otro proceso de tu aplicación
-
-			// Ejecutar la consulta preparada
+			// Verificar si la respuesta coincide
+			$stmt = $co->prepare("SELECT COUNT(*) AS count FROM usuario WHERE idusuario = :idusuario AND respuesta = :respuesta");
+			$stmt->bindParam(':idusuario', $idusuario, PDO::PARAM_STR);
+			$stmt->bindParam(':respuesta', $respuesta, PDO::PARAM_STR);
 			$stmt->execute();
-
-			return "Usuario registrado exitosamente";
+			$row = $stmt->fetch(PDO::FETCH_ASSOC);
+	
+			if ($row['count'] > 0) {
+				// La respuesta coincide, entonces actualiza la contraseña
+				$stmt = $co->prepare("UPDATE usuario SET password = :nuevaPassword WHERE idusuario = :idusuario");
+				$stmt->bindParam(':nuevaPassword', $nuevaPassword, PDO::PARAM_STR);
+				$stmt->bindParam(':idusuario', $idusuario, PDO::PARAM_STR);
+				$stmt->execute();
+				
+				return "Contraseña actualizada exitosamente";
+			} else {
+				return "La respuesta no coincide";
+			}
 		} catch (Exception $e) {
 			return $e->getMessage();
 		}
-	}
+	} */
+	
+
+	
+
+	
 }
+?>

@@ -8,9 +8,11 @@ document.addEventListener('DOMContentLoaded', function() {
     if (nivel_usuario == 1) {
 
         proveedores = document.getElementById("proveedor-lista");
-        if (proveedores) {
-            console.log("Eliminando proveedores");
+        usuarios = document.getElementById("usuario-lista");
+        if (proveedores || usuarios) {
+            console.log("Eliminando proveedores y usuarios");
             proveedores.parentNode.removeChild(proveedores);
+            usuarios.parentNode.removeChild(usuarios);
         };
 
 
