@@ -14,11 +14,30 @@
 
     if(is_file("vista/".$pagina.".php")){ 
     if(!empty($_POST)){
+      $accion = $_POST['accion'];
    
       $o = new inicio();
       
       $o->set_usuario($_POST['usuario']);
-      $o->set_clave($_POST['contra']);
+      $o->set_clave($_POST['clave']);
+      $o->set_nombres($_POST['nombres']);
+      $o->set_apellidos($_POST['apellidos']);
+      $o->set_id_pregunta_s($_POST['id_pregunta_s']);
+      $o->set_respuesta($_POST['respuesta']);
+
+      if($accion=='incluir'){
+        echo  $o->agregarcafe_tostado();
+      }
+     /*  elseif($accion=='modificar'){
+       echo  $o->modificar(); 
+      }
+      elseif($accion=='eliminar'){
+     echo  $o->borrar(); 
+      }
+      elseif($accion=='consultar'){
+       $o->consultar(); 
+      } */
+
 
       /* $cedulaMaestro = $_POST['usuario']; */
       

@@ -1,14 +1,11 @@
 <html lang="en">
 
 <head>
-  <?php
-  // require_once("comunes/encabezado.php");
 
-  ?>
   <meta charset="utf-8">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./CSS/bootstrap.min.css">
+  <link rel="stylesheet" href="./CSS/bootstrap.css">
   <link rel="stylesheet" href="./CSS/inicio.css">
   <link rel="stylesheet" href="./CSS/consulta.css">
   <link rel="stylesheet" href="./CSS/style.css">
@@ -72,76 +69,73 @@
             <span></span>
           </div>
           <hr>
-
-          
-          <button class=" btn-block" id="iniciar"><span>Ingresar</span></button>
-
+          <button class="finalizacion" id="iniciar"><span>Ingresar</span></button>
         </form>
-
-        <button class=" btn-block" id="registrarse" data-toggle="modal" data-target="#registro"><span>Registrarse</span></button>
-
-
+        <button type="button" class="finalizacion" id="registrarse" data-bs-toggle="modal" data-bs-target="#registroModal"><span>Registrar</span></button>
+        <br>
+        <p1 id="registrarse" data-bs-toggle="modal" data-bs-target="#recordarModal"><span>Recordar contraseña</span></p1>
 
       </div>
 
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-          Launch demo modal
-        </button>
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
+      <!-- MODAL DE OLVIDO CONTRASEÑA -->
+
+
+      <!-- Modal de Recordar Contraseña -->
+      <div class="modal fade" id="recordarModal" tabindex="-1" aria-labelledby="recordarModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title recordar" id="recordarModalLabel">Recordar Contraseña</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body recordar">
+              <!-- Campo de entrada para la contraseña -->
+              <div class="mb-3">
+                <label for="recordar_cedula" class="form-label recordar">Cedula</label>
+                <input type="text" class="form-control" id="recordar_cedula" placeholder="Ingrese su cedula">
               </div>
-              <div class="modal-body">
-                ...
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-              </div>
+            </div>
+            <div class="modal-footer">
+              <!-- Botón "Siguiente" -->
+              <button type="button" class="btn btn-primary">Siguiente</button>
+              <!-- Botón "Cerrar" -->
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
             </div>
           </div>
         </div>
+      </div>
 
 
-
-      <!-- Modal de Registro -->
-      <div class="modal fade" id="registro" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <!-- MODAL DE REGISTRO -->
+      <div class="modal fade" id="registroModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
-          <div class="modal-content">
+          <div class="modal-content" style=" background: linear-gradient(to right, #962828, #6b3f3f); -webkit-box-shadow: -20px 20px 43px -21px rgba(0,0,0,0.51); -moz-box-shadow: -20px 20px 43px -21px rgba(0,0,0,0.51); box-shadow: -20px 20px 43px -21px rgba(0,0,0,0.51);">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Formulario de Registro</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+              <h5 class="modal-title" id="exampleModalLabel">Nuevo Usuario</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <!-- Aquí irá el formulario -->
-              <form id="formularioRegistro">
+              <form method="POST" class="formulario" id="formulario" style="color: #343a40;">
                 <div class="form-group">
-                  <label for="cedula">Cédula</label>
-                  <input type="number" class="form-control" id="cedula" name="cedula">
+                  <label for="usuario">Cédula</label>
+                  <input type="text" class="form-control" id="usuario" name="usuario">
                 </div>
                 <div class="form-group">
-                  <label for="nombre">Nombre</label>
-                  <input type="text" class="form-control" id="nombre" name="nombre">
+                  <label for="nombres">Nombres</label>
+                  <input type="text" class="form-control" id="nombres" name="nombres">
                 </div>
                 <div class="form-group">
-                  <label for="apellido">Apellido</label>
-                  <input type="text" class="form-control" id="apellido" name="apellido">
+                  <label for="apellidos">apellidos</label>
+                  <input type="text" class="form-control" id="apellidos" name="apellidos">
                 </div>
                 <div class="form-group">
-                  <label for="password">Password</label>
-                  <input type="password" class="form-control" id="password" name="password">
+                  <label for="clave">clave</label>
+                  <input type="password" class="form-control" id="clave" name="clave">
                 </div>
                 <div class="form-group">
-                  <label for="pregunta">Pregunta de Seguridad</label>
-                  <select class="form-control" id="pregunta" name="pregunta">
+                  <label for="id_pregunta_s">Pregunta de Seguridad</label>
+                  <select class="form-control" id="id_pregunta_s" name="id_pregunta_s">
                     <!-- Este select se llenará con JavaScript -->
                   </select>
                 </div>
@@ -149,13 +143,18 @@
                   <label for="respuesta">Respuesta de Seguridad</label>
                   <input type="text" class="form-control" id="respuesta" name="respuesta">
                 </div>
-                <button type="submit" class="btn btn-primary">Registrarse</button>
+                <button class="finalizacion">Registrarse</button>
+                <button type="button" id="incluir" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
               </form>
             </div>
           </div>
         </div>
       </div>
-            <!-- modal error -->
+
+
+
+
+      <!-- modal error -->
       <div class="container" style="display: contents" id="modal1">
         <div class="modal fade" id="mostrarmodal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
           <div class="modal-dialog">
@@ -182,11 +181,12 @@
     </div>
   </div>
   </div>
-  <script src="./js/jquery-3.7.0.js"></script>
-  <script src="./js/bootstrap.min.js"></script>
-  <script src="./js/sweetalert2.js"></script>
-</body>
 
+</body>
+<script src="./js/bootstrap.js"></script>
+<script src="./js/jquery-3.7.0.js"></script>
+<script src="./js/popper.min.js"></script>
+<script src="./js/sweetalert2.js"></script>
 <script src="./js/inicio_sesion.js"></script>
 
 </html>

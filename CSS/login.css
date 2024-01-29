@@ -1,4 +1,4 @@
-button {
+.finalizacion {
     display: inline-block;
     border-radius: 4px;
     background-color: #4f923e;
@@ -13,14 +13,14 @@ button {
     margin: 5px;
 }
 
-button span {
+.finalizacion span {
     cursor: pointer;
     display: inline-block;
     position: relative;
     transition: 0.5s;
 }
 
-button span:after {
+.finalizacion span:after {
     content: '»';
     position: absolute;
     opacity: 0;
@@ -29,11 +29,19 @@ button span:after {
     transition: 0.5s;
 }
 
-button:hover span {
+.finalizacion:hover span {
     padding-right: 15px;
 }
 
-button:hover span:after {
+.finalizacion:hover span:after {
     opacity: 1;
     right: 0;
+}
+
+.form-group {
+    margin-top: 10px;
+}
+
+.recordar {
+    color: #6c757d;
 }
