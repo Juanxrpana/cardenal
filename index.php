@@ -4,7 +4,7 @@
 //es el encargado de direccionar todo el flujo de las
 //paginas en nuetro sitio web
 
-
+session_start();
 
 
 //$pagina, Variable que se recibe por GET y que indica que

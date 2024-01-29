@@ -10,12 +10,12 @@
     <link rel="stylesheet" href="./CSS/bootstrap.css">
     <link rel="stylesheet" href="./CSS/style.css">
 
-    <script src="https://kit.fontawesome.com/ecd5745f4f.js" crossorigin="anonymous"></script>
     <title>INICIO</title>
 </head>
 
 <body>
-    <div class="id_user" id="id_user"></div>
+
+    
     <div class="main--content">
         <div class="header--wrapper">
             <div class="header--titulo">

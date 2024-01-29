@@ -1,4 +1,6 @@
 <div class="sidebar">
+<input type="hidden" id="nivelUsuario" value="<?php echo isset($_SESSION['nivel']) ? $_SESSION['nivel'] : ''; ?>">
+
         
         <ul class="menu">
             <li class="active">
@@ -8,7 +10,7 @@
                 </a>
             </li>
             
-            <li>
+            <li id="proveedor-lista">
                 <a href="?pagina=proveedor">
                 <p1 class="icon-users"></p1>
                     <span>Proveedores</span>

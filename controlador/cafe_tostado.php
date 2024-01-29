@@ -30,7 +30,7 @@ require_once("modelo/".$pagina.".php");
 
 		   if($accion=='consultar'){
             
-			 echo  $o->consultar();
+			/*  echo  $o->consultar(); */
 		  }	  
 		  
 

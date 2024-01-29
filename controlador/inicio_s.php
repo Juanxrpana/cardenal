@@ -36,6 +36,7 @@
           $cargo_usuario = $o->busca_cargo();
           if ( $cargo_usuario == "1" ||  $cargo_usuario == "2") {
                 $_SESSION['nivel'] = $cargo_usuario;
+                echo $_SESSION['id_usuario'];
                 echo  $_SESSION['nivel'];
                 header("Location: .?pagina=inicio");
                 exit;
