@@ -58,7 +58,8 @@
                                 <div class="form-group">
                                     <label for="respuesta">Respuesta de Seguridad</label>
                                     <input type="text" class="form-control" id="respuesta" name="respuesta">
-                                </div> <button type="button" id="incluir" class="finalizacion" data-bs-dismiss="modal">Incluir</button>
+                                </div>
+                                <button type="button" id="incluir" class="finalizacion" data-bs-dismiss="modal">Incluir</button>
                             </form>
                         </div>
                     </div>

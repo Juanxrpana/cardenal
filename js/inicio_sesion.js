@@ -33,8 +33,30 @@ $(document).ready(function() {
         validarkeyup(/^[0-9a-zA-Z*\b-]{4,10}$/, $(this), $("#sclave"), "De 4 a 10 caracteres");
     });
 
+    $("#v_usuario").on("click", function() {
+        console.log("validar pregunta deusuario");
+        var datos = new FormData();
+        datos.append('accion', 'pregunta');
+        datos.append('id_usuario', $("#recordar_cedula").val());
+        recuperaAjax(datos, 'pregunta');
 
-    $("#incluir").on("click", function() {
+        console.log(datos.get('accion') + " esta es la accion");
+    });
+
+    $("#respuesta_boton").on("click", function() {
+        console.log("validar respuesta de usuario ahhhhhhhh");
+        var datos = new FormData();
+        datos.append('accion', 'respuesta');
+        datos.append('id_usuario', $("#recordar_cedula").val());
+        datos.append('respuesta', $("#respuesta").val());
+        respuestaAjax(datos, 'respuesta');
+
+        console.log(datos.get('accion') + " esta es la accion");
+
+    })
+
+
+    /* $("#incluir").on("click", function() {
         var datos = new FormData();
         datos.append('accion', 'incluir');
         datos.append('nuevo_usuario', $("#nuevo_usuario").val());
@@ -48,10 +70,24 @@ $(document).ready(function() {
 
     $("#registrarse").on("click", function() {
         llenarLista();
-    })
+    }) */
 });
 
-function enviaAjax(datos, accion) {
+function recuperador() {
+    var input = '<div' + ' ' + 'class="form-group">' +
+        '<label ' + 'for="respuesta" style=" color: #6c757d" >Respuesta de Seguridad</label>' +
+        '<input type="text" class="form-control" id="respuesta" name="respuesta">' +
+        '<button type=button id="respuesta_boton" class="btn btn-success">Siguiente</button>'
+    '</div>';
+    $("#recuperador").append(input);
+    eliminarsiguiente();
+}
+
+function eliminarsiguiente() {
+    document.getElementById('v_usuario').style.display = 'none';
+}
+
+function recuperaAjax(datos, accion) {
     $.ajax({
         async: true,
         url: '', //la pagina a donde se envia por estar en mvc, se omite la ruta ya que siempre estaremos en la misma pagina
@@ -60,32 +96,59 @@ function enviaAjax(datos, accion) {
         data: datos,
         processData: false,
         cache: false,
-        success: function(respuesta) {
-            console.log(respuesta);
+        success: function(resultado) {
+
+            var data = JSON.parse(resultado);;
+            document.getElementById('pregunta_show').value = data.pregunta_seguridad;
+
+            recuperador();
+
+
             //si resulto exitosa la transmision
-            if (accion == "consultar") {
-                $("#id_pregunta_s").html(respuesta);
-            } else {
-                Swal.fire({
-                    title: 'Usuario registrado exitosamente',
-                    text: "",
-                    icon: 'success',
-                    timer: 4000, // Establece el tiempo en milisegundos (5 segundos en este caso)
-
-                }).then((result) => {
-                    if (result.dismiss === Swal.DismissReason.timer) {
-                        // Esto se ejecutará después de que se cierre el mensaje automáticamente
-                        console.log('Mensaje modal cerrado');
-                    }
-                });
-
-            }
         },
         error: function() {
 
             Swal.fire({
-                title: 'Error al ingresar la materia primar',
-                text: 'Hubo un problema al registrar la materia primar.',
+                title: 'Error',
+                text: 'Hubo un problema en la busqueda',
+                icon: 'error',
+                timer: 4000, // Establece el tiempo en milisegundos (5 segundos en este caso)
+                showConfirmButton: false // Oculta el botón "Aceptar"
+            }).then((result) => {
+                if (result.dismiss === Swal.DismissReason.timer) {
+                    // Esto se ejecutará después de que se cierre el mensaje automáticamente
+                    console.log('Mensaje modal de error cerrado');
+                }
+            });
+
+
+        }
+
+    });
+
+
+}
+
+function respuestaAjax(datos, accion) {
+    $.ajax({
+        async: true,
+        url: '', //la pagina a donde se envia por estar en mvc, se omite la ruta ya que siempre estaremos en la misma pagina
+        type: 'POST', //tipo de envio 
+        contentType: false,
+        data: datos,
+        processData: false,
+        cache: false,
+        success: function(resultado) {
+            console.log(resultado);
+
+
+            //si resulto exitosa la transmision
+        },
+        error: function() {
+
+            Swal.fire({
+                title: 'Error',
+                text: 'Hubo un problema en la busqueda',
                 icon: 'error',
                 timer: 4000, // Establece el tiempo en milisegundos (5 segundos en este caso)
                 showConfirmButton: false // Oculta el botón "Aceptar"
@@ -105,12 +168,6 @@ function enviaAjax(datos, accion) {
 }
 
 
-function llenarLista() {
-    console.log("llena lista");
-    var datos = new FormData();
-    datos.append('accion', 'consultar');
-    enviaAjax(datos, 'consultar');
-}
 
 
 //console.log("aisdioj");

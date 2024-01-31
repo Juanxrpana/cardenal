@@ -128,9 +128,9 @@ function enviaAjax(datos, accion) {
 
                 //console.log(lee['resultado']);
                 if (lee['resultado'] == 'encontro') {
-                    //habilita los botones para poder eliminar y modificar
+                    //habilita los botones para poder y modificar
 
-                    botonOn();
+                    /*       botonOn(); */
                     $("#incluir").prop('disabled', true);
                     $("#apellidos").val(lee[0].apellidos);
                     $("#nombres").val(lee[0].nombres);

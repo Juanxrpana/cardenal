@@ -137,16 +137,91 @@ class inicio extends Conexion
 				return true;
 			} else {
 
-				return false;;
+				return false;
 			}
 		} catch (Exception $e) {
-			return false;
+			return $e->getMessage();
 		}
 	}
 
 	
 
 
+	public function validarusuario_pregunta()
+	{
+		$co = $this->conecta();
+		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		try {
+			// Consulta preparada para obtener el ID del usuario y el ID de la pregunta de seguridad
+			$stmt = $co->prepare("SELECT idusuario, id_pregunta_s FROM usuario WHERE idusuario = :usuario");
+			$stmt->bindParam(':usuario', $this->usuario);
+			$stmt->execute();
+			$resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+			
+			if ($resultado) {
+				// Si se encontró el usuario, obtenemos la pregunta de seguridad asociada
+				$pregunta_stmt = $co->prepare("SELECT pregunta FROM pregunta_s WHERE id_pregunta = :id_pregunta_s");
+				$pregunta_stmt->bindParam(':id_pregunta_s', $resultado['id_pregunta_s']);
+				$pregunta_stmt->execute();
+				$pregunta_resultado = $pregunta_stmt->fetch(PDO::FETCH_ASSOC);
+				
+				// Verifica si se encontró la pregunta de seguridad
+				if ($pregunta_resultado) {
+					// Agregamos la pregunta de seguridad al resultado
+					$resultado['pregunta_seguridad'] = $pregunta_resultado['pregunta'];
+				} else {
+					// Si no se encontró la pregunta de seguridad, devolvemos un valor predeterminado
+					$resultado['pregunta_seguridad'] = "Pregunta no encontrada";
+				}
+				
+				return $resultado; // Devuelve el ID de usuario, el ID de la pregunta de seguridad y la pregunta
+				// Después de obtener el resultado
+				
+			} else {
+				return false; // El usuario no existe en la base de datos
+			}
+		} catch (Exception $e) {
+			return $e->getMessage(); // Ocurrió un error al ejecutar la consulta
+		}
+	}
+	
+
+
+
+public function validarrespuesta()
+{
+    $co = $this->conecta();
+    $co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    try {
+        $stmt = $co->prepare("SELECT idusuario FROM usuario WHERE idusuario = :usuario AND respuesta = :respuesta");
+        $stmt->bindParam(':usuario', $this->usuario);
+        $stmt->bindParam(':respuesta', $this->respuesta);
+        $stmt->execute();
+        $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($resultado) {
+            return true; // La respuesta es correcta
+        } else {
+            return false; // La respuesta es incorrecta
+        }
+    } catch (Exception $e) {
+       return $e->getMessage(); // Ocurrió un error al ejecutar la consulta
+    }
+}
+
+public function actualizarclave($nuevaclave)
+{
+    $co = $this->conecta();
+    $co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    try {
+        $stmt = $co->prepare("UPDATE usuario SET password = :nuevaclave WHERE idusuario = :usuario");
+        $stmt->bindParam(':nuevaclave', $nuevaclave);
+        $stmt->bindParam(':usuario', $this->usuario);
+        $stmt->execute();
+        return true; // La contraseña se actualizó correctamente
+    } catch (Exception $e) {
+       return $e->getMessage(); // Ocurrió un error al ejecutar la consulta
+    }
+}
 
 	/* public function actualizarPassword($idusuario, $nuevaPassword, $respuesta) {
 		$co = $this->conecta();

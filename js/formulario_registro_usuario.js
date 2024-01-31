@@ -31,12 +31,12 @@ $(document).ready(function() {
         llenarLista();
     })
 
-    $("#v_usuario").on("click", function() {
+    /* $("#v_usuario").on("click", function() {
         var datos = new FormData();
         datos.append('accion', 'validarusuario');
         datos.append('id_usuario', $("#recordar_cedula").val());
         enviaAjax3(datos, 'validarusuario');
-    })
+    }) */
 
 
 

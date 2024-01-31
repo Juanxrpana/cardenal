@@ -91,8 +91,13 @@
                 <input type="text" class="form-control" id="recordar_cedula" placeholder="Ingrese su cedula">
                
                 <hr>
-                <input type="text" class="form-control" id="pregunta" placeholder="Su pregunta de seguridad" disabled>
+                <input type="text" class="form-control" id="pregunta_show" placeholder="Su pregunta de seguridad" disabled>
+                <hr>
               </div>
+              <form method="POST" id="recuperador">
+                
+                
+              </form>
             </div>
             <div class="modal-footer">
               <!-- Botón "Siguiente" -->
@@ -145,7 +150,7 @@
 <script src="./js/popper.min.js"></script>
 <script src="./js/sweetalert2.js"></script>
 <script src="./js/inicio_sesion.js"></script>
-<script src="./js/formulario_registro_usuario.js"></script>
+<!-- <script src="./js/formulario_registro_usuario.js"></script> -->
 
 
 </html>

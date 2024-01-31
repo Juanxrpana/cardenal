@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 26-01-2024 a las 16:01:44
--- Versión del servidor: 10.4.27-MariaDB
--- Versión de PHP: 8.0.25
+-- Host: 127.0.0.1
+-- Generation Time: Jan 29, 2024 at 10:44 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.0.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `cardenal`
+-- Database: `cardenal`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `cafe_final`
+-- Table structure for table `cafe_final`
 --
 
 CREATE TABLE `cafe_final` (
@@ -37,16 +37,17 @@ CREATE TABLE `cafe_final` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `cafe_final`
+-- Dumping data for table `cafe_final`
 --
 
 INSERT INTO `cafe_final` (`id_cafe_final`, `idcafe_tostado`, `cantidad_paquetes`, `fecha_empaquetado`, `id_bulto`, `estado`) VALUES
-(315, 180, 37, '2024-01-26', 180, 1);
+(315, 180, 37, '2024-01-26', 180, 1),
+(316, 181, 37, '2024-01-28', 181, 1);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `cafe_tostado`
+-- Table structure for table `cafe_tostado`
 --
 
 CREATE TABLE `cafe_tostado` (
@@ -60,15 +61,16 @@ CREATE TABLE `cafe_tostado` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `cafe_tostado`
+-- Dumping data for table `cafe_tostado`
 --
 
 INSERT INTO `cafe_tostado` (`idcafe_tostado`, `cantidad`, `nivel_tostado`, `nivel_molido`, `estado`, `fecha_tostado`, `usuario_idusuario`) VALUES
 (177, 5, 2, 3, '0', '2024-01-26', 28150004),
-(180, 5, 2, 3, '0', '2024-01-26', 28150004);
+(180, 5, 2, 3, '0', '2024-01-26', 28150004),
+(181, 5, 2, 1, '0', '2024-01-28', 28150004);
 
 --
--- Disparadores `cafe_tostado`
+-- Triggers `cafe_tostado`
 --
 DELIMITER $$
 CREATE TRIGGER `restar_valor_total_cafe` AFTER INSERT ON `cafe_tostado` FOR EACH ROW BEGIN
@@ -96,7 +98,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `cargo`
+-- Table structure for table `cargo`
 --
 
 CREATE TABLE `cargo` (
@@ -105,7 +107,7 @@ CREATE TABLE `cargo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `cargo`
+-- Dumping data for table `cargo`
 --
 
 INSERT INTO `cargo` (`idcargo`, `nombre_cargo`) VALUES
@@ -115,7 +117,7 @@ INSERT INTO `cargo` (`idcargo`, `nombre_cargo`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `cedula_fiscal`
+-- Table structure for table `cedula_fiscal`
 --
 
 CREATE TABLE `cedula_fiscal` (
@@ -124,7 +126,7 @@ CREATE TABLE `cedula_fiscal` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `cedula_fiscal`
+-- Dumping data for table `cedula_fiscal`
 --
 
 INSERT INTO `cedula_fiscal` (`id_cedula_fiscal`, `cedula_fiscal`) VALUES
@@ -138,7 +140,7 @@ INSERT INTO `cedula_fiscal` (`id_cedula_fiscal`, `cedula_fiscal`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `compra`
+-- Table structure for table `compra`
 --
 
 CREATE TABLE `compra` (
@@ -149,16 +151,17 @@ CREATE TABLE `compra` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `compra`
+-- Dumping data for table `compra`
 --
 
 INSERT INTO `compra` (`idcompra`, `fecha_compra`, `proveedor_id_proveedor`, `usuario_idusuario`) VALUES
-(199, '2024-04-28', 41, 28150004);
+(199, '2024-04-28', 41, 28150004),
+(209, '2024-01-28', 43, 28150004);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `datos_prov`
+-- Table structure for table `datos_prov`
 --
 
 CREATE TABLE `datos_prov` (
@@ -169,7 +172,7 @@ CREATE TABLE `datos_prov` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `datos_prov`
+-- Dumping data for table `datos_prov`
 --
 
 INSERT INTO `datos_prov` (`identificacion`, `nombre_prov`, `telefono`, `cedula_fiscal_id`) VALUES
@@ -177,13 +180,14 @@ INSERT INTO `datos_prov` (`identificacion`, `nombre_prov`, `telefono`, `cedula_f
 (15728175, 'Zoraimar Linárez', 2147483647, 1),
 (22232558, 'OBG C.A.', 55, 1),
 (28150004, 'Juan E Silva', 2147483647, 1),
+(28329224, 'Rocio', 2147483647, 1),
 (30623657, 'Paula Silva', 2147483647, 1),
 (53637425, 'KENDRICK', 53637425, 3);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `finca`
+-- Table structure for table `finca`
 --
 
 CREATE TABLE `finca` (
@@ -197,18 +201,41 @@ CREATE TABLE `finca` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `finca`
+-- Dumping data for table `finca`
 --
 
 INSERT INTO `finca` (`idfinca`, `ubicacion`, `nombre_finca`, `estado`, `municipio`, `parroquia`, `ciudad`) VALUES
 (44, 'Cerro 2 cerca de la cruz', 'Finca Paula', 'Lara', 'Morán', 'Bolivar', 'El Tocuyo'),
 (45, 'En mi casa', 'Juan Silva finca', 'Lara', 'Moran', 'Bolivar', 'El Tocuyo'),
-(46, 'Subiendo por quebrada negra km 8', 'Finca Fernandez', 'Portuguesa', 'Unda', 'Quebrada Negra', 'Chabasquen');
+(46, 'Subiendo por quebrada negra km 8', 'Finca Fernandez', 'Portuguesa', 'Unda', 'Quebrada Negra', 'Chabasquen'),
+(47, 'Fila del Tigre', 'Rocio', 'Lara', 'Morán', 'Guarico', 'Guarico');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `proveedor`
+-- Table structure for table `pregunta_s`
+--
+
+CREATE TABLE `pregunta_s` (
+  `id_pregunta` int(11) NOT NULL,
+  `pregunta` varchar(40) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `pregunta_s`
+--
+
+INSERT INTO `pregunta_s` (`id_pregunta`, `pregunta`) VALUES
+(1, 'Color favorito'),
+(2, 'Ciudad donde naciste'),
+(3, 'Comida favorita'),
+(4, 'Fecha de nacimiento'),
+(5, 'Lenguaje favorito');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `proveedor`
 --
 
 CREATE TABLE `proveedor` (
@@ -218,18 +245,19 @@ CREATE TABLE `proveedor` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `proveedor`
+-- Dumping data for table `proveedor`
 --
 
 INSERT INTO `proveedor` (`id_prov`, `finca_idfinca`, `datos_prov_identificacion`) VALUES
 (40, 44, 30623657),
 (41, 45, 28150004),
-(42, 46, 15728175);
+(42, 46, 15728175),
+(43, 47, 28329224);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `quintal`
+-- Table structure for table `quintal`
 --
 
 CREATE TABLE `quintal` (
@@ -241,16 +269,18 @@ CREATE TABLE `quintal` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `quintal`
+-- Dumping data for table `quintal`
 --
 
 INSERT INTO `quintal` (`idquintal`, `calidad_idcalidad`, `cantidad`, `estado`, `idcompra`) VALUES
-(255, 1, 1, 0, 199);
+(255, 1, 1, 0, 199),
+(267, 1, 45, 0, 209),
+(269, 2, 50, 0, 209);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `total_cafe`
+-- Table structure for table `total_cafe`
 --
 
 CREATE TABLE `total_cafe` (
@@ -259,68 +289,70 @@ CREATE TABLE `total_cafe` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `total_cafe`
+-- Dumping data for table `total_cafe`
 --
 
 INSERT INTO `total_cafe` (`id_total_cafe`, `total`) VALUES
-(1, 0),
+(1, 185),
 (2, 0),
-(3, 37);
+(3, 74);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `usuario`
+-- Table structure for table `usuario`
 --
 
 CREATE TABLE `usuario` (
   `idusuario` int(11) NOT NULL,
   `nombres` varchar(45) DEFAULT NULL,
   `apellidos` varchar(45) DEFAULT NULL,
-  `usuario` varchar(45) NOT NULL,
   `password` varchar(45) DEFAULT NULL,
-  `cargo_idcargo` int(11) NOT NULL
+  `cargo_idcargo` int(11) NOT NULL,
+  `id_pregunta_s` int(11) NOT NULL,
+  `respuesta` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `usuario`
+-- Dumping data for table `usuario`
 --
 
-INSERT INTO `usuario` (`idusuario`, `nombres`, `apellidos`, `usuario`, `password`, `cargo_idcargo`) VALUES
-(28150004, 'si1', 'si2', 'si3', '28150004', 1);
+INSERT INTO `usuario` (`idusuario`, `nombres`, `apellidos`, `password`, `cargo_idcargo`, `id_pregunta_s`, `respuesta`) VALUES
+(28150003, 'Juaner', 'Silva', '28150003', 1, 2, 'Barquisimeto'),
+(28150004, 'Juan', 'Silva', '28150004', 2, 2, 'Barquisimeto');
 
 --
--- Índices para tablas volcadas
+-- Indexes for dumped tables
 --
 
 --
--- Indices de la tabla `cafe_final`
+-- Indexes for table `cafe_final`
 --
 ALTER TABLE `cafe_final`
   ADD PRIMARY KEY (`id_cafe_final`),
   ADD KEY `cafe_final_ibfk_1` (`idcafe_tostado`);
 
 --
--- Indices de la tabla `cafe_tostado`
+-- Indexes for table `cafe_tostado`
 --
 ALTER TABLE `cafe_tostado`
   ADD PRIMARY KEY (`idcafe_tostado`),
   ADD KEY `fk_usuario_cafe_tostado` (`usuario_idusuario`);
 
 --
--- Indices de la tabla `cargo`
+-- Indexes for table `cargo`
 --
 ALTER TABLE `cargo`
   ADD PRIMARY KEY (`idcargo`);
 
 --
--- Indices de la tabla `cedula_fiscal`
+-- Indexes for table `cedula_fiscal`
 --
 ALTER TABLE `cedula_fiscal`
   ADD PRIMARY KEY (`id_cedula_fiscal`);
 
 --
--- Indices de la tabla `compra`
+-- Indexes for table `compra`
 --
 ALTER TABLE `compra`
   ADD PRIMARY KEY (`idcompra`),
@@ -328,20 +360,26 @@ ALTER TABLE `compra`
   ADD KEY `fk_compra_usuario1_idx` (`usuario_idusuario`);
 
 --
--- Indices de la tabla `datos_prov`
+-- Indexes for table `datos_prov`
 --
 ALTER TABLE `datos_prov`
   ADD PRIMARY KEY (`identificacion`),
   ADD KEY `fk_datos_prov_cedula_fiscal` (`cedula_fiscal_id`);
 
 --
--- Indices de la tabla `finca`
+-- Indexes for table `finca`
 --
 ALTER TABLE `finca`
   ADD PRIMARY KEY (`idfinca`);
 
 --
--- Indices de la tabla `proveedor`
+-- Indexes for table `pregunta_s`
+--
+ALTER TABLE `pregunta_s`
+  ADD PRIMARY KEY (`id_pregunta`);
+
+--
+-- Indexes for table `proveedor`
 --
 ALTER TABLE `proveedor`
   ADD PRIMARY KEY (`id_prov`),
@@ -349,142 +387,150 @@ ALTER TABLE `proveedor`
   ADD KEY `fk_datos_prov_identificacion_idx` (`datos_prov_identificacion`);
 
 --
--- Indices de la tabla `quintal`
+-- Indexes for table `quintal`
 --
 ALTER TABLE `quintal`
   ADD PRIMARY KEY (`idquintal`),
   ADD KEY `fk_idcompra1` (`idcompra`);
 
 --
--- Indices de la tabla `total_cafe`
+-- Indexes for table `total_cafe`
 --
 ALTER TABLE `total_cafe`
   ADD PRIMARY KEY (`id_total_cafe`);
 
 --
--- Indices de la tabla `usuario`
+-- Indexes for table `usuario`
 --
 ALTER TABLE `usuario`
   ADD PRIMARY KEY (`idusuario`),
-  ADD KEY `fk_usuario_cargo1_idx` (`cargo_idcargo`);
+  ADD KEY `fk_usuario_cargo1_idx` (`cargo_idcargo`),
+  ADD KEY `fk_usuario_pregunta_s1` (`id_pregunta_s`);
 
 --
--- AUTO_INCREMENT de las tablas volcadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de la tabla `cafe_final`
+-- AUTO_INCREMENT for table `cafe_final`
 --
 ALTER TABLE `cafe_final`
-  MODIFY `id_cafe_final` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=316;
+  MODIFY `id_cafe_final` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=317;
 
 --
--- AUTO_INCREMENT de la tabla `cafe_tostado`
+-- AUTO_INCREMENT for table `cafe_tostado`
 --
 ALTER TABLE `cafe_tostado`
-  MODIFY `idcafe_tostado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=181;
+  MODIFY `idcafe_tostado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=182;
 
 --
--- AUTO_INCREMENT de la tabla `cargo`
+-- AUTO_INCREMENT for table `cargo`
 --
 ALTER TABLE `cargo`
   MODIFY `idcargo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT de la tabla `cedula_fiscal`
+-- AUTO_INCREMENT for table `cedula_fiscal`
 --
 ALTER TABLE `cedula_fiscal`
   MODIFY `id_cedula_fiscal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT de la tabla `compra`
+-- AUTO_INCREMENT for table `compra`
 --
 ALTER TABLE `compra`
-  MODIFY `idcompra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=209;
+  MODIFY `idcompra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=211;
 
 --
--- AUTO_INCREMENT de la tabla `datos_prov`
+-- AUTO_INCREMENT for table `datos_prov`
 --
 ALTER TABLE `datos_prov`
   MODIFY `identificacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2147483648;
 
 --
--- AUTO_INCREMENT de la tabla `finca`
+-- AUTO_INCREMENT for table `finca`
 --
 ALTER TABLE `finca`
-  MODIFY `idfinca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `idfinca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
--- AUTO_INCREMENT de la tabla `proveedor`
+-- AUTO_INCREMENT for table `pregunta_s`
+--
+ALTER TABLE `pregunta_s`
+  MODIFY `id_pregunta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `proveedor`
 --
 ALTER TABLE `proveedor`
-  MODIFY `id_prov` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id_prov` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
--- AUTO_INCREMENT de la tabla `quintal`
+-- AUTO_INCREMENT for table `quintal`
 --
 ALTER TABLE `quintal`
-  MODIFY `idquintal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=267;
+  MODIFY `idquintal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=271;
 
 --
--- AUTO_INCREMENT de la tabla `total_cafe`
+-- AUTO_INCREMENT for table `total_cafe`
 --
 ALTER TABLE `total_cafe`
   MODIFY `id_total_cafe` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
--- AUTO_INCREMENT de la tabla `usuario`
+-- AUTO_INCREMENT for table `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28150006;
+  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28329226;
 
 --
--- Restricciones para tablas volcadas
+-- Constraints for dumped tables
 --
 
 --
--- Filtros para la tabla `cafe_final`
+-- Constraints for table `cafe_final`
 --
 ALTER TABLE `cafe_final`
   ADD CONSTRAINT `cafe_final_ibfk_1` FOREIGN KEY (`idcafe_tostado`) REFERENCES `cafe_tostado` (`idcafe_tostado`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
--- Filtros para la tabla `cafe_tostado`
+-- Constraints for table `cafe_tostado`
 --
 ALTER TABLE `cafe_tostado`
   ADD CONSTRAINT `fk_usuario_cafe_tostado` FOREIGN KEY (`usuario_idusuario`) REFERENCES `usuario` (`idusuario`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `compra`
+-- Constraints for table `compra`
 --
 ALTER TABLE `compra`
   ADD CONSTRAINT `fk_compra_proveedor` FOREIGN KEY (`proveedor_id_proveedor`) REFERENCES `proveedor` (`id_prov`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_compra_usuario1` FOREIGN KEY (`usuario_idusuario`) REFERENCES `usuario` (`idusuario`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `datos_prov`
+-- Constraints for table `datos_prov`
 --
 ALTER TABLE `datos_prov`
   ADD CONSTRAINT `fk_datos_prov_cedula_fiscal` FOREIGN KEY (`cedula_fiscal_id`) REFERENCES `cedula_fiscal` (`id_cedula_fiscal`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `proveedor`
+-- Constraints for table `proveedor`
 --
 ALTER TABLE `proveedor`
   ADD CONSTRAINT `fk_proveedor_datos_prov1` FOREIGN KEY (`datos_prov_identificacion`) REFERENCES `datos_prov` (`identificacion`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_proveedor_finca` FOREIGN KEY (`finca_idfinca`) REFERENCES `finca` (`idfinca`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `quintal`
+-- Constraints for table `quintal`
 --
 ALTER TABLE `quintal`
   ADD CONSTRAINT `fk_idcompra1` FOREIGN KEY (`idcompra`) REFERENCES `compra` (`idcompra`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `usuario`
+-- Constraints for table `usuario`
 --
 ALTER TABLE `usuario`
-  ADD CONSTRAINT `fk_usuario_cargo1` FOREIGN KEY (`cargo_idcargo`) REFERENCES `cargo` (`idcargo`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_usuario_cargo1` FOREIGN KEY (`cargo_idcargo`) REFERENCES `cargo` (`idcargo`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_usuario_pregunta_s1` FOREIGN KEY (`id_pregunta_s`) REFERENCES `pregunta_s` (`id_pregunta`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
