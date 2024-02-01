@@ -27,7 +27,16 @@ if (is_file("vista/" . $pagina . ".php")) {
     } elseif ($accion == 'respuesta') {
       $o->set_usuario($_POST['id_usuario']);
       $o->set_respuesta($_POST['respuesta']);
-      $o->validarrespuesta();
+      $resultado = $o->validarrespuesta();
+      echo $resultado;
+      exit;
+    } 
+    elseif ($accion == 'actualizar') {
+      $o->set_usuario($_POST['id_usuario']);
+      $o->set_clave($_POST['nueva_clave']);
+      $nueva_clave = $_POST['nueva_clave'];
+      $resultado = $o->actualizarclave($nueva_clave);
+      echo $resultado;
       exit;
     } else {
 

@@ -23,8 +23,10 @@ $(document).ready(function() {
         var condicional = $("#accion").val();
         if (condicional == "incluir") {
             incluirdatos();
+            limpiar();
         } else if (condicional == "modificar") {
-            modificarDatos2()
+            modificarDatos2();
+            limpiar();
         }
 
     });
@@ -63,6 +65,7 @@ function incluirdatos() {
     if (validarenvio() && validarselect()) {
         // Si todos los campos son válidos, envía los datos al servidor
         enviaAjax(datos, 'incluir');
+        limpiar();
     } else {
         // Muestra un mensaje de error con SweetAlert
         Swal.fire({
@@ -102,8 +105,6 @@ function modificarDatos2() {
         });
     }
 };
-
-
 
 
 
@@ -155,7 +156,7 @@ function enviaAjax(datos, accion) {
 
                 $("#hola").html(respuesta);
                 Swal.fire({
-                    title: 'Registrado exitosamente',
+                    title: 'Exito',
                     text: respuesta,
                     icon: 'success',
                     timer: 4000, // Establece el tiempo en milisegundos (5 segundos en este caso)
@@ -296,7 +297,7 @@ function validarenvio() {
     const validacion2 = e => {
         const value = e.target;
         const campovalue = e.target.value;
-        const regex = /^(0412|0416|0414|0424|0426)[0-9]{7}$/;
+        const regex = /^(0412|0416|0414|0424|0426)[0-9]{7}$/i;
         console.log(regex.test(value.value))
         if (campovalue.trim().length < 11 && !regex.test(campovalue)) {
             value.classList.add("invalido");
@@ -309,7 +310,7 @@ function validarenvio() {
 
         }
     }
-    telefono.addEventListener("input", validacion2)
+    telefono.addEventListener("blur", validacion2)
 
     const validacion3 = e => {
         const value = e.target;
@@ -374,4 +375,10 @@ function validarselect() {
 
     // Si llegamos aquí, el formulario es válido y se puede enviar
     return true;
-}
+};
+
+
+function limpiar() {
+    console.log("jola");
+    $("input").val("");
+};

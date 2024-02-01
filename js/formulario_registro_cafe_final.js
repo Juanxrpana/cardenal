@@ -54,7 +54,7 @@ function incluir_final(boton) {
 
     enviaAjax(datos, 'incluir');
     descontador_cafe_tostado();
-    mostrarDatoscafe_final();
+    actualizadorajax();
 
 
 }
@@ -93,6 +93,41 @@ function modificarDatos(valor) {
 }
 
 
+function actualizadorajax() {
+    console.log("actualizadorajax");
+    $.ajax({
+        async: true,
+        url: '', //la pagina a donde se envia por estar en mvc, se omite la ruta ya que siempre estaremos en la misma pagina
+        type: 'POST', //tipo de envio 
+        contentType: false,
+        processData: false,
+        cache: false,
+        success: function() {
+
+            /*  mostrarDatoscafe_tostado_final(); */
+            mostrarDatoscafe_final();
+            mostrarcontador();
+            mostrarcontador_materia_prima();
+            mostrarcontador_cafe_final();
+            console.log("actualizadorajax parte2");
+
+        },
+        error: function() {
+            Swal.fire({
+                title: 'Error al cargar las tablas',
+                text: 'Recargue la pagina por favor',
+                icon: 'error',
+                timer: 4000, // Establece el tiempo en milisegundos (5 segundos en este caso)
+                showConfirmButton: false // Oculta el botón "Aceptar"
+            }).then((result) => {
+                if (result.dismiss === Swal.DismissReason.timer) {
+                    // Esto se ejecutará después de que se cierre el mensaje automáticamente
+                    console.log('Mensaje modal de error cerrado');
+                }
+            });
+        }
+    });
+}
 
 function enviaAjax(datos, accion) {
     $.ajax({
@@ -108,18 +143,12 @@ function enviaAjax(datos, accion) {
             if (accion == "consultar") {
                 $("#proveedor").html(respuesta);
             } else {
-                /*  mostrarDatoscafe_tostado_final();
-                mostrarDatoscafe_final();
- */
-
-                /*  mostrarcontador(); */
-
                 $("#hola").html(respuesta);
                 Swal.fire({
-                    title: 'Proveedor ingresado exitosamente',
+                    title: 'Bultos de café ingresados exitosamente',
                     text: respuesta,
                     icon: 'success',
-                    timer: 4033330, // Establece el tiempo en milisegundos (5 segundos en este caso)
+                    timer: 4000
 
                 }).then((result) => {
                     if (result.dismiss === Swal.DismissReason.timer) {

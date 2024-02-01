@@ -195,13 +195,13 @@ public function validarrespuesta()
     try {
         $stmt = $co->prepare("SELECT idusuario FROM usuario WHERE idusuario = :usuario AND respuesta = :respuesta");
         $stmt->bindParam(':usuario', $this->usuario);
-        $stmt->bindParam(':respuesta', $this->respuesta);
+        $stmt->bindParam(':respuesta', $this->respuesta, PDO::PARAM_STR);
         $stmt->execute();
         $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
         if ($resultado) {
             return true; // La respuesta es correcta
         } else {
-            return false; // La respuesta es incorrecta
+            return "invalida"; // La respuesta es incorrecta
         }
     } catch (Exception $e) {
        return $e->getMessage(); // Ocurrió un error al ejecutar la consulta
@@ -217,7 +217,7 @@ public function actualizarclave($nuevaclave)
         $stmt->bindParam(':nuevaclave', $nuevaclave);
         $stmt->bindParam(':usuario', $this->usuario);
         $stmt->execute();
-        return true; // La contraseña se actualizó correctamente
+        return "Clave actualizada"; // La contraseña se actualizó correctamente
     } catch (Exception $e) {
        return $e->getMessage(); // Ocurrió un error al ejecutar la consulta
     }

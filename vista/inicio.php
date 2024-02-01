@@ -30,7 +30,23 @@
             </h3>
             <div class="tarjetas--wrapper">
                 <!-- aqui empiezan las tarjetas -->
-
+                <div class="tarjetas tarjetas--materia_prima">
+                    <div class="tarjetas--cabezera">
+                        <div class="ammount">
+                            <span class="titulo">
+                                <h3>MATERIA PRIMA</h3>
+                            </span>
+                            <div class="contador_texto" id="contador_texto">
+                                <div id="contador_materia_prima" class="contador_materia_prima"></div>
+                                <h6>/2000</h6>
+                            </div>
+                            <!-- <i><a href="?pagina=consulta">VER ULTIMO REGISTRO</a></i> -->
+                            </span>
+                        </div>
+                    </div>
+                </div>
+               
+                
                 <div class="tarjetas tarjetas--inventario">
                     <div class="tarjetas--cabezera">
                         <div class="ammount">
@@ -45,6 +61,7 @@
                         </div>
                     </div>
                 </div>
+                
                 <div class="tarjetas tarjetas--compras">
                     <div class="tarjetas--cabezera">
                         <div class="ammount">
@@ -55,21 +72,6 @@
                                 <div id="contador_cafe_final" class="contador_cafe_final"></div>
                                 <h6>/3000</h6>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tarjetas tarjetas--materia_prima">
-                    <div class="tarjetas--cabezera">
-                        <div class="ammount">
-                            <span class="titulo">
-                                <h3>MATERIA PRIMA</h3>
-                            </span>
-                            <div class="contador_texto" id="contador_texto">
-                                <div id="contador_materia_prima" class="contador_materia_prima"></div>
-                                <h6>/2000</h6>
-                            </div>
-                            <!-- <i><a href="?pagina=consulta">VER ULTIMO REGISTRO</a></i> -->
-                            </span>
                         </div>
                     </div>
                 </div>

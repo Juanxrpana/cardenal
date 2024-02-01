@@ -18,7 +18,7 @@
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Quintales</th>
                                 <th scope="col">Fecha Compra</th>
-                                <th scope="col">Estado</th>
+                                <th scope="col">Imprimir</th>
                                 
                             </tr>
                      </thead>
@@ -32,7 +32,7 @@
                                 <td>'.$value['nombre_prov'].'</td>
                                 <td>'.$value['total_cantidad'].'</td>
                                 <td>'.$value['fecha_compra'].'</td>
-                                <td>'.$value['estado'].'</td>
+                                <td><a id="imprimir_compra" class="btn btn-success btn" data-id="' . $value['idcompra'] . '" onclick="imprimircompra(' . $value['idcompra'] . ')"><span class="icon-printer"></span></a></td>
                                 <td>                              
                                 
                                 </td>

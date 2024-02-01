@@ -31,10 +31,12 @@
             <h3 class="main--titulo">
                 Registro de café molido para empaquetar
             </h3>
+            <h3>Tabla café tostado</h3>
             <form class="formulario" action="POST" method="POST">
             <input type="text" name="accion" id="accion" style="display:none" />
                 <div id="tablaDatoscafe_tostado_final"></div>
         </form>
+        <h3>Tabla bultos para venta</h3>
             <div id="tablaDatoscafe_final"></div>
 
         </div>

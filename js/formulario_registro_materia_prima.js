@@ -147,7 +147,7 @@ function enviaAjax(datos, accion) {
 
                 Swal.fire({
                     title: 'Cantidad registrada exitosamente',
-                    text: "",
+                    text: respuesta,
                     icon: 'success',
                     timer: 4000, // Establece el tiempo en milisegundos (5 segundos en este caso)
 

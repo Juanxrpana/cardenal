@@ -207,7 +207,7 @@ class Registrousuario extends Conexion
 		$co1 = $this->conecta();
 		$co1->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-		$sql = $co1->query("SELECT * FROM usuario");
+		$sql = $co1->query("SELECT * FROM usuario WHERE cargo_idcargo = 1");
 
 		return $sql;
 	}

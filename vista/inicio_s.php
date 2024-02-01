@@ -71,7 +71,7 @@
           <hr>
           <button class="finalizacion" id="iniciar"><span>Ingresar</span></button>
         </form>
-        <button type="button" class="finalizacion" id="recordar" data-bs-toggle="modal" data-bs-target="#recordarModal"><span>Recordar</span></button>
+        <button type="button" class="finalizacion" id="recordar" data-bs-toggle="modal" data-bs-target="#recordarModal"><span>Recuperar Contraseña</span></button>
         <br>
 
       </div>
@@ -81,7 +81,7 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title recordar" id="recordarModalLabel">Recordar Contraseña</h5>
+              <h5 class="modal-title recordar" id="recordarModalLabel">Recuperar Contraseña</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body recordar">
@@ -91,6 +91,8 @@
                 <input type="text" class="form-control" id="recordar_cedula" placeholder="Ingrese su cedula">
                
                 <hr>
+              
+                <h6 style="color: #6c757d;">Pregunta de seguridad</h6>
                 <input type="text" class="form-control" id="pregunta_show" placeholder="Su pregunta de seguridad" disabled>
                 <hr>
               </div>
