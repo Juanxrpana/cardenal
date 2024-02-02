@@ -45,6 +45,11 @@ require_once("modelo/".$pagina.".php");
 			 $o->set_id_prov($_POST['id_prov']);
 			 echo  $o->borrar();
 		  }
+
+		  elseif($accion=='llenardatos_ocultos'){
+			$o->set_id_prov($_POST['id_prov']);
+			echo $o->mostrartodo();
+		  }
 		  else{
 			  $o->set_cedula_fiscal_id($_POST['cedula_fiscal_id']);
 			  $o->set_identificacion($_POST['identificacion']);
@@ -61,12 +66,9 @@ require_once("modelo/".$pagina.".php");
 			  if($accion=='incluir'){            
 				echo  $o->agregar_proveedor();
 			  }
-			  elseif($accion=='mostrartodo'){
-				$o->set_id_prov($_POST['id_prov']);
-				echo $o->mostrartodo();
-			  }
+			  
 			  elseif($accion=='modificar'){
-               /*  echo "12121212121"; */
+                echo "MODIFICARAS PAPA";
                 $o->set_id_prov($_POST['id_prov']);
 				echo  $o->modificar();
 			  }

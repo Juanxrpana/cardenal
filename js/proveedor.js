@@ -9,6 +9,7 @@ $(document).ready(function() {
 
     $('#nuevo').click(function() {
         console.log("dsdsd");
+        limpiar();
 
 
 
@@ -18,21 +19,25 @@ $(document).ready(function() {
 
         $('#accion').val("incluir");
 
+
     });
 
     $("#incluir").on("click", function() {
-        console.log("oke");
+        console.log("pulsaste incluir");
 
 
 
         var condicional = $("#accion").val();
+        console.log("condicional:" + condicional);
         if (condicional == "incluir") {
+            var condicional = $("#accion").val();
             incluirdatos();
-            limpiar();
+            /*    limpiar(); */
         } else if (condicional == "modificar") {
+            var condicional = $("#accion").val();
 
             modificarDatos2(id_prov);
-            limpiar();
+            /*    limpiar(); */
         }
 
     });
@@ -219,7 +224,7 @@ function llenarLista() {
     enviaAjax(datos, 'consultar');
 }
 
-function mostrarDatosproveedor() {
+function mostrarDatosproveedor(id_prov) {
     // La función realiza una petición AJAX al archivo mostrarDatosmateria_prima.php
     /*  console.log("entrando data DatosProveedor"); */
 
@@ -227,14 +232,14 @@ function mostrarDatosproveedor() {
         // Cuando se recibe la respuesta de la petición AJAX, se agrega la tabla al elemento con el ID 'tablaDatosDatosProveedor'
         /*  console.log("Mostrando data satisfactoriamente"); */
         $('#tablaDatosProveedor').html(r);
+        $('#tproveedor').DataTable({
+            "language": {
+                "url": "./js/es-ES.json"
+            }
+        });
         $('tr').click(function() {
             console.log("dsdsd");
-            // Obtiene el valor de la columna 'identificacion' de la fila clicada
-            // Coloca el valor en el input con id 'inputIdentificacion'
-            /*   $('#identificacion').val(identificacion);
-              $('#nombre_prov').val(nombre);
-              $('#nombre_finca').val(finca);
-              $('#id_prov').val(idval); */
+
             $('#staticBackdrop').modal('show');
             $('#accion').val("modificar");
             $('#staticBackdropLabel').text('Modificar Proveedor');
@@ -394,26 +399,45 @@ function validarselect() {
 function limpiar() {
     console.log("Limpia los input");
     $("input").val("");
+    $("#accion").val("incluir");
 };
 
 function llenardatos_oculto(id_prov) {
+
     console.log("llenar datos ocultos dice que el prov es: " + id_prov);
-    $.ajax({ url: './Modelo/datos_modificar_proveedor.php' }).done(function(r) {
-        var datos = JSON.parse(r);
-        console.log(datos);
-        /*   $('#cedula_fiscal_id').val(datos.cedula_fiscal_id); */
-        $('#identificacion').val(datos.datos_prov_identificacion);
-        $('#nombre_prov').val(datos.nombre_prov);
-        $('#telefono').val(datos.telefono);
-        $('#estado').val(datos.estado);
-        $('#ubicacion').val(datos.ubicacion);
-        $('#nombre_finca').val(datos.nombre_finca);
-        $('#municipio').val(datos.municipio);
-        $('#parroquia').val(datos.parroquia);
-        $('#ciudad').val(datos.ciudad);
+
+    var datos = new FormData();
+    datos.append('accion', 'llenardatos_ocultos');
+    datos.append('id_prov', id_prov);
+    ajaxdatosocultos(datos, 'llenardatos_ocultos');
+}
+
+function ajaxdatosocultos(datos, accion) {
+    $.ajax({
+        async: true,
+        url: '',
+        type: 'POST',
+        contentType: false,
+        data: datos,
+        processData: false,
+        cache: false,
+        success: function(respuesta) {
+
+            var recuperado = respuesta;
+            var datosrecuperados = JSON.parse(recuperado);
+
+            $('#cedula_fiscal_id').val(datosrecuperados.id_cedula_fiscal);
+            $('#identificacion').val(datosrecuperados.datos_prov_identificacion);
+            $('#nombre_prov').val(datosrecuperados.nombre_prov);
+            $('#telefono').val(datosrecuperados.telefono);
+            $('#estado').val(datosrecuperados.estado);
+            $('#ubicacion').val(datosrecuperados.ubicacion);
+            $('#nombre_finca').val(datosrecuperados.nombre_finca);
+            $('#municipio').val(datosrecuperados.municipio);
+            $('#parroquia').val(datosrecuperados.parroquia);
+            $('#ciudad').val(datosrecuperados.ciudad);
 
 
-        /*  console.log("Mostrando datos del proveedor satisfactoriamente");
-         $('#datos-oculto').html(r); */
-    });
+        }
+    })
 }

@@ -288,46 +288,62 @@ class Registroproveedor extends Conexion
 
 
 	function modificar()
-	{
-		$co = $this->conecta();
-		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+{
+    $co = $this->conecta();
+    $co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-		try {
-			$co->beginTransaction();
+    try {
+        $co->beginTransaction();
 
-			$co->query("UPDATE datos_prov
+        $sql1 = "UPDATE datos_prov
                     JOIN proveedor ON datos_prov.identificacion = proveedor.datos_prov_identificacion
                     SET
-						datos_prov.identificacion = '$this->identificacion',
-                        datos_prov.nombre_prov = '$this->nombre_prov',
-                        datos_prov.telefono = '$this->telefono',
-                        datos_prov.cedula_fiscal_id = '$this->cedula_fiscal_id'
+                        datos_prov.identificacion = :identificacion,
+                        datos_prov.nombre_prov = :nombre_prov,
+                        datos_prov.telefono = :telefono,
+                        datos_prov.cedula_fiscal_id = :cedula_fiscal_id
                     WHERE
-                        proveedor.id_prov = '$this->id_prov'
-                ");
+                        proveedor.id_prov = :id_prov";
 
-			$co->query("UPDATE finca
+        $stmt1 = $co->prepare($sql1);
+        $stmt1->bindParam(':identificacion', $this->identificacion);
+        $stmt1->bindParam(':nombre_prov', $this->nombre_prov);
+        $stmt1->bindParam(':telefono', $this->telefono);
+        $stmt1->bindParam(':cedula_fiscal_id', $this->cedula_fiscal_id);
+        $stmt1->bindParam(':id_prov', $this->id_prov);
+        $stmt1->execute();
+
+        $sql2 = "UPDATE finca
                     JOIN proveedor ON finca.idfinca = proveedor.finca_idfinca
                     SET
-                        finca.ubicacion = '$this->ubicacion',
-                        finca.nombre_finca = '$this->nombre_finca',
-                        finca.estado = '$this->estado',
-                        finca.municipio = '$this->municipio',
-                        finca.parroquia = '$this->parroquia',
-                        finca.ciudad = '$this->ciudad'
-                        
+                        finca.ubicacion = :ubicacion,
+                        finca.nombre_finca = :nombre_finca,
+                        finca.estado = :estado,
+                        finca.municipio = :municipio,
+                        finca.parroquia = :parroquia,
+                        finca.ciudad = :ciudad
                     WHERE
-                        proveedor.id_prov = '$this->id_prov'
-                ");
+                        proveedor.id_prov = :id_prov";
 
-			$co->commit();
+        $stmt2 = $co->prepare($sql2);
+        $stmt2->bindParam(':ubicacion', $this->ubicacion);
+        $stmt2->bindParam(':nombre_finca', $this->nombre_finca);
+        $stmt2->bindParam(':estado', $this->estado);
+        $stmt2->bindParam(':municipio', $this->municipio);
+        $stmt2->bindParam(':parroquia', $this->parroquia);
+        $stmt2->bindParam(':ciudad', $this->ciudad);
+        $stmt2->bindParam(':id_prov', $this->id_prov);
+        $stmt2->execute();
 
-			return "Datos de datos_prov y finca actualizados";
-		} catch (Exception $e) {
-			$co->rollBack();
-			return $e->getMessage();
-		}
-	}
+        $co->commit();
+
+        return "Datos de datos_prov y finca actualizados correctamente";
+    } catch (Exception $e) {
+        $co->rollBack();
+        return $e->getMessage();
+    }
+}
+
 
 
 
@@ -356,28 +372,38 @@ class Registroproveedor extends Conexion
 		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		try {
 			$sql = "SELECT 
-		p.*, 
-		dp.identificacion AS identificacion_prov, 
-		dp.nombre_prov, 
-		dp.telefono, 
-		dp.cedula_fiscal_id, 
-		f.*
-	FROM 
-		proveedor p
-	JOIN 
-		datos_prov dp ON p.id_prov = dp.proveedor_id_prov
-	JOIN 
-		finca f ON dp.finca_id_finca = f.idfinca
-	WHERE 
-		p.id_prov = :id_prov;
-	";
+			p.id_prov,
+			p.finca_idfinca,
+			p.datos_prov_identificacion,
+			f.idfinca,
+			f.ubicacion,
+			f.nombre_finca,
+			f.estado,
+			f.municipio,
+			f.parroquia,
+			f.ciudad,
+			dp.identificacion,
+			dp.nombre_prov,
+			dp.telefono,
+			dp.cedula_fiscal_id,
+			cf.id_cedula_fiscal
+		FROM 
+			proveedor p
+		INNER JOIN 
+			finca f ON p.finca_idfinca = f.idfinca
+		INNER JOIN 
+			datos_prov dp ON p.datos_prov_identificacion = dp.identificacion
+		INNER JOIN 
+			cedula_fiscal cf ON dp.cedula_fiscal_id = cf.id_cedula_fiscal
+		WHERE 
+			p.id_prov = :id_prov";
 
 
 			// Preparar la consulta
 			$stmt = $co->prepare($sql);
 	
 
-echo $id_prov; 
+
 		$stmt->bindParam(':id_prov', $id_prov, PDO::PARAM_STR);
 		
 
