@@ -61,6 +61,10 @@ require_once("modelo/".$pagina.".php");
 			  if($accion=='incluir'){            
 				echo  $o->agregar_proveedor();
 			  }
+			  elseif($accion=='mostrartodo'){
+				$o->set_id_prov($_POST['id_prov']);
+				echo $o->mostrartodo();
+			  }
 			  elseif($accion=='modificar'){
                /*  echo "12121212121"; */
                 $o->set_id_prov($_POST['id_prov']);

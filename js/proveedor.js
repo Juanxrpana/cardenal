@@ -6,8 +6,11 @@ $(document).ready(function() {
     llenarLista();
     mostrarDatosproveedor();
 
+
     $('#nuevo').click(function() {
         console.log("dsdsd");
+
+
 
         $('#staticBackdropLabel').text('Incluir Nuevo Proveedor'); // Reemplaza 'Nuevo Título' con el texto que desees
 
@@ -20,16 +23,23 @@ $(document).ready(function() {
     $("#incluir").on("click", function() {
         console.log("oke");
 
+
+
         var condicional = $("#accion").val();
         if (condicional == "incluir") {
             incluirdatos();
             limpiar();
         } else if (condicional == "modificar") {
-            modificarDatos2();
+
+            modificarDatos2(id_prov);
             limpiar();
         }
 
     });
+
+    $("modificar").on("click", function() {
+        console.log("pulsastemodificar");
+    })
 
 
 
@@ -45,8 +55,13 @@ function borrarproveedor(valor) {
     enviaAjax(datos, 'eliminar');
 }
 
-function modificarDatos() {
-    console.log("oskadiojsd");
+function modificarDatos(id_prov) {
+    var datos = new FormData();
+    datos.append('id_prov', id_prov);
+    datos.append('accion', 'datos_ocultos');
+
+    console.log("modificar:" + id_prov);
+    llenardatos_oculto(id_prov);
 };
 
 function incluirdatos() {
@@ -77,7 +92,10 @@ function incluirdatos() {
 
 };
 
-function modificarDatos2() {
+function modificarDatos2(id_prov) {
+    console.log("este es el id: " + id_prov);
+    llenardatos_oculto(id_prov);
+    console.log("modificar2");
 
     var datos = new FormData();
     datos.append('accion', $("#accion").val());
@@ -212,16 +230,11 @@ function mostrarDatosproveedor() {
         $('tr').click(function() {
             console.log("dsdsd");
             // Obtiene el valor de la columna 'identificacion' de la fila clicada
-            var identificacion = $(this).find('td:eq(1)').text();
-            var nombre = $(this).find('td:eq(2)').text();
-            var finca = $(this).find('td:eq(4)').text();
-            var idval = $(this).find('td:eq(0)').text();
-
             // Coloca el valor en el input con id 'inputIdentificacion'
-            $('#identificacion').val(identificacion);
-            $('#nombre_prov').val(nombre);
-            $('#nombre_finca').val(finca);
-            $('#id_prov').val(idval);
+            /*   $('#identificacion').val(identificacion);
+              $('#nombre_prov').val(nombre);
+              $('#nombre_finca').val(finca);
+              $('#id_prov').val(idval); */
             $('#staticBackdrop').modal('show');
             $('#accion').val("modificar");
             $('#staticBackdropLabel').text('Modificar Proveedor');
@@ -379,6 +392,28 @@ function validarselect() {
 
 
 function limpiar() {
-    console.log("jola");
+    console.log("Limpia los input");
     $("input").val("");
 };
+
+function llenardatos_oculto(id_prov) {
+    console.log("llenar datos ocultos dice que el prov es: " + id_prov);
+    $.ajax({ url: './Modelo/datos_modificar_proveedor.php' }).done(function(r) {
+        var datos = JSON.parse(r);
+        console.log(datos);
+        /*   $('#cedula_fiscal_id').val(datos.cedula_fiscal_id); */
+        $('#identificacion').val(datos.datos_prov_identificacion);
+        $('#nombre_prov').val(datos.nombre_prov);
+        $('#telefono').val(datos.telefono);
+        $('#estado').val(datos.estado);
+        $('#ubicacion').val(datos.ubicacion);
+        $('#nombre_finca').val(datos.nombre_finca);
+        $('#municipio').val(datos.municipio);
+        $('#parroquia').val(datos.parroquia);
+        $('#ciudad').val(datos.ciudad);
+
+
+        /*  console.log("Mostrando datos del proveedor satisfactoriamente");
+         $('#datos-oculto').html(r); */
+    });
+}

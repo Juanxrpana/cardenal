@@ -1,5 +1,4 @@
-<?php require_once './comunes/menu.php';
-?>
+<?php require_once './comunes/menu.php'?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,6 +34,7 @@
         </div>
     </div>
 
+    <script src="./js/bootstrap.js"></script>
     <script src="./js/jquery-3.7.1.min.js"></script>
     <script src="./js/tabla.js"></script>
     <script src="./js/sweetalert2.js"></script>

@@ -31,7 +31,7 @@ class Registroproveedor extends Conexion
 	private $municipio;
 	private $parroquia;
 	private $ciudad;
-	
+
 
 
 
@@ -169,7 +169,7 @@ class Registroproveedor extends Conexion
 		$this->ciudad = $valor;
 	}
 
-	
+
 
 	//copia
 	public function existe($id_prov)
@@ -266,7 +266,7 @@ class Registroproveedor extends Conexion
 			$stmtFinca->bindParam(':municipio', $this->municipio, PDO::PARAM_STR);
 			$stmtFinca->bindParam(':parroquia', $this->parroquia, PDO::PARAM_STR);
 			$stmtFinca->bindParam(':ciudad', $this->ciudad, PDO::PARAM_STR);
-			
+
 			$stmtFinca->execute();
 
 			// Insertar en proveedor
@@ -346,7 +346,57 @@ class Registroproveedor extends Conexion
         INNER JOIN finca f ON p.finca_idfinca = f.idfinca");
 
 		return $sql;
+		/* echo $sql; */
 	}
+
+	public function mostrartodo()
+	{
+		$id_prov = $_POST['id_prov'];
+		$co = $this->conecta();
+		$co->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		try {
+			$sql = "SELECT 
+		p.*, 
+		dp.identificacion AS identificacion_prov, 
+		dp.nombre_prov, 
+		dp.telefono, 
+		dp.cedula_fiscal_id, 
+		f.*
+	FROM 
+		proveedor p
+	JOIN 
+		datos_prov dp ON p.id_prov = dp.proveedor_id_prov
+	JOIN 
+		finca f ON dp.finca_id_finca = f.idfinca
+	WHERE 
+		p.id_prov = :id_prov;
+	";
+
+
+			// Preparar la consulta
+			$stmt = $co->prepare($sql);
+	
+
+echo $id_prov; 
+		$stmt->bindParam(':id_prov', $id_prov, PDO::PARAM_STR);
+		
+
+
+			// Asignar el valor del parámetro ID del proveedor y ejecutar la consulta
+			/* $stmt->bindParam(':id_prov', $id_prov, PDO::PARAM_INT); */
+			$stmt->execute();
+
+			// Obtener los resultados de la consulta
+			$resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+			$retorno = json_encode($resultado);
+			
+			return $retorno;
+		} catch (Exception $e) {
+			return $e->getMessage();
+		}
+	}
+
+
 
 	public function borrar()
 	{

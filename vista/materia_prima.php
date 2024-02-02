@@ -17,9 +17,10 @@
     <title>Materia prima</title>
 </head>
 
-<body>
+<body style="background-color:#ebe9e9;">
     <div class="main--content">
         <div class="header--wrapper">
+           
             <div class="header--titulo" id="hola">
                 <span>Registro y control</span>
                 <h2>Materia Prima</h2>
@@ -52,17 +53,17 @@
                                 <option value="" selected>Proveedor</option>
                             </select>
                             <div><a href="?pagina=proveedor" type="button" id="nuevo_proveedor" class="btn btn-success">Proveedor<h4 class="icon-user-plus"></h4></a>
-                            <!-- Botón para abrir el modal -->
-                            <button id="openModalBtn" class="btn btn-success">Lista proveedores<h4 class="icon-search"></h4></button>
+                                <!-- Botón para abrir el modal -->
+                                <button id="openModalBtn" class="btn btn-success">Lista proveedores<h4 class="icon-search"></h4></button>
 
-                            <!-- El modal -->
-                            <div id="myModal" class="modal">
-                                <div class="modal-content">
-                                    <span class="close">&times;</span>
-                                    <h2>Lista de proveedores</h2>
-                                    <div class="tablaDatosProveedor" id="tablaDatosProveedor"></div>
+                                <!-- El modal -->
+                                <div id="myModal" class="modal">
+                                    <div class="modal-content">
+                                        <span class="close">&times;</span>
+                                        <h2>Lista de proveedores</h2>
+                                        <div class="tablaDatosProveedor" id="tablaDatosProveedor"></div>
+                                    </div>
                                 </div>
-                            </div>
                             </div>
 
                         </div>
